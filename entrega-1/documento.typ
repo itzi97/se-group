@@ -61,8 +61,10 @@ Usamos Sora para los títulos, IBM Plex Sans para el texto e IBM Plex Mono para 
 #let muestra(c, nombre, hex, uso) = block(width: 100%, breakable: false, {
   set par(justify: false, leading: 0.4em)
   block(width: 100%, height: 1.1cm, fill: c, stroke: 0.5pt + hairline, below: 5pt)
-  [#text(weight: 700, fill: petroleo, size: 9.5pt)[#nombre] #h(1fr) #text(font: monofont, size: 7.5pt, fill: muted)[#hex]]
-  v(2pt, weak: true)
+  text(weight: 700, fill: petroleo, size: 9.5pt)[#nombre]
+  v(3pt, weak: true)
+  text(font: monofont, size: 7.5pt, fill: brasa)[#hex]
+  v(3pt, weak: true)
   text(size: 8.5pt, fill: muted)[#uso]
 })
 #grid(columns: (1fr,) * 5, column-gutter: 8pt,
