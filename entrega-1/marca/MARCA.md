@@ -21,9 +21,9 @@
 
 | Valor | Qué significa para nosotros |
 |---|---|
-| **Innovación** | Estamos al corriente de lo que aparece y lo usamos cuando aporta valor al cliente |
-| **Integridad** | Cuidamos los datos de nuestros clientes y usamos los LLM sin poner en riesgo su privacidad |
-| **Flexibilidad** | Nos adaptamos a cada problema y ofrecemos soluciones a medida |
+| **Innovación** | Probamos las herramientas nuevas que van saliendo y nos quedamos con las que de verdad ayudan al cliente |
+| **Integridad** | Los datos de cada cliente son suyos. Usamos la IA sin poner en riesgo su privacidad |
+| **Flexibilidad** | Cada empresa trabaja a su manera, así que adaptamos el software a ella y no al revés |
 
 **Tono de voz:** claro, directo y sin jerga innecesaria. Frases cortas.
 

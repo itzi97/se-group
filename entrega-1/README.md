@@ -22,6 +22,25 @@ Resumen visual de todo el caso práctico: [`../RESUMEN-ENUNCIADO.md`](../RESUMEN
 
 Además se aplican las reglas generales (PDF pp. 13–14; diap. 15): **si falta algún apartado, no se aprueba** (completitud). Las decisiones se valoran **razonadas**. Nada de relleno ni adornos. Una mala redacción u ortografía puede quitar **hasta un 20 %**.
 
+## 📦 Qué se entrega
+
+| Fichero | Qué es |
+|---|---|
+| [`documento.pdf`](documento.pdf) | **La entrega**: 7 páginas. 1 Quiénes somos (nombre, valores, marca) · 2 Modelo de negocio (precio cerrado + cuota mensual, lienzo) · 3 Organización (estructura mixta, organigrama, cómo trabajamos) · 4 Casos de uso (decisiones, cambios tras la reunión, diagrama y tabla de CoreReservas y CoreBodega) |
+| [`presentacion.pdf`](presentacion.pdf) | 13 diapositivas, en el mismo orden que el documento. Poco texto: el resto se cuenta de palabra |
+| [`acta-reunion-01.pdf`](acta-reunion-01.pdf) | Acta de la reunión con el cliente del 16 oct (NN-AM-ACT-01). El documento la cita |
+
+Si Blackboard solo deja subir un fichero, se suben los tres en un `.zip`.
+
+**Guion de la presentación** (reparto propuesto por secciones, sin decidir aún):
+
+| Diapositivas | Sección | Qué contar |
+|---|---|---|
+| 1–5 | Quiénes somos | De dónde viene el nombre, qué hacemos, los tres valores, el logo («N» = red neuronal) y el lema |
+| 6–7 | Modelo de negocio | Para quién trabajamos, qué ofrecemos y cómo cobramos; recorrer el lienzo |
+| 8 | Organización | Por qué mezclamos jerárquica y plana, qué hace cada uno, trabajo híbrido y Proceso Unificado |
+| 9–12 | Casos de uso | Un diagrama por programa, un caso de uso por opción del menú, actores, «include» y «extend», y qué cambió tras la reunión |
+
 ---
 
 ## ✅ Checklist
@@ -78,11 +97,12 @@ Esto es lo que **dice el enunciado**, no un diseño: cómo lo agrupéis en casos
 
 ### Parte 3 · Documentación y presentación (25 %)
 
-- [x] **Documento** (PDF) con portada (empresa, logo, nombres de los cuatro miembros, asignatura, «Entrega 1») y las dos partes
+- [x] **Documento** (PDF) con portada (empresa, logo, cliente y los cuatro miembros) y las dos partes. Está escrito como un documento de Neuranet para el cliente, así que no lleva el nombre de la asignatura.
 - [x] **Diapositivas** para la exposición, con la marca de la empresa
 - [x] Diagramas **nítidos y legibles** al exportarlos, relacionados con el texto que los acompaña (PDF p. 14)
 - [ ] Revisión de **ortografía y redacción** por alguien que no lo haya escrito. No copiéis las erratas del enunciado: escribid **CoreBodega** (no «CoreBodegas»), **AñadaMaster** (sin tilde en la a) y **post mortem**.
 - [x] Sin relleno ni elementos solo decorativos (simplicidad)
+- [x] Textos en lenguaje llano, pensados para que los lea el cliente
 - [ ] Nada copiado de Internet ni de otro grupo. Se suspende **toda la asignatura** (diap. 16).
 
 ### Parte 4 · Exposición en clase (25 %)

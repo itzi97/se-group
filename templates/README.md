@@ -56,6 +56,7 @@ typst compile --root . --font-path templates/fonts entrega-1/documento.typ
 | `date` | `"22 de octubre de 2026"` | Ficha |
 | `author` | `"Nombre 1 · Nombre 2"` | «Preparado por» |
 | `confidential` | `true` / `false` | Sello en la portada y en el pie |
+| `chapter-break` | `true` / `false` | Si cada capítulo (`=`) empieza en página nueva. Con `false` los capítulos van seguidos, para documentos cortos |
 
 `neuranet-breve` acepta además `extra: (([Hora], [10:00]), ([Lugar], [Online]))` para añadir filas a la ficha (lo usa el acta).
 
@@ -67,7 +68,9 @@ typst compile --root . --font-path templates/fonts entrega-1/documento.typ
 * Control de versiones: `version-history(("1.0", "22/10/2026", "Autor", [Cambios]), ...)`
 * Diagramas: `orgchart(org-node(...))` (organigrama), `timeline(...)` (Gantt), `evolution-chain(...)`
 * Diagramas de se-ramify: `usecase-diagram(json("/diagramas/usecase-….json"))` dibuja un diagrama de casos de uso de se-ramify con el estilo de Neuranet (mismos nombres, códigos y relaciones que en la app; la maquetación se ajusta a la página)
-* Diapositivas: `title-slide`, `agenda-slide`, `section-slide`, `slide`, `slide-columns`, `focus-slide`, `stat`
+* Diapositivas: `title-slide`, `agenda-slide`, `section-slide`, `section-tag`, `slide`, `slide-columns`, `focus-slide`, `stat`
+  * `slide(fit: true)` escala el contenido para que llene la diapositiva (diagramas, organigramas, esquemas)
+  * `section-tag[...]` pone la etiqueta de sección en las diapositivas siguientes sin añadir una diapositiva separadora (para presentaciones cortas)
 * Código entre ```` ``` ```` con números de línea automáticos
 * Colores por nombre: `petroleo`, `brasa`, `chispa`, `sinapsis`, `niebla`
 
