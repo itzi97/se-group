@@ -32,7 +32,9 @@ jobs:
           echo "$PWD/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
 
       - name: Compilar los documentos
-        run: templates/compilar-todo.sh
+        # Fecha del PDF = fecha del último commit: si los .typ no cambian, los
+        # PDF salen idénticos y no se crea un commit «Regenerar PDF» vacío.
+        run: SOURCE_DATE_EPOCH=$(git log -1 --format=%ct) templates/compilar-todo.sh
 
       - name: Subir los PDF si han cambiado
         run: |
