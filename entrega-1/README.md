@@ -30,22 +30,24 @@ Además se aplican las reglas generales (PDF pp. 13–14; diap. 15): **si falta 
 
 Contexto (PDF p. 3): sois una **empresa de desarrollo de software recién creada** que da componentes software a sus clientes y que todavía no sabe qué metodología le va mejor.
 
-- [ ] **Nombre** de la empresa
-- [ ] **Marca**: logotipo e identidad visual (colores, tipografía, eslogan si lo hay). Usadla igual en el documento y en las diapositivas.
-- [ ] **Modelo de negocio**: a quién vendéis, qué valor aportáis, cómo lo entregáis y cómo ganáis dinero. Una herramienta habitual es el *Business Model Canvas* (conocimiento general, no viene en las diapositivas).
-- [ ] **Jerarquía**: organigrama de la empresa (lo pide el PDF en la p. 3)
-- [ ] **Asignación de roles** de **los cuatro miembros**: quién es quién y qué hace cada uno
-- [ ] Explicar **por qué** habéis elegido ese nombre, ese modelo y ese reparto de roles (originalidad + corrección razonada)
-- [ ] *(Opcional, conecta con el enunciado)* Cómo trabaja la empresa: OO + Proceso Unificado en este primer proyecto, y la intención de valorar después otras metodologías (PDF p. 5)
+- [x] **Nombre** de la empresa
+- [x] **Marca**: logotipo e identidad visual (colores, tipografía, eslogan si lo hay). Usadla igual en el documento y en las diapositivas.
+- [x] **Modelo de negocio**: a quién vendéis, qué valor aportáis, cómo lo entregáis y cómo ganáis dinero. Una herramienta habitual es el *Business Model Canvas* (conocimiento general, no viene en las diapositivas).
+- [x] **Jerarquía**: organigrama de la empresa (lo pide el PDF en la p. 3)
+- [x] **Asignación de roles** de **los cuatro miembros**: quién es quién y qué hace cada uno
+- [x] Explicar **por qué** habéis elegido ese nombre, ese modelo y ese reparto de roles (originalidad + corrección razonada)
+- [x] *(Opcional, conecta con el enunciado)* Cómo trabaja la empresa: OO + Proceso Unificado en este primer proyecto, y la intención de valorar después otras metodologías (PDF p. 5)
+
+> Parte 1 hecha en `documento.typ` (capítulos 1–3) y `presentacion.typ`. Organigrama también en `diagramas/` para se-ramify.
 
 ### Parte 2 · Diagramas UML de casos de uso (25 %)
 
-- [ ] **Diagrama(s) de casos de uso** de AñadaMaster: **actores**, **límite del sistema**, **casos de uso** con nombre en forma de verbo y relaciones **«include» / «extend»** donde tengan sentido
-- [ ] Decidir y **justificar** si hacéis un diagrama por Core (CoreReservas y CoreBodega) o uno general con dos subsistemas
-- [ ] **Comprobar que cubrís todo lo que describe el enunciado** (ver la tabla de abajo). La completitud cuenta el 20 % de cada apartado.
-- [ ] Explicar los **actores** y las decisiones que no son evidentes (por ejemplo, cómo modeláis que Administrador y Personal tengan los mismos privilegios, pero que CoreBodega lo use el Administrador)
-- [ ] *(Recomendado)* **Especificación** breve de los casos de uso principales: actor, precondiciones, flujo principal, flujos alternativos y postcondiciones. Blackboard no la pide para la E1, pero el PDF sí la pide en el proyecto (pp. 8 y 10), así que adelantáis trabajo.
-- [ ] Si ya os habéis reunido con el cliente: adjuntar el **acta de la reunión** (el PDF lo pide para cualquier reunión con el cliente, p. 8)
+- [x] **Diagrama(s) de casos de uso** de AñadaMaster: **actores**, **límite del sistema**, **casos de uso** con nombre en forma de verbo y relaciones **«include» / «extend»** donde tengan sentido
+- [x] Decidir y **justificar** si hacéis un diagrama por Core (CoreReservas y CoreBodega) o uno general con dos subsistemas
+- [x] **Comprobar que cubrís todo lo que describe el enunciado** (ver la tabla de abajo). La completitud cuenta el 20 % de cada apartado.
+- [x] Explicar los **actores** y las decisiones que no son evidentes (por ejemplo, cómo modeláis que Administrador y Personal tengan los mismos privilegios, pero que CoreBodega lo use el Administrador)
+- [x] *(Recomendado)* **Especificación** breve de los casos de uso principales: actor, precondiciones, flujo principal, flujos alternativos y postcondiciones. Blackboard no la pide para la E1, pero el PDF sí la pide en el proyecto (pp. 8 y 10), así que adelantáis trabajo.
+- [x] Si ya os habéis reunido con el cliente: adjuntar el **acta de la reunión** (el PDF lo pide para cualquier reunión con el cliente, p. 8)
 
 <details>
 <summary><b>Funcionalidades del enunciado que tienen que aparecer (PDF pp. 4–5)</b></summary>
@@ -72,13 +74,15 @@ Esto es lo que **dice el enunciado**, no un diseño: cómo lo agrupéis en casos
 
 </details>
 
+> Parte 2 hecha: diagramas en `diagramas/` (se-ramify), dibujados en el capítulo 4 de `documento.typ` y en las diapositivas. Acta de la reunión del 16 oct en `acta-reunion-01.typ`; dudas resueltas y pendientes en `dudas-cliente.md`.
+
 ### Parte 3 · Documentación y presentación (25 %)
 
-- [ ] **Documento** (PDF) con portada (empresa, logo, nombres de los cuatro miembros, asignatura, «Entrega 1») y las dos partes
-- [ ] **Diapositivas** para la exposición, con la marca de la empresa
-- [ ] Diagramas **nítidos y legibles** al exportarlos, relacionados con el texto que los acompaña (PDF p. 14)
+- [x] **Documento** (PDF) con portada (empresa, logo, nombres de los cuatro miembros, asignatura, «Entrega 1») y las dos partes
+- [x] **Diapositivas** para la exposición, con la marca de la empresa
+- [x] Diagramas **nítidos y legibles** al exportarlos, relacionados con el texto que los acompaña (PDF p. 14)
 - [ ] Revisión de **ortografía y redacción** por alguien que no lo haya escrito. No copiéis las erratas del enunciado: escribid **CoreBodega** (no «CoreBodegas»), **AñadaMaster** (sin tilde en la a) y **post mortem**.
-- [ ] Sin relleno ni elementos solo decorativos (simplicidad)
+- [x] Sin relleno ni elementos solo decorativos (simplicidad)
 - [ ] Nada copiado de Internet ni de otro grupo. Se suspende **toda la asignatura** (diap. 16).
 
 ### Parte 4 · Exposición en clase (25 %)

@@ -1,0 +1,114 @@
+{
+  "format": "se-ramify/1",
+  "id": "f0a967351f4c",
+  "kind": "orgchart",
+  "title": "Organigrama de Neuranet",
+  "project": "Entrega 1",
+  "notes": "Estructura mixta: las tres áreas responden ante la CEO & Project Manager (líneas «reports») y colaboran entre sí sin intermediarios (líneas «collab»).",
+  "created": "2026-10-22T17:05:17.000Z",
+  "updated": "2026-10-22T17:05:17.000Z",
+  "data": {
+    "nodes": [
+      {
+        "label": "CEO & Project Manager",
+        "x": 300,
+        "y": 0,
+        "type": "role",
+        "person": "Itziar Morales Rodriguez",
+        "attrs": [
+          "Dirige la empresa y el proyecto",
+          "Planifica y hace el seguimiento (Gantt)",
+          "Es la interlocutora con el cliente",
+          "Redacta las actas de las reuniones"
+        ],
+        "color": "#12343B",
+        "id": "a78e15c73f49"
+      },
+      {
+        "label": "Equipo de proyecto",
+        "x": 0,
+        "y": 190,
+        "type": "unit",
+        "w": 860,
+        "h": 210,
+        "id": "598d68097241"
+      },
+      {
+        "label": "Business Analyst",
+        "x": 30,
+        "y": 240,
+        "type": "role",
+        "person": "Samuel Porta Boylan",
+        "attrs": [
+          "Requisitos",
+          "Casos de uso y especificaciones",
+          "Historias de usuario y Gherkin",
+          "Mapa de stakeholders"
+        ],
+        "color": "#2E8B7A",
+        "id": "5e4206fd44da"
+      },
+      {
+        "label": "Software Architect",
+        "x": 310,
+        "y": 240,
+        "type": "role",
+        "person": "Javier Cejuela García",
+        "attrs": [
+          "Arquitectura del sistema",
+          "Diagramas de clases y secuencia",
+          "Infraestructura y TCO"
+        ],
+        "color": "#C2410C",
+        "id": "d7d49b7fec2c"
+      },
+      {
+        "label": "Lead Developer (AI & QA)",
+        "x": 590,
+        "y": 240,
+        "type": "role",
+        "person": "Diego Herrera Rodríguez",
+        "attrs": [
+          "Desarrollo asistido por IA",
+          "Pruebas y control de calidad",
+          "Material para evolucionar la app con IA"
+        ],
+        "color": "#FF6A3D",
+        "id": "3dacfbf5c128"
+      }
+    ],
+    "edges": [
+      {
+        "from": "5e4206fd44da",
+        "to": "a78e15c73f49",
+        "type": "reports",
+        "id": "af745691ce4c"
+      },
+      {
+        "from": "d7d49b7fec2c",
+        "to": "a78e15c73f49",
+        "type": "reports",
+        "id": "c1d99bd4eee5"
+      },
+      {
+        "from": "3dacfbf5c128",
+        "to": "a78e15c73f49",
+        "type": "reports",
+        "id": "a948625a1bce"
+      },
+      {
+        "from": "5e4206fd44da",
+        "to": "d7d49b7fec2c",
+        "type": "collab",
+        "id": "8f074b1da8c3"
+      },
+      {
+        "from": "d7d49b7fec2c",
+        "to": "3dacfbf5c128",
+        "type": "collab",
+        "id": "cebe46e14e8a"
+      }
+    ],
+    "routing": "orthogonal"
+  }
+}

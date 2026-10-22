@@ -4,9 +4,9 @@
   "kind": "usecase",
   "title": "Casos de uso — CoreReservas",
   "project": "Entrega 1",
-  "notes": "Entrega 1 · Parte 2. Diagrama de casos de uso del programa CoreReservas de AñadaMaster (enunciado, p. 4).\n\nDecisiones de modelado:\n- Un diagrama por Core: son dos programas distintos con usuarios distintos, y en un único diagrama los 25 casos de uso no se leerían.\n- Actor abstracto Usuario, del que heredan Administrador y Personal: el enunciado les da los mismos privilegios, así que todos los casos de uso cuelgan de Usuario.\n- Un caso de uso por operación (alta, modificación, baja) y no un «Gestionar X»: cada operación tiene su propio flujo, sus reglas y su especificación.\n- Confirmar o aplicar los cambios es un paso del flujo, no un caso de uso: no aporta un objetivo propio al actor.\n- «include» solo para comportamiento que comparten varios casos de uso: Buscar cliente (CU-05, CU-06, CU-07) y Buscar pedido (CU-08 a CU-13). Buscar un producto lo usa solo CU-03 y queda como paso de su flujo.\n- El cliente de la bodega no es actor porque no usa el sistema: sus llamadas son el disparador de los casos de uso de pedidos.\n- Producto no tiene baja y Factura solo imprime, como dice el enunciado.",
+  "notes": "Entrega 1 · Parte 2. Diagrama de casos de uso del programa CoreReservas de AñadaMaster (enunciado, p. 4).\n\nDecisiones de modelado:\n- Un diagrama por Core: son dos programas distintos con usuarios distintos, y en un único diagrama los 25 casos de uso no se leerían.\n- Personal es el actor principal (es quien más usa CoreReservas) y Administrador hereda de Personal: el enunciado les da los mismos privilegios.\n- Un caso de uso por operación (alta, modificación, baja) y no un «Gestionar X»: cada operación tiene su propio flujo, sus reglas y su especificación.\n- Confirmar o aplicar los cambios es un paso del flujo, no un caso de uso: no aporta un objetivo propio al actor.\n- «include» solo para comportamiento que comparten varios casos de uso: Buscar cliente (CU-05, CU-06, CU-07) y Buscar pedido (CU-08 a CU-13). Buscar un producto lo usa solo CU-03 y queda como paso de su flujo.\n- El cliente de la bodega no es actor porque no usa el sistema: sus llamadas son el disparador de los casos de uso de pedidos.\n- Producto no tiene baja y Factura solo imprime, como dice el enunciado.\n- Reunión con el cliente (16/10/2026): Imprimir factura pasa a Generar factura (es su primer sistema de facturación); el pedido pasa por reservado › confirmado › facturado › enviado › cerrado y solo se puede anular hasta facturarlo; la ficha de cliente distingue residencial o industrial y NIF o CIF.\n- «extend»: Dar de alta cliente extiende Dar de alta pedido cuando el cliente aún no existe.",
   "created": "2026-10-22T16:58:32.165Z",
-  "updated": "2026-10-22T16:58:32.165Z",
+  "updated": "2026-10-22T17:25:37.000Z",
   "data": {
     "routing": "straight",
     "nodes": [
@@ -21,13 +21,6 @@
       },
       {
         "type": "actor",
-        "x": 88,
-        "y": 481,
-        "label": "Usuario",
-        "id": "637cc84cc3b9"
-      },
-      {
-        "type": "actor",
         "x": -110,
         "y": 349,
         "label": "Administrador",
@@ -39,15 +32,6 @@
         "y": 609,
         "label": "Personal",
         "id": "31221e0a6800"
-      },
-      {
-        "type": "note",
-        "x": -140,
-        "y": 852,
-        "label": "Usuario es un actor abstracto: Administrador y Personal tienen los mismos privilegios en el sistema (enunciado, p. 4). El Personal es quien más usa CoreReservas.",
-        "w": 270,
-        "h": 110,
-        "id": "9625716dda47"
       },
       {
         "type": "note",
@@ -74,8 +58,8 @@
         "label": "Iniciar sesión",
         "spec": {
           "code": "CU-01",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "El usuario se identifica en CoreReservas para poder trabajar con él.",
           "preconditions": "El usuario está dado de alta como empleado de la empresa.",
           "trigger": "El usuario abre CoreReservas en un ordenador de administración o de bodega.",
@@ -94,8 +78,8 @@
         "label": "Dar de alta producto",
         "spec": {
           "code": "CU-02",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Registra un nuevo producto vinícola que se puede reservar.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
           "trigger": "Hay un producto nuevo que registrar.",
@@ -114,8 +98,8 @@
         "label": "Modificar producto",
         "spec": {
           "code": "CU-03",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Corrige o actualiza los datos de un producto, porque se introdujeron mal o porque han cambiado.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl producto existe.",
           "trigger": "Hay un error en los datos de un producto o estos han cambiado.",
@@ -134,13 +118,13 @@
         "label": "Dar de alta cliente",
         "spec": {
           "code": "CU-04",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
-          "description": "Registra un nuevo cliente enófilo con sus datos y su domicilio.",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
+          "description": "Registra un nuevo cliente con su ficha: tipo (residencial o industrial), NIF o CIF, datos y domicilio.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
           "trigger": "Un cliente nuevo quiere hacer reservas.",
-          "mainFlow": "El usuario elige Cliente › Alta.\nEl sistema muestra la plantilla de cliente.\nEl usuario introduce los datos y el domicilio del cliente.\nEl usuario confirma el alta.\nEl sistema valida los datos y guarda el cliente.",
-          "alternativeFlows": "5a. Faltan datos obligatorios o tienen un formato incorrecto: el sistema los señala y vuelve al paso 3.",
+          "mainFlow": "El usuario elige Cliente › Alta.\nEl sistema muestra la plantilla de cliente.\nEl usuario indica si el cliente es residencial o industrial e introduce su NIF o CIF, sus datos y su domicilio.\nEl usuario confirma el alta.\nEl sistema valida los datos y guarda el cliente.",
+          "alternativeFlows": "5a. Faltan datos obligatorios o tienen un formato incorrecto: el sistema los señala y vuelve al paso 3.\n5b. Ya existe un cliente con ese NIF o CIF: el sistema avisa y no lo duplica.",
           "postconditions": "El cliente queda registrado y se le pueden asignar pedidos.",
           "priority": "",
           "frequency": ""
@@ -154,8 +138,8 @@
         "label": "Modificar cliente",
         "spec": {
           "code": "CU-05",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Cambia el domicilio o cualquier otro dato importante de un cliente.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl cliente existe.",
           "trigger": "El cliente comunica un cambio en sus datos o se detecta un error.",
@@ -174,8 +158,8 @@
         "label": "Dar de baja cliente",
         "spec": {
           "code": "CU-06",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Elimina un cliente de la base de datos.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl cliente existe.",
           "trigger": "Hay que eliminar a un cliente.",
@@ -194,14 +178,14 @@
         "label": "Dar de alta pedido",
         "spec": {
           "code": "CU-07",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Registra un pedido (reserva de botellas) a nombre de un cliente.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl cliente está dado de alta.",
           "trigger": "Un cliente pide una reserva de productos.",
-          "mainFlow": "El usuario elige Pedido › Alta.\nEl usuario busca el cliente (incluye CU-14 Buscar cliente).\nEl usuario introduce los datos del pedido.\nEl usuario confirma el pedido.\nEl sistema guarda el pedido.",
-          "alternativeFlows": "2a. El cliente no existe: el usuario lo da de alta (CU-04) y continúa.\n4a. El usuario no confirma: el pedido no se guarda.",
-          "postconditions": "El pedido queda registrado. Sus líneas se añaden con CU-10.",
+          "mainFlow": "El usuario elige Pedido › Alta.\nEl usuario busca el cliente (incluye CU-14 Buscar cliente).\nEl usuario introduce los datos del pedido.\nEl sistema guarda el pedido en estado «reservado».\nCuando el cliente lo confirma, el usuario confirma el pedido y pasa a «confirmado».",
+          "alternativeFlows": "2a. El cliente no existe: se da de alta en ese momento (CU-04 «extend» CU-07) y se continúa.\n5a. El cliente no confirma: el pedido sigue reservado y se puede anular (CU-09).",
+          "postconditions": "El pedido queda registrado como reservado o confirmado. Sus líneas se añaden con CU-10. Estados del pedido: reservado › confirmado › facturado › enviado › cerrado.",
           "priority": "",
           "frequency": ""
         },
@@ -214,8 +198,8 @@
         "label": "Modificar pedido",
         "spec": {
           "code": "CU-08",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Cambia los datos de un pedido a petición del cliente.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl pedido existe.",
           "trigger": "El cliente llama por teléfono para modificar su pedido.",
@@ -234,13 +218,13 @@
         "label": "Anular pedido",
         "spec": {
           "code": "CU-09",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Da de baja (elimina) un pedido a petición del cliente.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl pedido existe.",
+          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl pedido existe y todavía no está facturado.",
           "trigger": "El cliente llama por teléfono para anular su pedido.",
           "mainFlow": "El usuario elige Pedido › Baja.\nEl usuario busca el pedido (incluye CU-15 Buscar pedido).\nEl sistema muestra el pedido y pide confirmación.\nEl usuario confirma la anulación.\nEl sistema elimina el pedido.",
-          "alternativeFlows": "4a. El usuario no confirma: el pedido se mantiene.",
+          "alternativeFlows": "3a. El pedido ya está facturado: el sistema no permite anularlo.\n4a. El usuario no confirma: el pedido se mantiene.",
           "postconditions": "El pedido ya no está en el sistema.",
           "priority": "",
           "frequency": ""
@@ -254,8 +238,8 @@
         "label": "Ingresar detalle de pedido",
         "spec": {
           "code": "CU-10",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Añade a un pedido las líneas de detalle: qué producto y qué cantidad reserva el cliente.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl pedido existe.",
           "trigger": "Hay que registrar qué productos y en qué cantidad incluye un pedido.",
@@ -274,8 +258,8 @@
         "label": "Modificar detalle de pedido",
         "spec": {
           "code": "CU-11",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Cambia la cantidad o el producto de una línea de detalle de un pedido.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl pedido tiene al menos una línea de detalle.",
           "trigger": "El cliente cambia lo que quiere reservar.",
@@ -294,8 +278,8 @@
         "label": "Eliminar detalle de pedido",
         "spec": {
           "code": "CU-12",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Elimina una línea de detalle de un pedido.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl pedido tiene al menos una línea de detalle.",
           "trigger": "El cliente ya no quiere uno de los productos del pedido.",
@@ -311,17 +295,17 @@
         "type": "usecase",
         "x": 536,
         "y": 924,
-        "label": "Imprimir factura",
+        "label": "Generar factura",
         "spec": {
           "code": "CU-13",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
-          "description": "Imprime la factura con el detalle de un pedido.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl pedido tiene al menos una línea de detalle.",
-          "trigger": "Hay que imprimir la factura de un pedido.",
-          "mainFlow": "El usuario elige Factura.\nEl usuario recupera el pedido (incluye CU-15 Buscar pedido).\nEl sistema muestra el detalle del pedido.\nEl usuario pulsa el botón de imprimir.\nEl sistema imprime la factura.",
-          "alternativeFlows": "3a. El pedido no tiene líneas de detalle: el sistema avisa y no permite imprimir.",
-          "postconditions": "La factura del pedido está impresa.",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
+          "description": "Genera la factura de un pedido confirmado, la guarda y la imprime. AñadaMaster es el primer sistema de facturación de la bodega.",
+          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl pedido está confirmado y tiene al menos una línea de detalle.",
+          "trigger": "Hay que facturar un pedido confirmado.",
+          "mainFlow": "El usuario elige Factura.\nEl usuario recupera el pedido (incluye CU-15 Buscar pedido).\nEl sistema muestra el detalle del pedido.\nEl usuario pulsa el botón de facturar.\nEl sistema genera y guarda la factura, la imprime y pasa el pedido a «facturado».",
+          "alternativeFlows": "3a. El pedido no está confirmado o no tiene líneas de detalle: el sistema avisa y no lo factura.",
+          "postconditions": "La factura queda guardada e impresa. El pedido está facturado y ya no se puede anular.",
           "priority": "",
           "frequency": ""
         },
@@ -334,8 +318,8 @@
         "label": "Buscar cliente",
         "spec": {
           "code": "CU-14",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Localiza un cliente registrado. Lo incluyen CU-05, CU-06 y CU-07.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
           "trigger": "Lo inicia el caso de uso que lo incluye.",
@@ -354,8 +338,8 @@
         "label": "Buscar pedido",
         "spec": {
           "code": "CU-15",
-          "primaryActor": "Usuario (Administrador o Personal)",
-          "secondaryActors": "",
+          "primaryActor": "Personal",
+          "secondaryActors": "Administrador (hereda de Personal)",
           "description": "Recupera un pedido registrado. Lo incluyen CU-08 a CU-13.",
           "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
           "trigger": "Lo inicia el caso de uso que lo incluye.",
@@ -366,95 +350,90 @@
           "frequency": ""
         },
         "id": "92ed1a5cce7c"
+      },
+      {
+        "type": "note",
+        "x": 1650,
+        "y": 40,
+        "label": "Personal es quien más usa CoreReservas. Administrador hereda de Personal: tiene los mismos privilegios y puede hacer todo lo que hace el Personal (enunciado, p. 4).",
+        "id": "990c4efc8709"
       }
     ],
     "edges": [
       {
-        "from": "ff4e14585aae",
-        "to": "637cc84cc3b9",
-        "type": "generalization",
-        "id": "627aa9c7268c"
-      },
-      {
         "from": "31221e0a6800",
-        "to": "637cc84cc3b9",
-        "type": "generalization",
-        "id": "eb1bb52fd379"
-      },
-      {
-        "from": "637cc84cc3b9",
         "to": "1c33691642f1",
         "type": "association",
         "id": "a681fa499e34"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "671389132c0a",
         "type": "association",
         "id": "5f05b1c8a6ff"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "343d296a1958",
         "type": "association",
         "id": "e384d19faa1d"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "b90ba0b2b2b8",
         "type": "association",
         "id": "cc82fac051c4"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "a992e5d9fbf1",
         "type": "association",
         "id": "9842646b4cfd"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "7bde3e45692b",
         "type": "association",
         "id": "f2c49772bb15"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "94e318133968",
         "type": "association",
         "id": "1272c71b82f2"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "2c5fa1ec5933",
         "type": "association",
         "id": "bb35c72863fb"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "d939c03acb4e",
         "type": "association",
         "id": "0e121e08c445"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "e9943a593d06",
         "type": "association",
         "id": "3c0dfafdd9ae"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "f5062341219c",
         "type": "association",
         "id": "35216c854735"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "42ec922e872a",
         "type": "association",
         "id": "baaf8bb0ac0c"
       },
       {
-        "from": "637cc84cc3b9",
+        "from": "31221e0a6800",
         "to": "a0be5ceaf8d1",
         "type": "association",
         "id": "467968bce324"
@@ -512,6 +491,19 @@
         "to": "92ed1a5cce7c",
         "type": "include",
         "id": "97a302a04f8c"
+      },
+      {
+        "from": "ff4e14585aae",
+        "to": "31221e0a6800",
+        "type": "generalization",
+        "id": "a2cb8ad2ea0f"
+      },
+      {
+        "from": "b90ba0b2b2b8",
+        "to": "94e318133968",
+        "type": "extend",
+        "label": "el cliente no existe",
+        "id": "79d60da68fb8"
       }
     ]
   }

@@ -1,0 +1,48 @@
+# Compila todos los documentos Typst a PDF en cada push a main y sube los PDF
+# al repositorio en un commit aparte. Así los PDF del repo siempre
+# corresponden a la última versión de los .typ y de los diagramas.
+name: Generar PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.typ"
+      - "diagramas/**"
+      - "templates/**"
+      - ".github/workflows/pdfs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pdfs
+  cancel-in-progress: true
+
+jobs:
+  pdfs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Typst 0.13.1
+        run: |
+          curl -sSL https://github.com/typst/typst/releases/download/v0.13.1/typst-x86_64-unknown-linux-musl.tar.xz | tar xJ
+          echo "$PWD/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+
+      - name: Compilar los documentos
+        run: templates/compilar-todo.sh
+
+      - name: Subir los PDF si han cambiado
+        run: |
+          rm -rf typst-x86_64-unknown-linux-musl
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.pdf'
+          if git diff --cached --quiet; then
+            echo "Los PDF ya estaban al día."
+          else
+            git commit -m "Regenerar PDF"
+            git push
+          fi
