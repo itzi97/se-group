@@ -81,7 +81,7 @@
 //  Callouts
 // ============================================================
 #let callout(body, title: none, accent: petroleo, bg: callbg) = block(
-  width: 100%, fill: bg, radius: 0pt, inset: (x: 11pt, y: 9pt),
+  width: 100%, fill: bg, radius: 0pt, inset: (x: 11pt, y: 9pt), breakable: false,
   stroke: (left: 3pt + accent), above: 0.75em, below: 0.75em,
 )[
   // force left alignment so the box reads correctly even inside a centred
@@ -301,6 +301,7 @@
   logo-width: auto,
   lang: "es",
   short-title: auto,               // título en la cabecera; por defecto, `title`
+  chapter-break: true,             // cada capítulo (=) empieza en una página nueva; false = texto seguido
   body,
 ) = {
   let short = if short-title == auto { title } else { short-title }
@@ -355,9 +356,9 @@
   // top-level section its own opening page. Sizes below body (10.5pt) are
   // avoided so every level stays clearly above running text.
   show heading.where(level: 1): it => {
-    pagebreak(weak: true)
-    block(above: 0pt, below: 26pt, sticky: true, {
-      set text(fill: petroleo, size: 24pt, weight: 700, font: headingfont)
+    if chapter-break { pagebreak(weak: true) }
+    block(above: if chapter-break { 0pt } else { 30pt }, below: if chapter-break { 26pt } else { 18pt }, sticky: true, {
+      set text(fill: petroleo, size: if chapter-break { 24pt } else { 20pt }, weight: 700, font: headingfont)
       stack(spacing: 9pt,
         { hnum(it); it.body },
         line(length: 100%, stroke: 0.5pt + petroleo),   // discrete dark divider
@@ -504,7 +505,7 @@
     // (no running header, no footer/page number), the same treatment as the
     // cover and the LaTeX `\utadcontents`. The header/footer appear from the
     // first numbered content page (page 2) onward.
-    header: context if counter(page).get().first() > 1 {
+    header: context if here().page() > 2 {  // portada = 1, índice = 2: sin cabecera
       set text(size: 8.5pt, fill: muted)
       // Izquierda: símbolo + título corto. Derecha: cliente · referencia.
       let right-bits = (client, reference).filter(x => x != none)
@@ -518,7 +519,7 @@
       v(5pt)
       line(length: 100%, stroke: 0.5pt + rgb("#C9D6D8"))
     },
-    footer: context if counter(page).get().first() > 1 {
+    footer: context if here().page() > 2 {
       set text(size: 8.5pt, fill: muted)
       line(length: 100%, stroke: 0.5pt + hairline)
       v(2pt)

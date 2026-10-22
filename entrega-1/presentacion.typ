@@ -18,9 +18,9 @@
   date: "22 de octubre de 2026",
 )
 
-#agenda-slide(secciones, current: 1)
+#agenda-slide(secciones)
 
-#section-slide[1 · Quiénes somos]
+#section-tag[1 · Quiénes somos]
 
 #slide(title: [Por qué «Neuranet»])[
   #slide-columns(ratio: (1.1fr, 1fr),
@@ -36,8 +36,8 @@
 ]
 
 #slide(title: [Nuestros valores])[
-  #set text(size: 22pt)
-  #cards(gutter: 0.8cm, inset: (x: 20pt, y: 22pt), title-size: 1.25em,
+  #set text(size: 25pt)
+  #cards(gutter: 0.8cm, inset: (x: 22pt, y: 30pt), title-size: 1.25em,
     (title: [Innovación], accent: brasa, body: [Al corriente de lo que aparece, y lo usamos cuando aporta valor.]),
     (title: [Integridad], accent: petroleo, body: [Cuidamos los datos del cliente y usamos los LLM sin poner en riesgo su privacidad.]),
     (title: [Flexibilidad], accent: sinapsis, body: [Nos adaptamos a cada problema con soluciones a medida.]),
@@ -49,10 +49,10 @@
   #v(0.6cm)
   #text(font: headingfont, size: 22pt, fill: brasa)[Soluciones de IA a tu medida]
   #v(0.5cm)
-  #text(size: 15pt, fill: muted)[La «N» es una red neuronal: entrada, neurona que se enciende y salida. La «a» repite la neurona.]
+  #text(size: 18pt, fill: muted)[La «N» es una red neuronal: entrada, neurona que se enciende y salida. La «a» repite la neurona.]
 ]
 
-#section-slide[2 · Modelo de negocio]
+#section-tag[2 · Modelo de negocio]
 
 #slide(title: [Modelo de negocio])[
   #set text(size: 18pt)
@@ -68,13 +68,13 @@
   )
 ]
 
-#section-slide[3 · Organización]
+#section-tag[3 · Organización]
 
 #slide(title: [Quién hace qué], fit: true)[
-  #box(width: 22cm, organigrama(s: 1.3))
+  #box(width: 25cm, organigrama(s: 1.6))
 ]
 
-#section-slide[4 · Casos de uso]
+#section-tag[4 · Casos de uso]
 
 #slide(title: [Casos de uso · CoreReservas], fit: true)[
   #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corereservas-0f712f.json"), show-codes: false, size: 11pt, row-gap: 7pt, v-pad: 0.7, legend: false)
@@ -85,8 +85,8 @@
 ]
 
 #slide(title: [Lo que cambió tras hablar con el cliente])[
-  #set text(size: 20pt)
-  #set list(spacing: 0.9em)
+  #set text(size: 23pt)
+  #set list(spacing: 1em)
   - *Generar factura*: será su primer sistema de facturación
   - Pedido: reservado › confirmado › facturado › enviado › cerrado; se anula solo antes de facturar
   - Cliente residencial o industrial, con NIF o CIF

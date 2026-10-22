@@ -118,6 +118,10 @@
 // matches its width). Also records the section so the following content
 // slides can show it as a tag next to their title; pass `tag:` for a shorter
 // version to show there (defaults to the full section title).
+// Set the section tag shown on content slides WITHOUT a divider slide
+// (for short decks where full-page dividers would waste space).
+#let section-tag(body) = _nn-section.update(body)
+
 #let section-slide(body, tag: auto) = {
   _nn-section.update(if tag == auto { body } else { tag })
   page(
@@ -234,7 +238,7 @@
     for (i, it) in items.enumerate() {
       let active = current == i + 1              // the section we're entering
       let dimmed = current != none and not active  // others, when a current is set
-      block(above: 0.34cm, below: 0.34cm,
+      block(above: 0.55cm, below: 0.55cm,
         grid(columns: (0.45cm, 1.15cm, 1fr), column-gutter: 0pt,
           align: (left + horizon, left + horizon, left + horizon),
           // blue tick marks the current item

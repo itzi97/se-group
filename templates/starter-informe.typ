@@ -24,13 +24,16 @@
   author: "Nombre 1 · Nombre 2 · Nombre 3 · Nombre 4",
   short-title: [Título corto],           // cabecera de cada página
   confidential: true,
+  chapter-break: true,                   // false = los capítulos siguen en la misma página
 )
 
-#neuranet-outline()                      // página de índice
-
+// Índice y control de versiones en la misma página
+#outline(title: [Índice])
+#v(1.2cm)
 #version-history(
   ("1.0", "22/10/2026", "Nombre 1", [Primera versión.]),
 )
+#pagebreak()
 
 = Primer capítulo
 == Un apartado
