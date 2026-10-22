@@ -5,7 +5,7 @@
 // ============================================================
 
 #import "/templates/lib.typ": *
-#import "comun.typ": equipo, organigrama, lienzo
+#import "comun.typ": equipo, organigrama
 #import "/templates/neuranet-ramify.typ": usecase-diagram
 
 #let secciones = ("Quiénes somos", "Modelo de negocio", "Organización", "Casos de uso")
@@ -25,6 +25,7 @@
 #slide(title: [Por qué «Neuranet»])[
   #slide-columns(ratio: (1.1fr, 1fr),
     [
+      #set text(size: 22pt)
       - *neura*: redes neuronales
       - *net*: red
       - Desarrollamos con LLM, aprendizaje automático y redes neuronales
@@ -35,12 +36,11 @@
 ]
 
 #slide(title: [Nuestros valores])[
-  #set text(size: 20pt)
-  #set par(justify: false)
-  #grid(columns: (1fr, 1fr, 1fr), column-gutter: 0.8cm,
-    callout(title: [Innovación], accent: brasa)[Al corriente de lo que aparece, y lo usamos cuando aporta valor.],
-    callout(title: [Integridad], accent: petroleo)[Cuidamos los datos del cliente y usamos los LLM sin poner en riesgo su privacidad.],
-    callout(title: [Flexibilidad], accent: sinapsis)[Nos adaptamos a cada problema con soluciones a medida.],
+  #set text(size: 22pt)
+  #cards(gutter: 0.8cm, inset: (x: 20pt, y: 22pt), title-size: 1.25em,
+    (title: [Innovación], accent: brasa, body: [Al corriente de lo que aparece, y lo usamos cuando aporta valor.]),
+    (title: [Integridad], accent: petroleo, body: [Cuidamos los datos del cliente y usamos los LLM sin poner en riesgo su privacidad.]),
+    (title: [Flexibilidad], accent: sinapsis, body: [Nos adaptamos a cada problema con soluciones a medida.]),
   )
 ]
 
@@ -54,46 +54,39 @@
 
 #section-slide[2 · Modelo de negocio]
 
-#slide(title: [Modelo de negocio], fit: true)[
-  #box(width: 26cm, lienzo(s: 1.35, alto: 14.5cm))
-]
-
-#slide(title: [Cómo ganamos dinero])[
-  #set par(justify: false)
-  #slide-columns(
-    callout(title: [Precio cerrado por proyecto], accent: brasa)[Alcance, precio y plazo pactados al inicio: el cliente sabe desde el primer día cuánto le cuesta.],
-    callout(title: [Cuota mensual de mantenimiento], accent: petroleo)[Soporte, corrección de errores y actualizaciones una vez entregado el software.],
+#slide(title: [Modelo de negocio])[
+  #set text(size: 18pt)
+  #cards(columns: 2, gutter: 0.6cm, inset: (x: 18pt, y: 16pt), title-size: 1.2em,
+    (title: [Para quién], accent: petroleo,
+     body: [Pymes de sectores tradicionales (agroalimentario, logística, comercio) que aún gestionan con hojas de cálculo o programas antiguos.]),
+    (title: [Qué ofrecemos], accent: brasa,
+     body: [Software de gestión a medida, desarrollado con IA para reducir plazos y con un uso de los LLM que protege sus datos.]),
+    (title: [Cómo trabajamos], accent: sinapsis,
+     body: [Un único interlocutor, reuniones con acta y equipo híbrido con oficina en Madrid.]),
+    (title: [Cómo ganamos dinero], accent: chispa,
+     body: [Precio cerrado por proyecto y una cuota mensual de mantenimiento (soporte, errores y actualizaciones).]),
   )
 ]
 
 #section-slide[3 · Organización]
 
-#slide(title: [Organigrama], fit: true)[
-  #box(width: 24cm, organigrama(s: 1.45))
-]
-
-#slide(title: [Quién hace qué])[
-  #set text(size: 14pt)
-  #neuranet-table(
-    columns: (auto, auto, 1fr),
-    inset: (x: 10pt, y: 7pt),
-    header: ([Persona], [Cargo], [Responsabilidades]),
-    ..equipo.map(p => ([#p.nombre], [*#p.cargo*], p.tareas.join([ · ]))).flatten(),
-  )
+#slide(title: [Quién hace qué], fit: true)[
+  #box(width: 22cm, organigrama(s: 1.3))
 ]
 
 #section-slide[4 · Casos de uso]
 
 #slide(title: [Casos de uso · CoreReservas], fit: true)[
-  #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corereservas-0f712f.json"), show-codes: false, size: 11pt, legend: false)
+  #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corereservas-0f712f.json"), show-codes: false, size: 11pt, row-gap: 7pt, v-pad: 0.7, legend: false)
 ]
 
-#slide(title: [Casos de uso · CoreBodega], fit: true)[
-  #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corebodega-b0c308.json"), show-codes: false, size: 11pt, legend: false)
+#slide(title: [Casos de uso · CoreBodega], align-center: true)[
+  #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corebodega-b0c308.json"), show-codes: false, size: 12.5pt, row-gap: 10pt, v-pad: 0.8, legend: false, max-scale: 2)
 ]
 
 #slide(title: [Lo que cambió tras hablar con el cliente])[
-  #set text(size: 18pt)
+  #set text(size: 20pt)
+  #set list(spacing: 0.9em)
   - *Generar factura*: será su primer sistema de facturación
   - Pedido: reservado › confirmado › facturado › enviado › cerrado; se anula solo antes de facturar
   - Cliente residencial o industrial, con NIF o CIF

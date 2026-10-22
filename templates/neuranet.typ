@@ -491,7 +491,7 @@
         ([Versión], version),
         ([Estado], status),
         ([Fecha], date),
-        ([Preparado por], author),
+        ([Preparado por], author.split(" · ").map(x => [#x]).join(linebreak())),
       ))
     ]
   ]
@@ -561,4 +561,30 @@
     header: ([Versión], [Fecha], [Autor], [Cambios]),
     ..rows.pos().flatten(),
   )
+})
+
+// ============================================================
+//  Tarjetas de la misma altura
+// ============================================================
+// Una fila de tarjetas (valores, servicios, cifras…) que siempre miden lo
+// mismo, aunque el texto de cada una sea de distinta longitud.
+//   #cards(
+//     (title: [Innovación], body: [...], accent: brasa),
+//     (title: [Integridad], body: [...], accent: petroleo),
+//   )
+// columns: cuántas por fila (por defecto, todas en una fila).
+#let cards(..items, columns: none, gutter: 10pt, inset: (x: 12pt, y: 11pt), title-size: 1.05em) = layout(size => {
+  let its = items.pos()
+  let n = if columns == none { its.len() } else { columns }
+  let w = (size.width - gutter * (n - 1)) / n
+  let card(it, h) = block(width: w, height: h, fill: callbg, inset: inset, radius: 0pt,
+    stroke: (top: 3pt + it.at("accent", default: petroleo)), breakable: false, {
+      set align(left + top)
+      set par(justify: false)
+      text(font: headingfont, weight: 700, fill: it.at("accent", default: petroleo), size: title-size, it.title)
+      v(0.55em, weak: true)
+      it.body
+    })
+  let h = calc.max(..its.map(it => measure(card(it, auto)).height))
+  grid(columns: (w,) * n, gutter: gutter, ..its.map(it => card(it, h)))
 })

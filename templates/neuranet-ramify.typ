@@ -48,6 +48,7 @@
   v-pad: 1.0,              // aire vertical dentro de cada elipse (menos = más compacto)
   labels: true,            // estereotipo en cada relación
   legend: true,
+  max-scale: 1.25,         // cuánto puede ampliarse para llenar el ancho disponible
 ) = layout(avail => context {
   let nodes = d.data.nodes
   let edges = d.data.edges
@@ -94,10 +95,20 @@
   let title-h = S * 2.6
   let ytop = pt(pad) + title-h
   let ys = (:)
-  for (i, n) in primary.enumerate() { ys.insert(n.id, ytop + i * (eh + gap) + eh / 2) }
+  // entre dos casos principales unidos por una relación («extend») se deja
+  // sitio para la flecha y su etiqueta
+  let pidx = (:)
+  for (i, n) in primary.enumerate() { pidx.insert(n.id, i) }
+  let linked = rel.filter(e => e.from in pidx and e.to in pidx and calc.abs(pidx.at(e.from) - pidx.at(e.to)) == 1)
+    .map(e => calc.min(pidx.at(e.from), pidx.at(e.to)))
+  let y = ytop
+  for (i, n) in primary.enumerate() {
+    ys.insert(n.id, y + eh / 2)
+    y += eh + (if i in linked { calc.max(gap, S * 3.4) } else { gap })
+  }
   let step = actor-h + S * 5
   let n-act = main-actors.len() + child-actors.len()
-  let body-h = calc.max(primary.len() * (eh + gap) - gap, n-act * step)
+  let body-h = calc.max(y - ytop - gap, n-act * step)
   let mid0 = ytop + body-h / 2
   let ya = mid0
   let half = calc.max(..primary.map(n => calc.abs(ys.at(n.id) - ya)), 1)
@@ -320,6 +331,6 @@
       if rel.any(e => e.type == "extend") { item(bx + S * 20, sinapsis, [«extend»: solo si se cumple la condición]) }
     }
   })
-  let f = calc.min(1, pt(avail.width) / W)
-  if f < 1 { align(center, scale(x: f * 100%, y: f * 100%, reflow: true, drawing)) } else { align(center, drawing) }
+  let f = calc.min(max-scale, pt(avail.width) / W)
+  if f != 1 { align(center, scale(x: f * 100%, y: f * 100%, reflow: true, drawing)) } else { align(center, drawing) }
 })

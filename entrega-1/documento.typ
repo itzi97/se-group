@@ -39,20 +39,14 @@ Neuranet es una empresa de desarrollo de software con sede en Madrid. Creamos so
 
 == Valores
 
-#[
-#set par(justify: false)
-#grid(columns: (1fr, 1fr, 1fr), column-gutter: 10pt,
-  callout(title: [Innovación], accent: brasa)[
-    Estamos al corriente de las herramientas y técnicas que aparecen y las incorporamos cuando aportan valor al cliente.
-  ],
-  callout(title: [Integridad], accent: petroleo)[
-    Tratamos los datos de nuestros clientes con cuidado y usamos los LLM sin poner en riesgo su privacidad.
-  ],
-  callout(title: [Flexibilidad], accent: sinapsis)[
-    Nos adaptamos a cada problema y ofrecemos soluciones a medida en lugar de productos cerrados.
-  ],
+#cards(
+  (title: [Innovación], accent: brasa,
+   body: [Estamos al corriente de las herramientas y técnicas que aparecen y las incorporamos cuando aportan valor al cliente.]),
+  (title: [Integridad], accent: petroleo,
+   body: [Tratamos los datos de nuestros clientes con cuidado y usamos los LLM sin poner en riesgo su privacidad.]),
+  (title: [Flexibilidad], accent: sinapsis,
+   body: [Nos adaptamos a cada problema y ofrecemos soluciones a medida en lugar de productos cerrados.]),
 )
-]
 
 == Nuestra marca
 
@@ -71,7 +65,7 @@ Neuranet es una empresa de desarrollo de software con sede en Madrid. Creamos so
   columns: (auto, auto, auto, 1fr),
   header: ([], [Color], [Código], [Uso]),
   muestra(petroleo), [Petróleo], `#12343B`, [Color principal: logotipo, títulos y texto],
-  muestra(chispa), [Chispa], `#FF6A3D`, [La neurona del logotipo y los elementos gráficos destacados],
+  muestra(chispa), [Chispa], `#FF6A3D`, [La neurona del logotipo y los detalles gráficos],
   muestra(brasa), [Brasa], `#C2410C`, [Texto destacado sobre fondo claro],
   muestra(sinapsis), [Sinapsis], `#2E8B7A`, [Color secundario para diagramas],
   muestra(niebla), [Niebla], `#F4F7F7`, [Fondos claros],
@@ -95,30 +89,18 @@ Cobramos de dos formas:
 
 = Organización
 
-== Estructura
+== Estructura y roles
 
 Somos cuatro personas, así que hemos combinado una estructura jerárquica con una plana:
 
 - *Jerárquica en la responsabilidad.* La dirección y la jefatura de proyecto recaen en la misma persona, que decide, planifica y es la única interlocutora con el cliente. El cliente siempre sabe a quién dirigirse.
 - *Plana en el trabajo.* Las tres áreas técnicas colaboran directamente entre sí. Los requisitos pasan al diseño y el diseño al desarrollo sin intermediarios, que es el orden en que trabaja el Proceso Unificado.
 
-Una jerarquía pura añadiría capas innecesarias en un equipo tan pequeño, y una estructura totalmente plana dejaría al cliente sin un interlocutor claro.
+Una jerarquía pura añadiría capas innecesarias en un equipo tan pequeño, y una estructura totalmente plana dejaría al cliente sin un interlocutor claro. El organigrama muestra el cargo y las responsabilidades de cada persona.
 
 #figure(
   organigrama(),
   caption: [Organigrama de Neuranet.],
-)
-
-== Roles
-
-#neuranet-table(
-  columns: (3.4cm, 3.9cm, 1fr),
-  header: ([Persona], [Cargo], [Responsabilidades]),
-  ..equipo.map(p => (
-    [#p.nombre],
-    [*#p.cargo*#if p.area != none [ \ #text(size: 0.85em, fill: muted)[#p.area]]],
-    list(..p.tareas),
-  )).flatten(),
 )
 
 == Cómo trabajamos

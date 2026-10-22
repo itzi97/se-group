@@ -62,6 +62,7 @@ typst compile --root . --font-path templates/fonts entrega-1/documento.typ
 ## Componentes
 
 * Recuadros: `note[...]`, `important[...]`, `callout(title: ...)[...]`
+* Tarjetas de la misma altura: `cards((title: [...], body: [...], accent: brasa), ...)` (valores, servicios…)
 * Tablas: `neuranet-table(columns: ..., header: (...), ...celdas)`
 * Control de versiones: `version-history(("1.0", "22/10/2026", "Autor", [Cambios]), ...)`
 * Diagramas: `orgchart(org-node(...))` (organigrama), `timeline(...)` (Gantt), `evolution-chain(...)`

@@ -17,41 +17,70 @@
 // ---------------- Organigrama ----------------
 // Mezcla de estructura jerárquica y plana: las tres áreas responden ante la
 // dirección (líneas continuas) y trabajan entre sí sin intermediarios
-// (flechas discontinuas).
-#let org-caja(p, top: false, s: 1) = box(
-  width: 100%, height: if top { auto } else { 2.4cm * s }, inset: (x: 8pt * s, y: 7pt * s),
+// (flechas). Cada caja lleva el cargo, la persona y sus responsabilidades;
+// las tres de abajo miden siempre lo mismo.
+#let org-tareas(p, s, color) = {
+  set par(justify: false, leading: 0.4em)
+  set text(size: 8pt * s, fill: color)
+  set align(left)
+  list(marker: box(baseline: -0.22em, square(size: 0.34em, fill: chispa)),
+    indent: 0pt, body-indent: 0.5em, spacing: 0.5em, tight: false, ..p.tareas)
+}
+#let org-caja(p, w, h, top: false, s: 1) = block(
+  width: w, height: h, inset: (x: 9pt * s, y: 8pt * s), breakable: false,
   fill: if top { petroleo } else { white },
   stroke: if top { none } else { 1pt + petroleo },
   {
-    set align(center + horizon)
     set par(justify: false, leading: 0.45em)
-    if p.area != none { text(size: 7pt * s, fill: brasa, weight: 700, tracking: 0.6pt)[#upper(p.area)]; v(2pt * s) }
-    text(size: 10pt * s, weight: 700, font: headingfont, fill: if top { white } else { petroleo })[#p.cargo]
-    v(1pt * s)
-    text(size: 8.5pt * s, fill: if top { rgb("#DCE4E5") } else { ink })[#p.nombre]
+    set align(center + std.top)
+    set block(spacing: 0pt)
+    if p.area != none { block(text(size: 6.8pt * s, fill: brasa, weight: 700, tracking: 0.6pt)[#upper(p.area)]); v(4pt * s) }
+    block(text(size: 10pt * s, weight: 700, font: headingfont, fill: if top { white } else { petroleo })[#p.cargo])
+    v(3pt * s)
+    block(text(size: 8.5pt * s, fill: if top { rgb("#DCE4E5") } else { muted })[#p.nombre])
+    v(7pt * s)
+    line(length: 100%, stroke: 0.5pt + if top { rgb("#3E5A60") } else { hairline })
+    v(7pt * s)
+    if top {
+      let mitad = calc.ceil(p.tareas.len() / 2)
+      grid(columns: (1fr, 1fr), column-gutter: 10pt * s,
+        org-tareas((tareas: p.tareas.slice(0, mitad)), s, white),
+        org-tareas((tareas: p.tareas.slice(mitad)), s, white))
+    } else { org-tareas(p, s, ink) }
   },
 )
 
-#let organigrama(s: 1) = {
+#let organigrama(s: 1) = layout(size => {
   let jefa = equipo.at(0)
   let rest = equipo.slice(1)
-  let colab = box(width: 100%, align(center + horizon,
-    text(size: 14pt * s, fill: chispa, font: "DejaVu Sans Mono", weight: 700)[↔]))
-  set block(spacing: 0pt)
-  align(center, box(width: 40%, org-caja(jefa, top: true, s: s)))
-  // conectores: bajada central, travesaño y tres bajadas
-  align(center, line(start: (0pt, 0pt), end: (0pt, 12pt * s), stroke: 1pt + petroleo))
-  block(width: 100%, height: 12pt * s, {
-    place(top + left, dx: 16.67%, line(length: 66.66%, stroke: 1pt + petroleo))
-    for x in (16.67%, 50%, 83.33%) { place(top + left, dx: x, line(start: (0pt, 0pt), end: (0pt, 12pt * s), stroke: 1pt + petroleo)) }
-  })
-  block(width: 100%, fill: niebla, inset: (x: 6pt * s, y: 8pt * s), stroke: (paint: rgb("#C9D6D8"), thickness: 0.6pt, dash: "dashed"), {
-    grid(columns: (1fr, 1.3em * s, 1fr, 1.3em * s, 1fr), align: horizon,
-      org-caja(rest.at(0), s: s), colab, org-caja(rest.at(1), s: s), colab, org-caja(rest.at(2), s: s))
-    v(6pt * s)
-    align(center, text(size: 7.5pt * s, fill: muted)[Equipo de proyecto · las áreas colaboran entre sí sin intermediarios])
-  })
-}
+  let W = size.width
+  let inset-x = 8pt * s
+  let arrow-w = 16pt * s
+  let bw = (W - 2 * inset-x - 2 * arrow-w) / 3
+  let top-w = calc.min(W * 0.62, bw * 2)
+  let h = calc.max(..rest.map(p => measure(org-caja(p, bw, auto, s: s)).height))
+  let th = measure(org-caja(jefa, top-w, auto, top: true, s: s)).height
+  let colab = box(width: arrow-w, height: h, align(center + horizon,
+    text(size: 13pt * s, fill: chispa, font: "DejaVu Sans Mono", weight: 700)[↔]))
+  let drop = 12pt * s
+  // posiciones x de los centros de las tres cajas
+  let cx = range(3).map(i => inset-x + bw / 2 + i * (bw + arrow-w))
+  stack(spacing: 0pt,
+  align(center, org-caja(jefa, top-w, th, top: true, s: s)),
+  block(width: W, height: 2 * drop, {
+    place(top + left, dx: W / 2, line(start: (0pt, 0pt), end: (0pt, drop), stroke: 1pt + petroleo))
+    place(top + left, dx: cx.at(0), dy: drop, line(start: (0pt, 0pt), end: (cx.at(2) - cx.at(0), 0pt), stroke: 1pt + petroleo))
+    for x in cx { place(top + left, dx: x, dy: drop, line(start: (0pt, 0pt), end: (0pt, drop), stroke: 1pt + petroleo)) }
+  }),
+  block(width: W, fill: niebla, inset: (x: inset-x, top: 0pt, bottom: 8pt * s),
+    stroke: (paint: rgb("#C9D6D8"), thickness: 0.6pt, dash: "dashed"), {
+      grid(columns: (bw, arrow-w, bw, arrow-w, bw), align: horizon,
+        org-caja(rest.at(0), bw, h, s: s), colab, org-caja(rest.at(1), bw, h, s: s), colab, org-caja(rest.at(2), bw, h, s: s))
+      v(6pt * s)
+      align(center, text(size: 7.5pt * s, fill: muted)[Equipo de proyecto · las áreas colaboran entre sí sin intermediarios])
+    }),
+  )
+})
 
 // ---------------- Lienzo del modelo de negocio ----------------
 #let lienzo-celda(titulo, cuerpo, s: 1, acento: false) = block(
@@ -59,7 +88,7 @@
   stroke: 0.7pt + petroleo, {
     set align(left + top)
     set par(justify: false, leading: 0.5em, spacing: 0.5em)
-    set list(spacing: 0.45em, marker: text(fill: chispa)[▪])
+    set list(spacing: 0.45em, indent: 0pt, body-indent: 0.45em, marker: box(baseline: -0.2em, square(size: 0.32em, fill: chispa)))
     text(size: 7.2pt * s, weight: 700, fill: brasa, tracking: 0.5pt)[#upper(titulo)]
     v(3pt * s)
     set text(size: 7.8pt * s)
