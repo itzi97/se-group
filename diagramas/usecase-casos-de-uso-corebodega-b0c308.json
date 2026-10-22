@@ -4,60 +4,34 @@
   "kind": "usecase",
   "title": "Casos de uso — CoreBodega",
   "project": "Entrega 1",
-  "notes": "Entrega 1 · Parte 2. Diagrama de casos de uso del programa CoreBodega de AñadaMaster (enunciado, pp. 4-5).\n\nDecisiones de modelado:\n- Solo actúa el Administrador: el enunciado dice que en este Core «el trabajador que interactúa son los administradores».\n- MateriaPrima y Detalle de materia prima no tienen modificación porque el enunciado no lo permite. Detalle de materia prima tampoco tiene baja: el enunciado solo describe el ingreso.\n- Validar es un paso del flujo de cada caso de uso, no un caso de uso aparte.\n- Registrar responsable de la operación es un «include» de todas las gestiones porque el enunciado exige que quede registrado qué usuario hace cada una.\n- «include» de búsqueda solo cuando la comparten varios casos de uso: Buscar materia prima (CU-22, CU-23) y Buscar empleado (CU-25, CU-26).\n- La opción Personal se modela como «empleado» para no confundirla con el actor Personal de CoreReservas.\n- Queda fuera el dispositivo móvil de registro de materia prima (enunciado, p. 7): no se describe y hay que preguntarlo al cliente.\n- Reunión con el cliente (16/10/2026): no hay devoluciones; la uva que no cumple el grado de azúcar mínimo se tira y se usa como abono (CU-22). La entrada de uva registra peso del remolque, variedad y grado de azúcar (CU-21). La producción queda para versiones posteriores.",
+  "notes": "Entrega 1 · Parte 2. Diagrama de casos de uso del programa CoreBodega de AñadaMaster (enunciado, pp. 4-5).\n\nDecisiones de modelado:\n- Solo actúa el Administrador: el enunciado dice que en este Core «el trabajador que interactúa son los administradores».\n- Un caso de uso por opción del menú (MateriaPrima, Detalle Materia Prima, Personal). Las operaciones de cada opción están en su especificación.\n- La materia prima y su detalle no se pueden modificar (enunciado, p. 5).\n- Validar es un paso del flujo de cada caso de uso, no un caso de uso aparte.\n- «include»: Registrar responsable de la operación en todas las gestiones (el enunciado exige que quede registrado quién hace cada una), Buscar materia prima (CU-21, CU-22) y Buscar empleado (CU-23).\n- La opción Personal se modela como «empleado» para no confundirla con el actor Personal de CoreReservas.\n- Reunión con el cliente (16/10/2026): no hay devoluciones; la uva que no llega al grado de azúcar mínimo se tira y se usa como abono. La entrada de uva registra peso, variedad y grado de azúcar. La producción queda para versiones posteriores.",
   "created": "2026-10-22T16:58:32.167Z",
-  "updated": "2026-10-22T17:15:11.000Z",
+  "updated": "2026-10-22T17:42:57.000Z",
   "data": {
     "routing": "straight",
     "nodes": [
       {
         "type": "boundary",
-        "x": 470,
+        "x": 300,
         "y": 0,
         "label": "AñadaMaster · CoreBodega",
-        "w": 1140,
-        "h": 626,
+        "w": 980,
+        "h": 440,
         "id": "1ac519ab9003"
       },
       {
         "type": "actor",
-        "x": 68,
-        "y": 283,
+        "x": 60,
+        "y": 195.0,
         "label": "Administrador",
         "id": "004a97e9c3fb"
       },
       {
-        "type": "note",
-        "x": 1650,
-        "y": 153.6,
-        "label": "MateriaPrima y Detalle de materia prima no se pueden modificar una vez introducidos (enunciado, p. 5): por eso no tienen caso de uso de modificación.",
-        "w": 260,
-        "h": 110,
-        "id": "44374035ddbd"
-      },
-      {
-        "type": "note",
-        "x": 1650,
-        "y": 325.2,
-        "label": "Validar la operación para que sea efectiva es el último paso del flujo de cada caso de uso (ver especificaciones), no un caso de uso aparte.",
-        "w": 260,
-        "h": 100,
-        "id": "49676e22bc2c"
-      },
-      {
-        "type": "note",
-        "x": 1650,
-        "y": 473.4,
-        "label": "«Empleado» es la opción Personal del enunciado. Se renombra para no confundirla con el actor Personal de CoreReservas.",
-        "w": 260,
-        "h": 90,
-        "id": "a5bff222a2c6"
-      },
-      {
         "type": "usecase",
-        "x": 519,
-        "y": 60,
+        "id": "2803ffda24db",
         "label": "Iniciar sesión",
+        "x": 380,
+        "y": 60,
         "spec": {
           "code": "CU-20",
           "primaryActor": "Administrador",
@@ -65,193 +39,150 @@
           "description": "El administrador se identifica en CoreBodega. Su identidad es la que queda registrada en cada operación.",
           "preconditions": "El administrador está dado de alta como empleado de la empresa.",
           "trigger": "El administrador abre CoreBodega en un ordenador de administración o de bodega.",
-          "mainFlow": "El sistema solicita las credenciales del administrador.\nEl administrador introduce sus credenciales.\nEl sistema comprueba las credenciales.\nEl sistema abre la sesión y muestra el menú de opciones (MateriaPrima, Personal, Detalle Materia Prima).",
+          "mainFlow": "El sistema solicita las credenciales.\nEl administrador introduce sus credenciales.\nEl sistema comprueba las credenciales.\nEl sistema abre la sesión y muestra el menú (MateriaPrima, Personal, Detalle Materia Prima).",
           "alternativeFlows": "3a. Las credenciales no son correctas: el sistema muestra un aviso y vuelve al paso 1.",
           "postconditions": "Hay una sesión abierta a nombre del administrador.",
           "priority": "",
           "frequency": ""
-        },
-        "id": "2803ffda24db"
+        }
       },
       {
         "type": "usecase",
-        "x": 554,
-        "y": 138,
-        "label": "Ingresar materia prima",
+        "id": "9769d70cb0a5",
+        "label": "Gestionar materia prima",
+        "x": 380,
+        "y": 150,
         "spec": {
           "code": "CU-21",
           "primaryActor": "Administrador",
           "secondaryActors": "",
-          "description": "Registra la entrada de uva en la bodega: peso del remolque, variedad y grado de azúcar.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
-          "trigger": "Llega a la bodega un remolque de uva (solo uva local, en las 2-3 semanas de vendimia).",
-          "mainFlow": "El administrador elige MateriaPrima › Ingresar.\nEl sistema muestra el formulario.\nEl administrador introduce la fecha, el peso del remolque, la variedad, el grado de azúcar y la descripción.\nEl administrador valida el ingreso.\nEl sistema guarda la materia prima.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-29 Registrar responsable de la operación).",
-          "alternativeFlows": "4a. Faltan datos o el peso no es un número positivo: el sistema los señala y vuelve al paso 3.\n4b. El grado de azúcar no llega al mínimo de la variedad: la uva no se acepta, se tira y se usa como abono.\n4c. El administrador no valida: el ingreso no es efectivo y no se guarda.",
-          "postconditions": "La materia prima queda registrada, junto al administrador que la ingresó. No se puede modificar.",
+          "description": "Registra la entrada de uva en la bodega y elimina la que se tira. La materia prima no se puede modificar una vez introducida.",
+          "preconditions": "El administrador ha iniciado sesión en el programa (CU-20).",
+          "trigger": "Llega un remolque de uva (solo uva local, en las 2-3 semanas de vendimia) o hay que eliminar uva que se ha tirado.",
+          "mainFlow": "Ingresar: el administrador elige MateriaPrima › Ingresar e introduce la fecha, el peso del remolque, la variedad, el grado de azúcar y la descripción.\nEliminar: el administrador elige MateriaPrima › Eliminar y busca la materia prima (incluye CU-24).\nEl administrador valida la operación y el sistema la guarda.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-26).",
+          "alternativeFlows": "Faltan datos o el peso no es un número positivo: el sistema los señala y no guarda.\nEl grado de azúcar no llega al mínimo de la variedad: la uva no se acepta, se tira y se usa como abono. La bodega no hace devoluciones.\nEl administrador no valida: la operación no es efectiva.",
+          "postconditions": "La materia prima queda registrada o eliminada, junto al administrador que hizo la operación.",
           "priority": "",
           "frequency": ""
-        },
-        "id": "9769d70cb0a5"
+        }
       },
       {
         "type": "usecase",
-        "x": 574,
-        "y": 216,
-        "label": "Eliminar materia prima",
+        "id": "5db872a2a418",
+        "label": "Ingresar detalle de materia prima",
+        "x": 380,
+        "y": 240,
         "spec": {
           "code": "CU-22",
           "primaryActor": "Administrador",
           "secondaryActors": "",
-          "description": "Borra una materia prima que se ha tirado (se usa como abono). La bodega no hace devoluciones.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nLa materia prima existe.",
-          "trigger": "Una partida de uva se tira porque no cumple los criterios de calidad.",
-          "mainFlow": "El administrador elige MateriaPrima › Eliminar.\nEl administrador busca la materia prima (incluye CU-27 Buscar materia prima).\nEl sistema muestra sus datos.\nEl administrador valida la eliminación.\nEl sistema borra la materia prima.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-29 Registrar responsable de la operación).",
-          "alternativeFlows": "4a. El administrador no valida: la materia prima se mantiene.",
-          "postconditions": "La materia prima ya no está en la base de datos y queda registrado quién la eliminó.",
+          "description": "Registra el detalle de una materia prima ya ingresada. No se puede modificar una vez introducido.",
+          "preconditions": "El administrador ha iniciado sesión en el programa (CU-20).\nLa materia prima está registrada (CU-21).",
+          "trigger": "Hay que registrar el detalle de una materia prima.",
+          "mainFlow": "El administrador elige Detalle Materia Prima › Ingresar.\nEl administrador busca la materia prima (incluye CU-24).\nEl administrador introduce el detalle y lo valida.\nEl sistema guarda el detalle.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-26).",
+          "alternativeFlows": "Faltan datos: el sistema los señala y no guarda.\nEl administrador no valida: el detalle no se guarda.",
+          "postconditions": "El detalle queda asociado a la materia prima.",
           "priority": "",
           "frequency": ""
-        },
-        "id": "70ad89bf8fd5"
+        }
       },
       {
         "type": "usecase",
-        "x": 580,
-        "y": 294,
-        "label": "Ingresar detalle de materia prima",
+        "id": "6ead65e73243",
+        "label": "Gestionar empleado",
+        "x": 380,
+        "y": 330,
         "spec": {
           "code": "CU-23",
           "primaryActor": "Administrador",
           "secondaryActors": "",
-          "description": "Registra el detalle de una materia prima ya ingresada.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nLa materia prima está registrada (CU-21).",
-          "trigger": "Hay que registrar el detalle de una materia prima.",
-          "mainFlow": "El administrador elige Detalle Materia Prima › Ingresar.\nEl administrador busca la materia prima (incluye CU-27 Buscar materia prima).\nEl administrador introduce el detalle.\nEl administrador valida el ingreso.\nEl sistema guarda el detalle.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-29 Registrar responsable de la operación).",
-          "alternativeFlows": "4a. Faltan datos: el sistema los señala y vuelve al paso 3.\n4b. El administrador no valida: el detalle no se guarda.",
-          "postconditions": "El detalle queda asociado a la materia prima. No se puede modificar.",
+          "description": "Da de alta, modifica y da de baja a los empleados (opción Personal del enunciado). Se registran con sus datos personales y el código de la empresa.",
+          "preconditions": "El administrador ha iniciado sesión en el programa (CU-20).",
+          "trigger": "Se incorpora una persona, hay un dato mal introducido o un trabajador deja la empresa.",
+          "mainFlow": "Alta: el administrador elige Personal › Ingresar e introduce los datos personales y el código de la empresa.\nModificar: el administrador elige Personal › Modificar, busca al empleado (incluye CU-25) y corrige sus datos.\nBaja: el administrador elige Personal › Eliminar y busca al empleado (incluye CU-25).\nEl administrador valida la operación y el sistema la guarda.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-26).",
+          "alternativeFlows": "Faltan datos o el código de la empresa no es válido: el sistema los señala y no guarda.\nEl administrador no valida: no se aplica ningún cambio.",
+          "postconditions": "El empleado queda registrado, corregido o eliminado, junto al administrador que hizo la operación.",
           "priority": "",
           "frequency": ""
-        },
-        "id": "5db872a2a418"
+        }
       },
       {
         "type": "usecase",
-        "x": 574,
-        "y": 372,
-        "label": "Dar de alta empleado",
+        "id": "0e7f22ee57d2",
+        "label": "Buscar materia prima",
+        "x": 860,
+        "y": 195.0,
         "spec": {
           "code": "CU-24",
           "primaryActor": "Administrador",
           "secondaryActors": "",
-          "description": "Registra a un empleado (opción Personal) con sus datos personales y el código de la empresa.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
-          "trigger": "Se incorpora una persona a la empresa.",
-          "mainFlow": "El administrador elige Personal › Ingresar.\nEl sistema muestra el formulario.\nEl administrador introduce los datos personales y el código de la empresa.\nEl administrador valida el alta.\nEl sistema guarda el empleado.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-29 Registrar responsable de la operación).",
-          "alternativeFlows": "4a. Faltan datos o el código de la empresa no es válido: el sistema los señala y vuelve al paso 3.\n4b. El administrador no valida: no se guarda nada.",
-          "postconditions": "El empleado queda registrado.",
-          "priority": "",
-          "frequency": ""
-        },
-        "id": "6ead65e73243"
-      },
-      {
-        "type": "usecase",
-        "x": 554,
-        "y": 450,
-        "label": "Modificar empleado",
-        "spec": {
-          "code": "CU-25",
-          "primaryActor": "Administrador",
-          "secondaryActors": "",
-          "description": "Corrige algún dato mal introducido de un empleado.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl empleado existe.",
-          "trigger": "Se detecta un error en los datos de un empleado.",
-          "mainFlow": "El administrador elige Personal › Modificar.\nEl administrador busca al empleado (incluye CU-28 Buscar empleado).\nEl sistema muestra sus datos.\nEl administrador corrige los datos.\nEl administrador valida los cambios.\nEl sistema guarda los cambios.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-29 Registrar responsable de la operación).",
-          "alternativeFlows": "5a. El administrador no valida: los cambios no se aplican.\n6a. Los datos no son válidos: el sistema los señala y vuelve al paso 4.",
-          "postconditions": "El empleado tiene los datos corregidos.",
-          "priority": "",
-          "frequency": ""
-        },
-        "id": "74a3e583c355"
-      },
-      {
-        "type": "usecase",
-        "x": 519,
-        "y": 528,
-        "label": "Dar de baja empleado",
-        "spec": {
-          "code": "CU-26",
-          "primaryActor": "Administrador",
-          "secondaryActors": "",
-          "description": "Elimina los datos de un empleado que ya no está en la empresa.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).\nEl empleado existe.",
-          "trigger": "Un trabajador ya no está en la empresa.",
-          "mainFlow": "El administrador elige Personal › Eliminar.\nEl administrador busca al empleado (incluye CU-28 Buscar empleado).\nEl sistema muestra sus datos.\nEl administrador valida la baja.\nEl sistema elimina al empleado.\nEl sistema registra al administrador que ha hecho la operación (incluye CU-29 Registrar responsable de la operación).",
-          "alternativeFlows": "4a. El administrador no valida: el empleado se mantiene.",
-          "postconditions": "El empleado ya no está en el sistema.",
-          "priority": "",
-          "frequency": ""
-        },
-        "id": "3992ce4b9710"
-      },
-      {
-        "type": "usecase",
-        "x": 1332,
-        "y": 200.4,
-        "label": "Buscar materia prima",
-        "spec": {
-          "code": "CU-27",
-          "primaryActor": "Administrador",
-          "secondaryActors": "",
-          "description": "Localiza una materia prima registrada. Lo incluyen CU-22 y CU-23.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
+          "description": "Localiza una materia prima registrada. Lo incluyen CU-21 y CU-22.",
+          "preconditions": "El administrador ha iniciado sesión en el programa (CU-20).",
           "trigger": "Lo inicia el caso de uso que lo incluye.",
           "mainFlow": "El administrador introduce un criterio de búsqueda.\nEl sistema muestra las materias primas que coinciden.\nEl administrador selecciona una.",
           "alternativeFlows": "2a. No hay coincidencias: el sistema lo indica y permite buscar de nuevo.",
           "postconditions": "El caso de uso que lo incluye tiene la materia prima seleccionada.",
           "priority": "",
           "frequency": ""
-        },
-        "id": "0e7f22ee57d2"
+        }
       },
       {
         "type": "usecase",
-        "x": 1349,
-        "y": 512.4,
+        "id": "9aa4190c0892",
         "label": "Buscar empleado",
+        "x": 860,
+        "y": 330.0,
         "spec": {
-          "code": "CU-28",
+          "code": "CU-25",
           "primaryActor": "Administrador",
           "secondaryActors": "",
-          "description": "Localiza a un empleado registrado. Lo incluyen CU-25 y CU-26.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
+          "description": "Localiza a un empleado registrado. Lo incluye CU-23.",
+          "preconditions": "El administrador ha iniciado sesión en el programa (CU-20).",
           "trigger": "Lo inicia el caso de uso que lo incluye.",
           "mainFlow": "El administrador introduce un criterio de búsqueda.\nEl sistema muestra los empleados que coinciden.\nEl administrador selecciona uno.",
           "alternativeFlows": "2a. No hay coincidencias: el sistema lo indica y permite buscar de nuevo.",
           "postconditions": "El caso de uso que lo incluye tiene al empleado seleccionado.",
           "priority": "",
           "frequency": ""
-        },
-        "id": "9aa4190c0892"
+        }
       },
       {
         "type": "usecase",
-        "x": 991,
-        "y": 333,
-        "label": "Registrar responsable\nde la operación",
+        "id": "645dced8e395",
+        "label": "Registrar responsable de la operación",
+        "x": 860,
+        "y": 465.0,
         "spec": {
-          "code": "CU-29",
+          "code": "CU-26",
           "primaryActor": "Administrador",
           "secondaryActors": "",
-          "description": "Deja constancia de qué usuario hizo cada gestión en CoreBodega, como pide el enunciado. Lo incluyen CU-21 a CU-26.",
-          "preconditions": "El usuario ha iniciado sesión en el programa (CU de iniciar sesión).",
+          "description": "Deja constancia de qué usuario hizo cada gestión en CoreBodega, como pide el enunciado. Lo incluyen CU-21, CU-22 y CU-23.",
+          "preconditions": "El administrador ha iniciado sesión en el programa (CU-20).",
           "trigger": "Lo inicia el caso de uso que lo incluye, al validar la operación.",
           "mainFlow": "El sistema obtiene el usuario de la sesión abierta.\nEl sistema guarda el usuario junto a la operación realizada.",
           "alternativeFlows": "2a. No se puede guardar el registro: la operación no se hace efectiva y el sistema informa del error.",
           "postconditions": "La operación queda asociada al administrador que la hizo.",
           "priority": "",
           "frequency": ""
-        },
-        "id": "645dced8e395"
+        }
+      },
+      {
+        "type": "note",
+        "x": 1320,
+        "y": 40,
+        "w": 260,
+        "h": 110,
+        "label": "Cada caso de uso agrupa las operaciones de una opción del menú; el detalle de cada operación está en su especificación.",
+        "id": "a13f2a5de7e9"
+      },
+      {
+        "type": "note",
+        "x": 1320,
+        "y": 170,
+        "w": 260,
+        "h": 110,
+        "label": "«Empleado» es la opción Personal del enunciado. Se renombra para no confundirla con el actor Personal de CoreReservas.",
+        "id": "0e1608425cce"
       }
     ],
     "edges": [
@@ -259,103 +190,61 @@
         "from": "004a97e9c3fb",
         "to": "2803ffda24db",
         "type": "association",
-        "id": "153a364fa67d"
+        "id": "989ca3ce9a42"
       },
       {
         "from": "004a97e9c3fb",
         "to": "9769d70cb0a5",
         "type": "association",
-        "id": "9d87842f498b"
-      },
-      {
-        "from": "004a97e9c3fb",
-        "to": "70ad89bf8fd5",
-        "type": "association",
-        "id": "d0e089def3c8"
+        "id": "00795a5be2e1"
       },
       {
         "from": "004a97e9c3fb",
         "to": "5db872a2a418",
         "type": "association",
-        "id": "acd3e2a53aa0"
+        "id": "1f4fcd109efd"
       },
       {
         "from": "004a97e9c3fb",
         "to": "6ead65e73243",
         "type": "association",
-        "id": "e78023d31392"
+        "id": "e0b65ebafad1"
       },
       {
-        "from": "004a97e9c3fb",
-        "to": "74a3e583c355",
-        "type": "association",
-        "id": "23378f52fba7"
-      },
-      {
-        "from": "004a97e9c3fb",
-        "to": "3992ce4b9710",
-        "type": "association",
-        "id": "d2b9ba88099f"
-      },
-      {
-        "from": "70ad89bf8fd5",
+        "from": "9769d70cb0a5",
         "to": "0e7f22ee57d2",
         "type": "include",
-        "id": "6750234cf8fd"
+        "id": "c95741d5e02d"
       },
       {
         "from": "5db872a2a418",
         "to": "0e7f22ee57d2",
         "type": "include",
-        "id": "ebad4b5730a3"
-      },
-      {
-        "from": "74a3e583c355",
-        "to": "9aa4190c0892",
-        "type": "include",
-        "id": "4bd836973755"
-      },
-      {
-        "from": "3992ce4b9710",
-        "to": "9aa4190c0892",
-        "type": "include",
-        "id": "7759621fc71c"
+        "id": "0974331c68e8"
       },
       {
         "from": "9769d70cb0a5",
         "to": "645dced8e395",
         "type": "include",
-        "id": "7df05133a458"
-      },
-      {
-        "from": "70ad89bf8fd5",
-        "to": "645dced8e395",
-        "type": "include",
-        "id": "3763211d261a"
+        "id": "43711d06296e"
       },
       {
         "from": "5db872a2a418",
         "to": "645dced8e395",
         "type": "include",
-        "id": "366a395f675d"
+        "id": "ee9923e505da"
       },
       {
         "from": "6ead65e73243",
         "to": "645dced8e395",
         "type": "include",
-        "id": "4f4070956b00"
+        "id": "a05177a11f07"
       },
       {
-        "from": "74a3e583c355",
-        "to": "645dced8e395",
+        "from": "6ead65e73243",
+        "to": "9aa4190c0892",
         "type": "include",
-        "id": "5d88e410a7f7"
-      },
-      {
-        "from": "3992ce4b9710",
-        "to": "645dced8e395",
-        "type": "include",
-        "id": "de8ccf47073c"
+        "id": "f3ae53f839ac"
       }
     ]
   }

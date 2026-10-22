@@ -129,14 +129,15 @@ Como empresa recién creada, todavía no tenemos una metodología fija. En Añad
 
 = Casos de uso
 
-AñadaMaster está formado por dos programas, CoreReservas y CoreBodega, y hemos hecho un diagrama de casos de uso para cada uno. Son programas distintos, con usuarios distintos, y en un único diagrama los 25 casos de uso no se leerían bien.
+AñadaMaster está formado por dos programas, CoreReservas y CoreBodega, y hemos hecho un diagrama de casos de uso para cada uno. Son programas distintos, con usuarios distintos.
 
 Decisiones de modelado:
 
 - *Actores.* En CoreReservas, el Personal es quien más usa el programa. El Administrador hereda de Personal: tiene los mismos privilegios y puede hacer todo lo que hace el Personal. En CoreBodega solo actúa el Administrador.
 - *El cliente de la bodega no es actor.* No usa el sistema: llama por teléfono y el personal registra sus pedidos.
-- *Confirmar y validar* son el último paso de cada caso de uso, no casos de uso aparte.
-- *«include» y «extend».* Un «include» se ejecuta siempre: las búsquedas que comparten varios casos de uso y, en CoreBodega, _Registrar responsable de la operación_, porque debe quedar constancia de quién hizo cada gestión. Un «extend» solo ocurre si se cumple una condición: si al dar de alta un pedido el cliente no existe, se da de alta en ese momento.
+- *Un caso de uso por opción del menú.* Cada opción del enunciado (Producto, Cliente, Pedido, Pedido Detalle, Factura en CoreReservas; MateriaPrima, Detalle Materia Prima y Personal en CoreBodega) es un caso de uso. Sus operaciones (alta, modificar, baja o anular) están en la tabla y en la especificación. Así el diagrama es más fácil de leer.
+- *Confirmar y validar* son el último paso de cada operación, no casos de uso aparte.
+- *«include» y «extend».* Un «include» se ejecuta siempre: las búsquedas que comparten varios casos de uso y, en CoreBodega, _Registrar responsable de la operación_, porque debe quedar constancia de quién hizo cada gestión. Un «extend» solo ocurre si se cumple una condición: si al dar de alta un pedido el cliente no existe, se da de alta en ese momento (_Gestionar cliente_ extiende _Gestionar pedido_).
 
 #callout(title: [Cambios tras la reunión con el cliente del 16 de octubre], accent: brasa)[
   - _Imprimir factura_ pasa a ser _Generar factura_: AñadaMaster será el primer sistema de facturación de la bodega, así que la factura se guarda además de imprimirse.

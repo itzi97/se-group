@@ -85,11 +85,11 @@
 #section-slide[4 · Casos de uso]
 
 #slide(title: [Casos de uso · CoreReservas], fit: true)[
-  #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corereservas-0f712f.json"), show-codes: false, size: 9.5pt, row-gap: 6pt, v-pad: 0.5, legend: false)
+  #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corereservas-0f712f.json"), show-codes: false, size: 11pt, legend: false)
 ]
 
 #slide(title: [Casos de uso · CoreBodega], fit: true)[
-  #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corebodega-b0c308.json"), show-codes: false, size: 11pt, row-gap: 7pt, v-pad: 0.5, legend: false)
+  #usecase-diagram(json("/diagramas/usecase-casos-de-uso-corebodega-b0c308.json"), show-codes: false, size: 11pt, legend: false)
 ]
 
 #slide(title: [Lo que cambió tras hablar con el cliente])[
