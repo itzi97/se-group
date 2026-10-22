@@ -26,10 +26,9 @@
   #slide-columns(ratio: (1.1fr, 1fr),
     [
       #set text(size: 22pt)
-      - *neura*: redes neuronales
-      - *net*: red
-      - Desarrollamos con LLM, aprendizaje automático y redes neuronales
-      - Siempre al día de cómo avanza la industria
+      - *neura*, de redes neuronales
+      - *net*, red
+      - Trabajamos con LLM, aprendizaje automático y redes neuronales
     ],
     align(center, image("/templates/logo-mark.svg", height: 5.5cm)),
   )
@@ -38,9 +37,9 @@
 #slide(title: [Nuestros valores])[
   #set text(size: 25pt)
   #cards(gutter: 0.8cm, inset: (x: 22pt, y: 30pt), title-size: 1.25em,
-    (title: [Innovación], accent: brasa, body: [Al corriente de lo que aparece, y lo usamos cuando aporta valor.]),
-    (title: [Integridad], accent: petroleo, body: [Cuidamos los datos del cliente y usamos los LLM sin poner en riesgo su privacidad.]),
-    (title: [Flexibilidad], accent: sinapsis, body: [Nos adaptamos a cada problema con soluciones a medida.]),
+    (title: [Innovación], accent: brasa, body: [Probamos lo nuevo y nos quedamos con lo que ayuda al cliente.]),
+    (title: [Integridad], accent: petroleo, body: [Los datos del cliente son suyos. Usamos la IA sin poner en riesgo su privacidad.]),
+    (title: [Flexibilidad], accent: sinapsis, body: [Adaptamos el software a cada empresa, y no al revés.]),
   )
 ]
 
@@ -49,7 +48,7 @@
   #v(0.6cm)
   #text(font: headingfont, size: 22pt, fill: brasa)[Soluciones de IA a tu medida]
   #v(0.5cm)
-  #text(size: 18pt, fill: muted)[La «N» es una red neuronal: entrada, neurona que se enciende y salida. La «a» repite la neurona.]
+  #text(size: 18pt, fill: muted)[La "N" es una red neuronal: entra la necesidad, se enciende la neurona y sale el software.]
 ]
 
 #section-tag[2 · Modelo de negocio]
@@ -58,13 +57,13 @@
   #set text(size: 18pt)
   #cards(columns: 2, gutter: 0.6cm, inset: (x: 18pt, y: 16pt), title-size: 1.2em,
     (title: [Para quién], accent: petroleo,
-     body: [Pymes de sectores tradicionales (agroalimentario, logística, comercio) que aún gestionan con hojas de cálculo o programas antiguos.]),
+     body: [Pymes del sector agroalimentario, la logística o el comercio que aún se apañan con hojas de cálculo o programas viejos.]),
     (title: [Qué ofrecemos], accent: brasa,
-     body: [Software de gestión a medida, desarrollado con IA para reducir plazos y con un uso de los LLM que protege sus datos.]),
+     body: [Un programa de gestión pensado para su forma de trabajar. Con IA tardamos menos, y cuidamos sus datos.]),
     (title: [Cómo trabajamos], accent: sinapsis,
-     body: [Un único interlocutor, reuniones con acta y equipo híbrido con oficina en Madrid.]),
+     body: [Una sola persona de contacto, un acta de cada reunión y oficina en Madrid.]),
     (title: [Cómo ganamos dinero], accent: chispa,
-     body: [Precio cerrado por proyecto y una cuota mensual de mantenimiento (soporte, errores y actualizaciones).]),
+     body: [Precio cerrado por proyecto y una cuota al mes por el mantenimiento.]),
   )
 ]
 
@@ -87,11 +86,11 @@
 #slide(title: [Lo que cambió tras hablar con el cliente])[
   #set text(size: 23pt)
   #set list(spacing: 1em)
-  - *Generar factura*: será su primer sistema de facturación
-  - Pedido: reservado › confirmado › facturado › enviado › cerrado; se anula solo antes de facturar
+  - Imprimir factura pasa a ser *Generar factura*: la factura se guarda
+  - Pedido: reservado › confirmado › facturado › enviado › cerrado. Solo se anula antes de facturar
   - Cliente residencial o industrial, con NIF o CIF
-  - Uva: peso, variedad y grado de azúcar; la que no llega al mínimo se tira
-  - La producción, en versiones posteriores
+  - De la uva se apuntan peso, variedad y grado de azúcar. No hay devoluciones
+  - La producción, más adelante
 ]
 
 #focus-slide[Soluciones de IA a tu medida.]

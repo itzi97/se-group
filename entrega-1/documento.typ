@@ -33,30 +33,30 @@
 
 = Quiénes somos
 
-Neuranet es una empresa de software de Madrid. Hacemos software de gestión a medida para pymes de sectores tradicionales.
+Somos Neuranet, una empresa de software de Madrid. Hacemos programas de gestión a medida para pymes y usamos la IA para hacerlos en menos tiempo.
 
 == Nuestro nombre
 
-*Neuranet* une _neura_ (redes neuronales) y _net_ (red). Desarrollamos con LLM, aprendizaje automático y redes neuronales, y seguimos de cerca cómo avanza la industria.
+Neuranet sale de juntar "neura", por las redes neuronales, y "net", red. Trabajamos con LLM, aprendizaje automático y redes neuronales, y nos gusta estar al día de lo que va saliendo.
 
 == Valores
 
 #cards(
   (title: [Innovación], accent: brasa,
-   body: [Conocemos las herramientas que aparecen y las usamos cuando aportan valor al cliente.]),
+   body: [Probamos las herramientas nuevas que van saliendo y nos quedamos con las que de verdad ayudan al cliente.]),
   (title: [Integridad], accent: petroleo,
-   body: [Cuidamos los datos de nuestros clientes y usamos los LLM sin poner en riesgo su privacidad.]),
+   body: [Los datos de cada cliente son suyos. Usamos la IA sin poner en riesgo su privacidad.]),
   (title: [Flexibilidad], accent: sinapsis,
-   body: [Nos adaptamos a cada problema con soluciones a medida, no con productos cerrados.]),
+   body: [Cada empresa trabaja a su manera, así que adaptamos el software a ella y no al revés.]),
 )
 
 == Nuestra marca
 
 #figure(image("/templates/logo-full.svg", width: 8cm), caption: [Logotipo de Neuranet.])
 
-- *Logotipo.* La «N» es una red neuronal mínima: la entrada (la necesidad del cliente), una neurona que se enciende (nuestro trabajo) y la salida (el software). La «a» repite esa neurona.
-- *Lema.* _Soluciones de IA a tu medida._
-- *Tipografía.* Sora para títulos, IBM Plex Sans para el texto e IBM Plex Mono para el código.
+El logotipo es la propia palabra. La "N" dibuja una red neuronal muy sencilla: entra la necesidad del cliente, se enciende la neurona (nuestro trabajo) y sale el software. La "a" lleva la misma neurona. Nuestro lema es _Soluciones de IA a tu medida_.
+
+Usamos Sora para los títulos, IBM Plex Sans para el texto e IBM Plex Mono para el código, con estos cinco colores:
 
 #let muestra(c, nombre, hex, uso) = block(width: 100%, breakable: false, {
   set par(justify: false, leading: 0.4em)
@@ -75,14 +75,18 @@ Neuranet es una empresa de software de Madrid. Hacemos software de gestión a me
 
 = Modelo de negocio
 
-Hacemos software de gestión a medida para pymes de sectores tradicionales (agroalimentario, logística, comercio) que aún trabajan con hojas de cálculo o programas antiguos. Lo desarrollamos con IA para acortar plazos y cuidamos sus datos.
+Nuestros clientes son pymes del sector agroalimentario, la logística o el comercio que todavía se apañan con hojas de cálculo o con programas que se han quedado viejos. Les hacemos un programa pensado para su forma de trabajar. Como desarrollamos con ayuda de IA tardamos menos, y cuidamos mucho sus datos.
+
+#block(breakable: false)[
+Cobramos de dos formas:
 
 #cards(
   (title: [Precio cerrado por proyecto], accent: brasa,
-   body: [Pactamos alcance, precio y plazo al inicio. El cliente sabe desde el primer día cuánto le cuesta.]),
+   body: [Al empezar acordamos qué se hace, cuánto cuesta y cuándo se entrega. Así no hay sorpresas.]),
   (title: [Cuota mensual de mantenimiento], accent: petroleo,
-   body: [Soporte, corrección de errores y actualizaciones. Ingresos recurrentes para nosotros y tranquilidad para el cliente.]),
+   body: [Con el programa ya en marcha, seguimos dando soporte, arreglando errores y actualizándolo.]),
 )
+]
 
 #figure(
   lienzo(s: 1.08, alto: 11.2cm),
@@ -93,36 +97,41 @@ Hacemos software de gestión a medida para pymes de sectores tradicionales (agro
 
 == Estructura y roles
 
-Somos cuatro personas y combinamos dos estructuras:
+Somos cuatro, así que no tenía sentido montar una jerarquía con varios niveles. Tampoco queríamos una estructura del todo plana, porque el cliente tiene que saber a quién llamar. Al final hemos mezclado las dos:
 
-- *Jerárquica en la responsabilidad.* Una sola persona dirige, planifica y habla con el cliente, así que el cliente siempre sabe a quién dirigirse.
-- *Plana en el trabajo.* Las tres áreas colaboran sin intermediarios: los requisitos pasan al diseño y el diseño al desarrollo, como en el Proceso Unificado.
+- Itziar, como CEO y Project Manager, dirige el proyecto y es la persona de contacto con el cliente.
+- Samuel, Javier y Diego llevan los requisitos, el diseño y el desarrollo. Trabajan juntos y se pasan el trabajo directamente, sin tener que pasar por ella para cada cosa.
 
-Una jerarquía pura sobraría en un equipo tan pequeño, y una estructura plana dejaría al cliente sin un interlocutor claro. La @organigrama muestra los cargos y las responsabilidades de cada persona.
+En la @organigrama se ve qué hace cada uno.
 
-#figure(organigrama(), caption: [Organigrama de Neuranet: cargos y responsabilidades.], placement: auto) <organigrama>
+#figure(organigrama(), caption: [Organigrama de Neuranet.], placement: auto) <organigrama>
 
 == Cómo trabajamos
 
-Trabajamos en formato híbrido, con oficina en Madrid, y vemos al cliente en sus instalaciones o por videollamada. Cada reunión queda en un acta.
+Trabajamos en modo híbrido: tenemos oficina en Madrid y parte de la semana trabajamos desde casa. Con el cliente nos vemos en sus instalaciones o por videollamada, y de cada reunión sale un acta.
 
-Como empresa nueva, aún no tenemos una metodología fija. En AñadaMaster usaremos orientación a objetos y el Proceso Unificado. Al terminar, lo compararemos con otras metodologías para elegir la nuestra.
+Como somos una empresa nueva, todavía no tenemos una metodología fija. En AñadaMaster vamos a usar orientación a objetos y el Proceso Unificado. Cuando acabemos, veremos qué tal ha ido y lo compararemos con otras metodologías antes de quedarnos con una.
 
 = Casos de uso
 
-Hay un diagrama por programa, porque CoreReservas y CoreBodega tienen usuarios y opciones distintos. La especificación completa de cada caso de uso (actores, precondiciones, flujos y postcondiciones) está en los ficheros de se-ramify, en la carpeta `diagramas/`.
+AñadaMaster son dos programas: CoreReservas, para los pedidos de los clientes, y CoreBodega, para la entrada de uva y los empleados. Los usan personas distintas, así que hay un diagrama para cada uno. La especificación completa de cada caso de uso (precondiciones, pasos y alternativas) está en los ficheros de la carpeta `diagramas/`.
 
-- *Un caso de uso por opción del menú.* Las operaciones de cada opción (alta, modificar, baja o anular) están en la tabla y en su especificación.
-- *Actores.* En CoreReservas, el Personal es el actor principal y el Administrador hereda de él, porque tienen los mismos privilegios. En CoreBodega solo actúa el Administrador. El cliente de la bodega no es actor: llama por teléfono y el personal registra sus pedidos.
-- *«include» y «extend».* Un «include» se ejecuta siempre: las búsquedas compartidas y _Registrar responsable de la operación_. Un «extend» solo si se cumple una condición: si el cliente no existe al dar de alta un pedido, se da de alta en ese momento.
-- *Confirmar y validar* son el último paso de cada operación, no casos de uso.
+Para leer los diagramas conviene saber esto:
 
-#callout(title: [Cambios tras la reunión con el cliente del 16 de octubre (acta NN-AM-ACT-01)], accent: brasa)[
-  - _Imprimir factura_ pasa a _Generar factura_: es su primer sistema de facturación.
-  - Pedido: reservado › confirmado › facturado › enviado › cerrado. Solo se anula antes de facturar.
-  - Ficha de cliente: residencial o industrial, con NIF o CIF.
-  - Entrada de uva: peso, variedad y grado de azúcar. No hay devoluciones: la uva que no llega al mínimo se tira.
-  - La producción queda para versiones posteriores.
+- Cada opción del menú es un caso de uso. Lo que se puede hacer dentro de cada opción (dar de alta, modificar, dar de baja o anular) está en las tablas.
+- CoreReservas lo usa el personal de la bodega. El administrador puede hacer lo mismo que ellos, por eso en el diagrama hereda de Personal. CoreBodega solo lo usa el administrador.
+- Los clientes de la bodega no aparecen porque no usan el programa: llaman por teléfono y es el personal quien apunta el pedido.
+- Un «include» es un paso que se hace siempre, como buscar el pedido antes de facturarlo. Un «extend» solo pasa a veces: si al hacer un pedido el cliente no existe, se le da de alta en ese momento.
+- Confirmar y validar no son casos de uso aparte. Son el último paso de cada operación.
+
+#callout(title: [Lo que cambió después de la reunión del 16 de octubre], accent: brasa)[
+  - Imprimir factura pasa a ser Generar factura. AñadaMaster va a ser el primer sistema de facturación de la bodega, así que la factura tiene que quedar guardada.
+  - Un pedido pasa por estos estados: reservado, confirmado, facturado, enviado y cerrado. Solo se puede anular antes de facturarlo.
+  - En la ficha del cliente se indica si es residencial o industrial y su NIF o CIF.
+  - Cuando entra uva se apuntan el peso, la variedad y el grado de azúcar. No hay devoluciones: si la uva no llega al grado mínimo, se tira.
+  - La parte de producción se deja para más adelante.
+
+  Todo está recogido en el acta NN-AM-ACT-01.
 ]
 
 #let cu-tabla(d) = neuranet-table(
