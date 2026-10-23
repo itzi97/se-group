@@ -32,7 +32,7 @@ Además se aplican las reglas generales (PDF pp. 13–14; diap. 15): **si falta 
 
 Si Blackboard solo deja subir un fichero, se suben los tres en un `.zip`.
 
-**Guion de la presentación** (reparto propuesto por secciones, sin decidir aún):
+**Guion de la presentación.** Presentan **Itziar** (diapositivas 1–8) y **Sam** (9–13). Cada uno tiene una chuleta para el móvil en [`notas/`](notas/): `chuleta-itziar.pdf` y `chuleta-sam.pdf`.
 
 | Diapositivas | Sección | Qué contar |
 |---|---|---|
@@ -107,7 +107,7 @@ Esto es lo que **dice el enunciado**, no un diseño: cómo lo agrupéis en casos
 
 ### Parte 4 · Exposición en clase (25 %)
 
-- [ ] Decidir **quién presenta** esta vez. No hace falta que presenten todos, pero **cada uno tiene que presentar al menos una vez** durante el curso. Apuntad quién lo hace en cada entrega.
+- [x] Decidir **quién presenta** esta vez: Itziar y Sam. No hace falta que presenten todos, pero **cada uno tiene que presentar al menos una vez** durante el curso. Apuntad quién lo hace en cada entrega.
 - [ ] Duración: **5–15 minutos** (PDF p. 8; confirmad si se aplica también a las entregas parciales)
 - [ ] Ensayar al menos una vez cronometrando
 
