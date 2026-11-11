@@ -83,6 +83,7 @@ Están basadas en [utad-templates](https://github.com/itzi97/utad-templates); su
 * `neuranet-assignment.typ`: documento breve (`neuranet-breve`)
 * `neuranet-slides.typ`: diapositivas
 * `neuranet-ramify.typ`: diagramas de se-ramify (casos de uso)
+* `neuranet-uml.typ`: más diagramas de se-ramify: clases, estados, secuencia, stakeholders (cebolla y matriz) y visión. Clases y estados usan las posiciones de la app; la secuencia se maqueta sola
 * `lib.typ`: lo importa todo de una vez
 * `logo-*.svg`: logotipo y símbolo (los mismos que en `entrega-1/marca/`)
 * `fonts/`: Sora, IBM Plex Sans e IBM Plex Mono (licencia SIL OFL, ver `fonts/OFL-*.txt`)

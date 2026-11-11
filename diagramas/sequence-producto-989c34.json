@@ -1,0 +1,212 @@
+{
+  "format": "se-ramify/1",
+  "id": "989c34641772",
+  "kind": "sequence",
+  "title": "Secuencia — Producto (CU-02)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. CU-02 Gestionar producto. Operaciones: alta y modificar. Los productos no se borran (supuesto S-02).",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "participants": [
+      {
+        "id": "4d9aee03fb67",
+        "name": "Personal",
+        "kind": "actor"
+      },
+      {
+        "id": "fd5121aee3f3",
+        "name": ":PantallaProducto",
+        "kind": "boundary"
+      },
+      {
+        "id": "081e0072fdf7",
+        "name": ":ControlProducto",
+        "kind": "control"
+      },
+      {
+        "id": "6bb5a3c6cc66",
+        "name": ":Producto",
+        "kind": "entity"
+      },
+      {
+        "id": "247bc5cb3645",
+        "name": "BD",
+        "kind": "database"
+      }
+    ],
+    "items": [
+      {
+        "id": "b9de0615d359",
+        "t": "note",
+        "over": [
+          "4d9aee03fb67",
+          "fd5121aee3f3"
+        ],
+        "text": "La pantalla pide confirmación\nantes de enviar cada operación"
+      },
+      {
+        "id": "d8807932f7c4",
+        "t": "open",
+        "op": "alt",
+        "guard": "Alta"
+      },
+      {
+        "id": "cd8bb266e83e",
+        "t": "msg",
+        "from": "4d9aee03fb67",
+        "to": "fd5121aee3f3",
+        "text": "alta(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "d11805ef8c7e",
+        "t": "msg",
+        "from": "fd5121aee3f3",
+        "to": "081e0072fdf7",
+        "text": "altaProducto(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "69b5da74c555",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "081e0072fdf7",
+        "text": "validar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "05ff88735bc8",
+        "t": "open",
+        "op": "alt",
+        "guard": "datos válidos"
+      },
+      {
+        "id": "ce915f1044eb",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "6bb5a3c6cc66",
+        "text": "new(datos)",
+        "style": "create"
+      },
+      {
+        "id": "1b8edc18b6f9",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "247bc5cb3645",
+        "text": "guardar(producto)",
+        "style": "sync"
+      },
+      {
+        "id": "df47356b4530",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "fd5121aee3f3",
+        "text": "producto dado de alta",
+        "style": "reply"
+      },
+      {
+        "id": "c9ae3aa8058f",
+        "t": "else",
+        "guard": "faltan datos o formato incorrecto"
+      },
+      {
+        "id": "f2c91551e920",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "fd5121aee3f3",
+        "text": "errores",
+        "style": "reply"
+      },
+      {
+        "id": "87ff68ae3272",
+        "t": "close"
+      },
+      {
+        "id": "aec3a3f55b7a",
+        "t": "else",
+        "guard": "Modificar"
+      },
+      {
+        "id": "37b6762c1e58",
+        "t": "msg",
+        "from": "4d9aee03fb67",
+        "to": "fd5121aee3f3",
+        "text": "modificar(codigo, datos)",
+        "style": "sync"
+      },
+      {
+        "id": "48bd2661fa25",
+        "t": "msg",
+        "from": "fd5121aee3f3",
+        "to": "081e0072fdf7",
+        "text": "modificarProducto(codigo, datos)",
+        "style": "sync"
+      },
+      {
+        "id": "06426a9fd4b7",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "247bc5cb3645",
+        "text": "buscar(codigo)",
+        "style": "sync"
+      },
+      {
+        "id": "3d611b63bec2",
+        "t": "msg",
+        "from": "247bc5cb3645",
+        "to": "081e0072fdf7",
+        "text": "producto",
+        "style": "reply"
+      },
+      {
+        "id": "ffb3d25512cf",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "081e0072fdf7",
+        "text": "validar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "0c907f281a80",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "6bb5a3c6cc66",
+        "text": "actualizar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "30b6628e94cb",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "247bc5cb3645",
+        "text": "guardar(producto)",
+        "style": "sync"
+      },
+      {
+        "id": "a4c0b34c25f4",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "fd5121aee3f3",
+        "text": "cambios guardados",
+        "style": "reply"
+      },
+      {
+        "id": "0d14070cd8ef",
+        "t": "close"
+      },
+      {
+        "id": "c3b6fc7fce73",
+        "t": "msg",
+        "from": "fd5121aee3f3",
+        "to": "4d9aee03fb67",
+        "text": "mostrarResultado()",
+        "style": "reply"
+      }
+    ],
+    "activations": true,
+    "autonumber": true
+  }
+}

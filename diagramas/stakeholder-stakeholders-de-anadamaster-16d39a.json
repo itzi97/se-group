@@ -1,0 +1,139 @@
+{
+  "format": "se-ramify/1",
+  "id": "16d39aeceae1",
+  "kind": "stakeholder",
+  "title": "Mapa de stakeholders — AñadaMaster",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · Mapa de stakeholders en los dos formatos del Tema 3: la cebolla (decisores, clientes, influyentes, proveedores) y la matriz poder/interés.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "view": "grid",
+    "product": "AñadaMaster",
+    "stakeholders": [
+      {
+        "id": "9813b0d45076",
+        "name": "Dirección de la bodega",
+        "role": "Encarga y paga el proyecto",
+        "power": 0.86,
+        "interest": 0.9,
+        "ring": 0,
+        "sector": "decisores",
+        "attitude": "supporter",
+        "notes": "Empresa familiar. Quiere un sistema interno que no se caiga y su primera facturación. Aprueba alcance, presupuesto y entregas."
+      },
+      {
+        "id": "39445bf17abb",
+        "name": "Representante de la bodega",
+        "role": "Nuestro interlocutor en las reuniones",
+        "power": 0.74,
+        "interest": 0.93,
+        "ring": 0,
+        "sector": "decisores",
+        "attitude": "supporter",
+        "notes": "Resuelve las dudas y valida los requisitos. Tiene poco tiempo: las reuniones van con el orden del día y las dudas preparadas."
+      },
+      {
+        "id": "b6072973ae12",
+        "name": "Administradores",
+        "role": "Usan CoreBodega (y CoreReservas)",
+        "power": 0.56,
+        "interest": 0.84,
+        "ring": 0,
+        "sector": "clientes",
+        "attitude": "supporter",
+        "notes": "Registran la uva en vendimia (2-3 semanas de mucha carga) y dan de alta al personal. Necesitan pantallas rápidas y sin errores."
+      },
+      {
+        "id": "12b5f184f68f",
+        "name": "Personal de oficina",
+        "role": "Usan CoreReservas a diario",
+        "power": 0.35,
+        "interest": 0.85,
+        "ring": 0,
+        "sector": "clientes",
+        "attitude": "neutral",
+        "notes": "Atienden 5 líneas de teléfono a la vez. Cambian de herramienta: hay que formarles y no hacerles el trabajo más lento."
+      },
+      {
+        "id": "c80c6409c0a6",
+        "name": "Clientes de la bodega",
+        "role": "Hacen los pedidos por teléfono",
+        "power": 0.3,
+        "interest": 0.55,
+        "ring": 2,
+        "sector": "clientes",
+        "attitude": "neutral",
+        "notes": "Particulares (residenciales) y empresas (industriales). No usan el sistema, pero reciben sus pedidos y facturas."
+      },
+      {
+        "id": "89d7727f9b11",
+        "name": "Viticultores",
+        "role": "Traen la uva en remolques",
+        "power": 0.2,
+        "interest": 0.5,
+        "ring": 2,
+        "sector": "proveedores",
+        "attitude": "neutral",
+        "notes": "El peso y el grado de azúcar que se registran deciden si su uva se acepta o va a abono."
+      },
+      {
+        "id": "38439a9d581d",
+        "name": "Neuranet",
+        "role": "Desarrolla y mantiene AñadaMaster",
+        "power": 0.63,
+        "interest": 0.97,
+        "ring": 1,
+        "sector": "proveedores",
+        "attitude": "supporter",
+        "notes": "El equipo del proyecto: análisis, diseño, desarrollo y soporte posterior (cuota de mantenimiento)."
+      },
+      {
+        "id": "c75d00d2034b",
+        "name": "Proveedor de infraestructura",
+        "role": "Servidores propios o nube (según el TCO)",
+        "power": 0.36,
+        "interest": 0.3,
+        "ring": 2,
+        "sector": "proveedores",
+        "attitude": "neutral",
+        "notes": "Su servicio decide la disponibilidad de 9 a 18 h y la redundancia que pide el encargo."
+      },
+      {
+        "id": "2601a1890aae",
+        "name": "Asesoría fiscal / gestoría",
+        "role": "Lleva la contabilidad y los impuestos",
+        "power": 0.43,
+        "interest": 0.22,
+        "ring": 2,
+        "sector": "influyentes",
+        "attitude": "neutral",
+        "notes": "Usará las facturas que genere AñadaMaster: tienen que cumplir la normativa de facturación."
+      },
+      {
+        "id": "5f21ccc1cdc8",
+        "name": "Agencia Tributaria",
+        "role": "Normativa de facturación",
+        "power": 0.84,
+        "interest": 0.1,
+        "ring": 3,
+        "sector": "influyentes",
+        "attitude": "neutral",
+        "notes": "AñadaMaster será el primer sistema de facturación de la bodega: tiene que cumplir lo que exija Hacienda a los programas de facturación."
+      },
+      {
+        "id": "7d2752464deb",
+        "name": "Protección de datos (RGPD)",
+        "role": "Datos de clientes y empleados",
+        "power": 0.75,
+        "interest": 0.1,
+        "ring": 3,
+        "sector": "influyentes",
+        "attitude": "neutral",
+        "notes": "Guardamos NIF, domicilios y datos de los empleados: acceso solo con usuario, registro de operaciones y copias de seguridad."
+      }
+    ]
+  }
+}

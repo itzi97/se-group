@@ -1,0 +1,200 @@
+{
+  "format": "se-ramify/1",
+  "id": "82b80421a0c6",
+  "kind": "class",
+  "title": "Modelo de dominio — CoreReservas",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. Modelo de dominio de CoreReservas: los conceptos del negocio, sus datos y cómo se relacionan. Sin tipos ni operaciones (eso va en el diagrama de diseño).\n\nDecisiones:\n- LineaPedido es la opción «Pedido Detalle» del menú: cada línea es un vino y una cantidad. Composición: si se borra el pedido, se borran sus líneas.\n- Cliente residencial o industrial con herencia: cada tipo tiene su documento (NIF o CIF) y sus datos propios (reunión del 16/10).\n- Una factura agrupa uno o varios pedidos del mismo cliente; un pedido se factura una sola vez.\n- Los estados del pedido son un enumerado (reunión del 16/10). El ciclo completo está en el diagrama de estados.\n- Producto.activo y Cliente.activo: supuestos S-02 y S-03 (no se borra lo que tiene historial).",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "nodes": [
+      {
+        "id": "66c737db5f67",
+        "type": "package",
+        "x": -40,
+        "y": -60,
+        "label": "CoreReservas",
+        "w": 1080,
+        "h": 900
+      },
+      {
+        "id": "fdd09273a03a",
+        "type": "class",
+        "x": 0,
+        "y": 0,
+        "label": "Factura",
+        "attrs": [
+          "numero",
+          "fecha",
+          "baseImponible",
+          "iva",
+          "total"
+        ],
+        "ops": []
+      },
+      {
+        "id": "6dc911d85d26",
+        "type": "class",
+        "x": 340,
+        "y": 0,
+        "label": "Pedido",
+        "attrs": [
+          "numero",
+          "fechaAlta",
+          "estado: EstadoPedido",
+          "observaciones"
+        ],
+        "ops": []
+      },
+      {
+        "id": "2ad87974037f",
+        "type": "class",
+        "x": 680,
+        "y": 0,
+        "label": "LineaPedido",
+        "attrs": [
+          "cantidad",
+          "precioUnitario"
+        ],
+        "ops": []
+      },
+      {
+        "id": "ef1d4832d4f4",
+        "type": "class",
+        "x": 680,
+        "y": 260,
+        "label": "Producto",
+        "attrs": [
+          "codigo",
+          "nombre",
+          "variedad",
+          "añada",
+          "formato",
+          "precio",
+          "activo"
+        ],
+        "ops": []
+      },
+      {
+        "id": "7f5432407a9e",
+        "type": "class",
+        "x": 340,
+        "y": 300,
+        "label": "Cliente",
+        "attrs": [
+          "codigo",
+          "nombre",
+          "telefono",
+          "email",
+          "domicilio",
+          "activo"
+        ],
+        "ops": [],
+        "abstract": true
+      },
+      {
+        "id": "b4d1f77142ad",
+        "type": "enum",
+        "x": 0,
+        "y": 300,
+        "label": "EstadoPedido",
+        "stereotype": "enumeration",
+        "attrs": [
+          "RESERVADO",
+          "CONFIRMADO",
+          "FACTURADO",
+          "ENVIADO",
+          "CERRADO",
+          "ANULADO"
+        ],
+        "ops": []
+      },
+      {
+        "id": "e9ae12f4068f",
+        "type": "class",
+        "x": 180,
+        "y": 620,
+        "label": "ClienteResidencial",
+        "attrs": [
+          "nif",
+          "apellidos"
+        ],
+        "ops": []
+      },
+      {
+        "id": "9bba41f9513f",
+        "type": "class",
+        "x": 500,
+        "y": 620,
+        "label": "ClienteIndustrial",
+        "attrs": [
+          "cif",
+          "razonSocial",
+          "personaContacto"
+        ],
+        "ops": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "b6efddaa9b8a",
+        "type": "association",
+        "from": "7f5432407a9e",
+        "to": "6dc911d85d26",
+        "label": "hace",
+        "fromLabel": "1",
+        "toLabel": "0..*"
+      },
+      {
+        "id": "851ab873dfe3",
+        "type": "composition",
+        "from": "6dc911d85d26",
+        "to": "2ad87974037f",
+        "fromLabel": "1",
+        "toLabel": "1..*"
+      },
+      {
+        "id": "67de1f1445f0",
+        "type": "association",
+        "from": "2ad87974037f",
+        "to": "ef1d4832d4f4",
+        "fromLabel": "0..*",
+        "toLabel": "1"
+      },
+      {
+        "id": "ea5f00e2f3e0",
+        "type": "association",
+        "from": "fdd09273a03a",
+        "to": "6dc911d85d26",
+        "label": "agrupa",
+        "fromLabel": "0..1",
+        "toLabel": "1..*"
+      },
+      {
+        "id": "4abb7057341a",
+        "type": "association",
+        "from": "7f5432407a9e",
+        "to": "fdd09273a03a",
+        "label": "recibe",
+        "fromLabel": "1",
+        "toLabel": "0..*"
+      },
+      {
+        "id": "79b7adc56f56",
+        "type": "generalization",
+        "from": "e9ae12f4068f",
+        "to": "7f5432407a9e"
+      },
+      {
+        "id": "6fbd7c81211c",
+        "type": "generalization",
+        "from": "9bba41f9513f",
+        "to": "7f5432407a9e"
+      }
+    ],
+    "routing": "orthogonal"
+  }
+}

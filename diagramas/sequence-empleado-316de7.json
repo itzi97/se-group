@@ -1,0 +1,321 @@
+{
+  "format": "se-ramify/1",
+  "id": "316de7e535a0",
+  "kind": "sequence",
+  "title": "Secuencia — Personal (CU-23)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. CU-23 Gestionar empleado (opción «Personal» del menú). Operaciones: ingresar, modificar y eliminar. La baja es lógica (supuesto S-04) para no perder el registro de quién hizo cada operación.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "participants": [
+      {
+        "id": "6ec13b5039b3",
+        "name": "Administrador",
+        "kind": "actor"
+      },
+      {
+        "id": "a0a84945604f",
+        "name": ":PantallaEmpleado",
+        "kind": "boundary"
+      },
+      {
+        "id": "af484e27ac50",
+        "name": ":ControlEmpleado",
+        "kind": "control"
+      },
+      {
+        "id": "b88cac4744f2",
+        "name": ":Empleado",
+        "kind": "entity"
+      },
+      {
+        "id": "6bb1af018929",
+        "name": ":RegistroOperacion",
+        "kind": "entity"
+      },
+      {
+        "id": "00ae59106791",
+        "name": "BD",
+        "kind": "database"
+      }
+    ],
+    "items": [
+      {
+        "id": "3b7cce63cc50",
+        "t": "open",
+        "op": "alt",
+        "guard": "Ingresar"
+      },
+      {
+        "id": "b3a50492b105",
+        "t": "msg",
+        "from": "6ec13b5039b3",
+        "to": "a0a84945604f",
+        "text": "ingresar(datos, codigoEmpresa, rol)",
+        "style": "sync"
+      },
+      {
+        "id": "10a15aa1f4aa",
+        "t": "msg",
+        "from": "6ec13b5039b3",
+        "to": "a0a84945604f",
+        "text": "validar()",
+        "style": "sync"
+      },
+      {
+        "id": "a7557ccac34d",
+        "t": "msg",
+        "from": "a0a84945604f",
+        "to": "af484e27ac50",
+        "text": "altaEmpleado(datos, rol)",
+        "style": "sync"
+      },
+      {
+        "id": "10ee0bc8feed",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "af484e27ac50",
+        "text": "validarCodigoEmpresa(codigo)",
+        "style": "sync"
+      },
+      {
+        "id": "b1b1bac2831e",
+        "t": "open",
+        "op": "alt",
+        "guard": "código válido y datos completos"
+      },
+      {
+        "id": "9d2be30f5a14",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "b88cac4744f2",
+        "text": "new Administrador | Personal(datos)",
+        "style": "create"
+      },
+      {
+        "id": "82b85b7cdc10",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "00ae59106791",
+        "text": "guardar(empleado)",
+        "style": "sync"
+      },
+      {
+        "id": "e41ef9e09a34",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "6bb1af018929",
+        "text": "new(empleado, ALTA, nuevo)",
+        "style": "create"
+      },
+      {
+        "id": "ba6315a4832b",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "00ae59106791",
+        "text": "guardar(registro)",
+        "style": "sync"
+      },
+      {
+        "id": "fbee9b1baad6",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "a0a84945604f",
+        "text": "empleado dado de alta",
+        "style": "reply"
+      },
+      {
+        "id": "ed461d1927da",
+        "t": "else",
+        "guard": "datos no válidos"
+      },
+      {
+        "id": "7946e9c9fbab",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "a0a84945604f",
+        "text": "errores",
+        "style": "reply"
+      },
+      {
+        "id": "fc2800a2c5c2",
+        "t": "close"
+      },
+      {
+        "id": "3fde0be1de73",
+        "t": "else",
+        "guard": "Modificar"
+      },
+      {
+        "id": "dcde0ad27af9",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-25 Buscar empleado"
+      },
+      {
+        "id": "3ec8c5bf5233",
+        "t": "close"
+      },
+      {
+        "id": "2274ce176642",
+        "t": "msg",
+        "from": "6ec13b5039b3",
+        "to": "a0a84945604f",
+        "text": "modificar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "77910ba199a7",
+        "t": "msg",
+        "from": "6ec13b5039b3",
+        "to": "a0a84945604f",
+        "text": "validar()",
+        "style": "sync"
+      },
+      {
+        "id": "6a69b154c8e1",
+        "t": "msg",
+        "from": "a0a84945604f",
+        "to": "af484e27ac50",
+        "text": "modificarEmpleado(id, datos)",
+        "style": "sync"
+      },
+      {
+        "id": "156bd5ff93bd",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "b88cac4744f2",
+        "text": "actualizar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "21d3b9eda3df",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "00ae59106791",
+        "text": "guardar(empleado)",
+        "style": "sync"
+      },
+      {
+        "id": "dec41197f77d",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "6bb1af018929",
+        "text": "new(empleado, MODIFICACION, afectado)",
+        "style": "create"
+      },
+      {
+        "id": "7fba27825b98",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "00ae59106791",
+        "text": "guardar(registro)",
+        "style": "sync"
+      },
+      {
+        "id": "dd38e478e0c4",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "a0a84945604f",
+        "text": "cambios guardados",
+        "style": "reply"
+      },
+      {
+        "id": "6a2017141ea2",
+        "t": "else",
+        "guard": "Eliminar"
+      },
+      {
+        "id": "f12b7614a392",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-25 Buscar empleado"
+      },
+      {
+        "id": "73df548aae03",
+        "t": "close"
+      },
+      {
+        "id": "022964c9ead2",
+        "t": "msg",
+        "from": "6ec13b5039b3",
+        "to": "a0a84945604f",
+        "text": "eliminar()",
+        "style": "sync"
+      },
+      {
+        "id": "8d5e8b1b35b5",
+        "t": "msg",
+        "from": "6ec13b5039b3",
+        "to": "a0a84945604f",
+        "text": "validar()",
+        "style": "sync"
+      },
+      {
+        "id": "9eeae56f0a49",
+        "t": "msg",
+        "from": "a0a84945604f",
+        "to": "af484e27ac50",
+        "text": "bajaEmpleado(id)",
+        "style": "sync"
+      },
+      {
+        "id": "d8a4f27a67a1",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "b88cac4744f2",
+        "text": "darDeBaja()",
+        "style": "sync"
+      },
+      {
+        "id": "44048532665a",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "00ae59106791",
+        "text": "guardar(empleado)",
+        "style": "sync"
+      },
+      {
+        "id": "b13d75e17427",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "6bb1af018929",
+        "text": "new(empleado, BAJA, afectado)",
+        "style": "create"
+      },
+      {
+        "id": "29539b0a1ce5",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "00ae59106791",
+        "text": "guardar(registro)",
+        "style": "sync"
+      },
+      {
+        "id": "4c89592402be",
+        "t": "msg",
+        "from": "af484e27ac50",
+        "to": "a0a84945604f",
+        "text": "empleado dado de baja",
+        "style": "reply"
+      },
+      {
+        "id": "2c7d3662516a",
+        "t": "close"
+      },
+      {
+        "id": "56bd34edafc4",
+        "t": "msg",
+        "from": "a0a84945604f",
+        "to": "6ec13b5039b3",
+        "text": "mostrarResultado()",
+        "style": "reply"
+      }
+    ],
+    "activations": true,
+    "autonumber": true
+  }
+}

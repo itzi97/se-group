@@ -9,3 +9,4 @@
 #import "neuranet-assignment.typ": neuranet-breve, assignment, compact-info
 #import "neuranet-slides.typ": title-slide, section-slide, section-tag, slide, focus-slide, slide-columns, agenda-slide, stat, no-logo-slides
 #import "neuranet-ramify.typ": usecase-diagram
+#import "neuranet-uml.typ": class-diagram, state-diagram, sequence-diagram, stakeholder-grid, stakeholder-onion, stakeholder-legend, stakeholder-table, vision-pitch, class-legend

@@ -1,0 +1,234 @@
+{
+  "format": "se-ramify/1",
+  "id": "aa59e36f0d48",
+  "kind": "sequence",
+  "title": "Secuencia — MateriaPrima (CU-21)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. CU-21 Gestionar materia prima. Operaciones: ingresar y eliminar (no se puede modificar). Cada operación deja un RegistroOperacion (CU-26).",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "participants": [
+      {
+        "id": "0918311bf37c",
+        "name": "Administrador",
+        "kind": "actor"
+      },
+      {
+        "id": "df3ae6489cd1",
+        "name": ":PantallaMateriaPrima",
+        "kind": "boundary"
+      },
+      {
+        "id": "9403b345c766",
+        "name": ":ControlMateriaPrima",
+        "kind": "control"
+      },
+      {
+        "id": "3f8bb2e1cae7",
+        "name": ":MateriaPrima",
+        "kind": "entity"
+      },
+      {
+        "id": "9e2f2806a2ef",
+        "name": ":RegistroOperacion",
+        "kind": "entity"
+      },
+      {
+        "id": "fd9c180f3a0b",
+        "name": "BD",
+        "kind": "database"
+      }
+    ],
+    "items": [
+      {
+        "id": "c6cfe61dd9f6",
+        "t": "open",
+        "op": "alt",
+        "guard": "Ingresar"
+      },
+      {
+        "id": "576f4ec8f20e",
+        "t": "msg",
+        "from": "0918311bf37c",
+        "to": "df3ae6489cd1",
+        "text": "ingresar(fecha, procedencia, remolque, descripcion)",
+        "style": "sync"
+      },
+      {
+        "id": "d96ad0875cbb",
+        "t": "msg",
+        "from": "0918311bf37c",
+        "to": "df3ae6489cd1",
+        "text": "validar()",
+        "style": "sync"
+      },
+      {
+        "id": "0585f99b4a22",
+        "t": "msg",
+        "from": "df3ae6489cd1",
+        "to": "9403b345c766",
+        "text": "registrarEntrada(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "fc12c3c1b1f1",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "9403b345c766",
+        "text": "validar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "ae015fe5eb75",
+        "t": "open",
+        "op": "alt",
+        "guard": "datos válidos"
+      },
+      {
+        "id": "0d4a4cec55f4",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "3f8bb2e1cae7",
+        "text": "new(datos)",
+        "style": "create"
+      },
+      {
+        "id": "6930cd06b362",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "fd9c180f3a0b",
+        "text": "guardar(entrada)",
+        "style": "sync"
+      },
+      {
+        "id": "12eac94075f3",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "9e2f2806a2ef",
+        "text": "new(empleado, ALTA, entrada)",
+        "style": "create"
+      },
+      {
+        "id": "87bf90ecc6db",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "fd9c180f3a0b",
+        "text": "guardar(registro)",
+        "style": "sync"
+      },
+      {
+        "id": "2697cb3027f9",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "df3ae6489cd1",
+        "text": "entrada nº",
+        "style": "reply"
+      },
+      {
+        "id": "509746f6047f",
+        "t": "else",
+        "guard": "faltan datos"
+      },
+      {
+        "id": "0604929b1e72",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "df3ae6489cd1",
+        "text": "errores",
+        "style": "reply"
+      },
+      {
+        "id": "17b0cb23bb4b",
+        "t": "close"
+      },
+      {
+        "id": "d73e45af41c8",
+        "t": "else",
+        "guard": "Eliminar"
+      },
+      {
+        "id": "7cbc4777451d",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-24 Buscar materia prima"
+      },
+      {
+        "id": "6e09a32b6fab",
+        "t": "close"
+      },
+      {
+        "id": "c5baecf21cd7",
+        "t": "msg",
+        "from": "0918311bf37c",
+        "to": "df3ae6489cd1",
+        "text": "eliminar()",
+        "style": "sync"
+      },
+      {
+        "id": "6504632c468d",
+        "t": "msg",
+        "from": "0918311bf37c",
+        "to": "df3ae6489cd1",
+        "text": "validar()",
+        "style": "sync"
+      },
+      {
+        "id": "aabf4adb41d4",
+        "t": "msg",
+        "from": "df3ae6489cd1",
+        "to": "9403b345c766",
+        "text": "eliminarEntrada(numero)",
+        "style": "sync"
+      },
+      {
+        "id": "667bc12c6899",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "fd9c180f3a0b",
+        "text": "eliminar(entrada)",
+        "style": "sync"
+      },
+      {
+        "id": "61b66aa9d93f",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "9e2f2806a2ef",
+        "text": "new(empleado, BAJA, entrada)",
+        "style": "create"
+      },
+      {
+        "id": "9e957e7232e1",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "fd9c180f3a0b",
+        "text": "guardar(registro)",
+        "style": "sync"
+      },
+      {
+        "id": "94ad05d3bcd8",
+        "t": "msg",
+        "from": "9403b345c766",
+        "to": "df3ae6489cd1",
+        "text": "entrada eliminada",
+        "style": "reply"
+      },
+      {
+        "id": "36a9fdcd1916",
+        "t": "close"
+      },
+      {
+        "id": "b3eb914e8ba4",
+        "t": "msg",
+        "from": "df3ae6489cd1",
+        "to": "0918311bf37c",
+        "text": "mostrarResultado()",
+        "style": "reply"
+      }
+    ],
+    "activations": true,
+    "autonumber": true
+  }
+}

@@ -1,0 +1,431 @@
+{
+  "format": "se-ramify/1",
+  "id": "09bc30198b5b",
+  "kind": "sequence",
+  "title": "Secuencia — Pedido (CU-04)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. CU-04 Gestionar pedido. Operaciones: alta, confirmar, modificar, marcar enviado o cerrado, y anular.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "participants": [
+      {
+        "id": "9d25bcc76c40",
+        "name": "Personal",
+        "kind": "actor"
+      },
+      {
+        "id": "0f0de3f74032",
+        "name": ":PantallaPedido",
+        "kind": "boundary"
+      },
+      {
+        "id": "46e3b54b00c9",
+        "name": ":ControlPedido",
+        "kind": "control"
+      },
+      {
+        "id": "6ac8a81c5b84",
+        "name": ":Pedido",
+        "kind": "entity"
+      },
+      {
+        "id": "878260474bad",
+        "name": "BD",
+        "kind": "database"
+      }
+    ],
+    "items": [
+      {
+        "id": "043dee5223e4",
+        "t": "open",
+        "op": "alt",
+        "guard": "Alta"
+      },
+      {
+        "id": "73599ab714c0",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-07 Buscar cliente"
+      },
+      {
+        "id": "ffa14acd40d8",
+        "t": "close"
+      },
+      {
+        "id": "e8f7dd893cba",
+        "t": "open",
+        "op": "opt",
+        "guard": "el cliente no existe"
+      },
+      {
+        "id": "3d18cdf113ca",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-03 Gestionar cliente: alta («extend»)"
+      },
+      {
+        "id": "d312a95ee5f8",
+        "t": "close"
+      },
+      {
+        "id": "fe52feeb867d",
+        "t": "close"
+      },
+      {
+        "id": "b76451d69b48",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "nuevoPedido(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "4d290f269742",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "46e3b54b00c9",
+        "text": "altaPedido(codCliente, datos)",
+        "style": "sync"
+      },
+      {
+        "id": "0c41549e7fcb",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "6ac8a81c5b84",
+        "text": "new(cliente, datos)",
+        "style": "create"
+      },
+      {
+        "id": "d1694f5eaf1c",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "878260474bad",
+        "text": "guardar(pedido)",
+        "style": "sync"
+      },
+      {
+        "id": "edca9885bbd8",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "0f0de3f74032",
+        "text": "pedido nº, reservado",
+        "style": "reply"
+      },
+      {
+        "id": "3c6391b0ac94",
+        "t": "else",
+        "guard": "Confirmar"
+      },
+      {
+        "id": "fa6cfe4c79d7",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-08 Buscar pedido"
+      },
+      {
+        "id": "bfa6c1570c68",
+        "t": "close"
+      },
+      {
+        "id": "6a5e9cb4316e",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "confirmar()",
+        "style": "sync"
+      },
+      {
+        "id": "97c265056cb7",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "46e3b54b00c9",
+        "text": "confirmarPedido(numero)",
+        "style": "sync"
+      },
+      {
+        "id": "973d9c892baa",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "6ac8a81c5b84",
+        "text": "confirmar()",
+        "style": "sync"
+      },
+      {
+        "id": "b1594372c0ce",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "878260474bad",
+        "text": "guardar(pedido)",
+        "style": "sync"
+      },
+      {
+        "id": "5da4217883e8",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "0f0de3f74032",
+        "text": "pedido confirmado",
+        "style": "reply"
+      },
+      {
+        "id": "8719c5b05fab",
+        "t": "else",
+        "guard": "Modificar"
+      },
+      {
+        "id": "ace32a204b43",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-08 Buscar pedido"
+      },
+      {
+        "id": "2d78d359dca0",
+        "t": "close"
+      },
+      {
+        "id": "842f86e98415",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "modificar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "0fb53f9c8996",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "46e3b54b00c9",
+        "text": "modificarPedido(numero, datos)",
+        "style": "sync"
+      },
+      {
+        "id": "be5c987e3fb5",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "6ac8a81c5b84",
+        "text": "esModificable()",
+        "style": "sync"
+      },
+      {
+        "id": "e80417ac45d1",
+        "t": "msg",
+        "from": "6ac8a81c5b84",
+        "to": "46e3b54b00c9",
+        "text": "sí / no",
+        "style": "reply"
+      },
+      {
+        "id": "a2f091df8085",
+        "t": "open",
+        "op": "alt",
+        "guard": "no facturado"
+      },
+      {
+        "id": "9f95fc045b60",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "6ac8a81c5b84",
+        "text": "actualizar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "eaeb0af3da4b",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "878260474bad",
+        "text": "guardar(pedido)",
+        "style": "sync"
+      },
+      {
+        "id": "e6ad2d11669e",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "0f0de3f74032",
+        "text": "cambios guardados",
+        "style": "reply"
+      },
+      {
+        "id": "89397e440d90",
+        "t": "else",
+        "guard": "ya facturado"
+      },
+      {
+        "id": "4a30a2fe91d7",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "0f0de3f74032",
+        "text": "aviso: no se puede modificar",
+        "style": "reply"
+      },
+      {
+        "id": "a447d81fc599",
+        "t": "close"
+      },
+      {
+        "id": "a34b49476c31",
+        "t": "else",
+        "guard": "Marcar enviado o cerrado"
+      },
+      {
+        "id": "d2c3dc798f96",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-08 Buscar pedido"
+      },
+      {
+        "id": "69e470bb1c86",
+        "t": "close"
+      },
+      {
+        "id": "df4cb9577426",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "cambiarEstado(estado)",
+        "style": "sync"
+      },
+      {
+        "id": "b8059da0c9fd",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "46e3b54b00c9",
+        "text": "cambiarEstado(numero, estado)",
+        "style": "sync"
+      },
+      {
+        "id": "01e27577f283",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "6ac8a81c5b84",
+        "text": "marcarEnviado() | cerrar()",
+        "style": "sync"
+      },
+      {
+        "id": "e3cada6b97b3",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "878260474bad",
+        "text": "guardar(pedido)",
+        "style": "sync"
+      },
+      {
+        "id": "f915f9e93cab",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "0f0de3f74032",
+        "text": "estado actualizado",
+        "style": "reply"
+      },
+      {
+        "id": "6d73036a36a6",
+        "t": "else",
+        "guard": "Anular"
+      },
+      {
+        "id": "607cb958f7d9",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-08 Buscar pedido"
+      },
+      {
+        "id": "40de869fa680",
+        "t": "close"
+      },
+      {
+        "id": "8b1355bbf31d",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "anular()",
+        "style": "sync"
+      },
+      {
+        "id": "2158846a5c57",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "46e3b54b00c9",
+        "text": "anularPedido(numero)",
+        "style": "sync"
+      },
+      {
+        "id": "637d8a86c60e",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "6ac8a81c5b84",
+        "text": "esModificable()",
+        "style": "sync"
+      },
+      {
+        "id": "f87f409294c0",
+        "t": "msg",
+        "from": "6ac8a81c5b84",
+        "to": "46e3b54b00c9",
+        "text": "sí / no",
+        "style": "reply"
+      },
+      {
+        "id": "16a3193434b0",
+        "t": "open",
+        "op": "alt",
+        "guard": "no facturado"
+      },
+      {
+        "id": "622372e246bd",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "6ac8a81c5b84",
+        "text": "anular()",
+        "style": "sync"
+      },
+      {
+        "id": "5b0b4694547d",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "878260474bad",
+        "text": "guardar(pedido)",
+        "style": "sync"
+      },
+      {
+        "id": "ea8685b2eccd",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "0f0de3f74032",
+        "text": "pedido anulado",
+        "style": "reply"
+      },
+      {
+        "id": "4ce388ca37c7",
+        "t": "else",
+        "guard": "ya facturado"
+      },
+      {
+        "id": "12040a886f10",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "0f0de3f74032",
+        "text": "aviso: no se puede anular",
+        "style": "reply"
+      },
+      {
+        "id": "421ee91f02e2",
+        "t": "close"
+      },
+      {
+        "id": "8d14eb3996ff",
+        "t": "close"
+      },
+      {
+        "id": "fbf512305dff",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "9d25bcc76c40",
+        "text": "mostrarResultado()",
+        "style": "reply"
+      }
+    ],
+    "activations": true,
+    "autonumber": true
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "format": "se-ramify/1",
+  "id": "0515f7fdf3dc",
+  "kind": "state",
+  "title": "Diagrama de estados — Pedido",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML (complemento). Ciclo de vida de un pedido, acordado con el cliente el 16/10: reservado › confirmado › facturado › enviado › cerrado. Solo se puede anular (y modificar) antes de facturar.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "nodes": [
+      {
+        "id": "b21357d07d0a",
+        "type": "initial",
+        "x": 0,
+        "y": 130,
+        "label": ""
+      },
+      {
+        "id": "b62ef27ec4e1",
+        "type": "state",
+        "x": 120,
+        "y": 100,
+        "label": "Reservado",
+        "attrs": [
+          "entry / guardar con fecha de alta"
+        ]
+      },
+      {
+        "id": "711c9a29f947",
+        "type": "state",
+        "x": 470,
+        "y": 100,
+        "label": "Confirmado"
+      },
+      {
+        "id": "fd8b21bdabf9",
+        "type": "state",
+        "x": 820,
+        "y": 100,
+        "label": "Facturado",
+        "attrs": [
+          "entry / guardar e imprimir factura"
+        ]
+      },
+      {
+        "id": "9a51c148b7cf",
+        "type": "state",
+        "x": 820,
+        "y": 330,
+        "label": "Enviado"
+      },
+      {
+        "id": "e1fe3dfc1193",
+        "type": "state",
+        "x": 470,
+        "y": 330,
+        "label": "Cerrado"
+      },
+      {
+        "id": "405fd80f972b",
+        "type": "state",
+        "x": 120,
+        "y": 330,
+        "label": "Anulado"
+      },
+      {
+        "id": "f34c95b498cd",
+        "type": "final",
+        "x": 330,
+        "y": 500,
+        "label": ""
+      }
+    ],
+    "edges": [
+      {
+        "id": "2165094102d1",
+        "type": "transition",
+        "from": "b21357d07d0a",
+        "to": "b62ef27ec4e1",
+        "label": "altaPedido()"
+      },
+      {
+        "id": "dc1d8a4462bd",
+        "type": "transition",
+        "from": "b62ef27ec4e1",
+        "to": "711c9a29f947",
+        "label": "confirmar()"
+      },
+      {
+        "id": "e0376d9fd11a",
+        "type": "transition",
+        "from": "711c9a29f947",
+        "to": "fd8b21bdabf9",
+        "label": "generarFactura() [tiene líneas]"
+      },
+      {
+        "id": "7ba87e9c83bb",
+        "type": "transition",
+        "from": "fd8b21bdabf9",
+        "to": "9a51c148b7cf",
+        "label": "marcarEnviado()"
+      },
+      {
+        "id": "5d37a549d0a5",
+        "type": "transition",
+        "from": "9a51c148b7cf",
+        "to": "e1fe3dfc1193",
+        "label": "cerrar() [cliente lo recibe]"
+      },
+      {
+        "id": "d92f3fc5e34f",
+        "type": "transition",
+        "from": "b62ef27ec4e1",
+        "to": "405fd80f972b",
+        "label": "anular()"
+      },
+      {
+        "id": "179bedfe811e",
+        "type": "transition",
+        "from": "711c9a29f947",
+        "to": "405fd80f972b",
+        "label": "anular()"
+      },
+      {
+        "id": "e8cabbbf5dd5",
+        "type": "transition",
+        "from": "b62ef27ec4e1",
+        "to": "b62ef27ec4e1",
+        "label": "modificar()"
+      },
+      {
+        "id": "10069652041b",
+        "type": "transition",
+        "from": "711c9a29f947",
+        "to": "711c9a29f947",
+        "label": "modificar()"
+      },
+      {
+        "id": "51b17f86c4b2",
+        "type": "transition",
+        "from": "e1fe3dfc1193",
+        "to": "f34c95b498cd"
+      },
+      {
+        "id": "aae27e8e49f1",
+        "type": "transition",
+        "from": "405fd80f972b",
+        "to": "f34c95b498cd"
+      }
+    ],
+    "routing": "orthogonal"
+  }
+}

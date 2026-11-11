@@ -1,0 +1,203 @@
+{
+  "format": "se-ramify/1",
+  "id": "7bf47bd27aaa",
+  "kind": "sequence",
+  "title": "Secuencia — Detalle Materia Prima (CU-22)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. CU-22 Ingresar detalle de materia prima. Solo se puede ingresar (no modificar ni eliminar). Cada línea se evalúa contra el grado mínimo de su variedad.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "participants": [
+      {
+        "id": "f09ae9af026f",
+        "name": "Administrador",
+        "kind": "actor"
+      },
+      {
+        "id": "155183ff2800",
+        "name": ":PantallaDetalleMP",
+        "kind": "boundary"
+      },
+      {
+        "id": "f9457452e3f7",
+        "name": ":ControlDetalleMP",
+        "kind": "control"
+      },
+      {
+        "id": "08be0f453b50",
+        "name": ":MateriaPrima",
+        "kind": "entity"
+      },
+      {
+        "id": "fc3b8efbdacb",
+        "name": ":DetalleMateriaPrima",
+        "kind": "entity"
+      },
+      {
+        "id": "3ca6a8e19be8",
+        "name": ":Variedad",
+        "kind": "entity"
+      },
+      {
+        "id": "35cb45bdcd4c",
+        "name": ":RegistroOperacion",
+        "kind": "entity"
+      },
+      {
+        "id": "0c0d256ceff2",
+        "name": "BD",
+        "kind": "database"
+      }
+    ],
+    "items": [
+      {
+        "id": "df28638098ea",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-24 Buscar materia prima"
+      },
+      {
+        "id": "f22df1e57bac",
+        "t": "close"
+      },
+      {
+        "id": "4e56bd84df2c",
+        "t": "open",
+        "op": "loop",
+        "guard": "una línea por variedad del remolque"
+      },
+      {
+        "id": "220891fdb0c4",
+        "t": "msg",
+        "from": "f09ae9af026f",
+        "to": "155183ff2800",
+        "text": "anadirLinea(variedad, peso, grado)",
+        "style": "sync"
+      },
+      {
+        "id": "873c0eb46c62",
+        "t": "close"
+      },
+      {
+        "id": "f1f56ac31531",
+        "t": "msg",
+        "from": "f09ae9af026f",
+        "to": "155183ff2800",
+        "text": "validar()",
+        "style": "sync"
+      },
+      {
+        "id": "fd288aae8a74",
+        "t": "msg",
+        "from": "155183ff2800",
+        "to": "f9457452e3f7",
+        "text": "ingresarDetalle(numeroMP, lineas)",
+        "style": "sync"
+      },
+      {
+        "id": "de1614549032",
+        "t": "open",
+        "op": "loop",
+        "guard": "para cada línea"
+      },
+      {
+        "id": "4450f5988adf",
+        "t": "msg",
+        "from": "f9457452e3f7",
+        "to": "08be0f453b50",
+        "text": "anadirDetalle(variedad, peso, grado)",
+        "style": "sync"
+      },
+      {
+        "id": "4f34abb18fb9",
+        "t": "msg",
+        "from": "08be0f453b50",
+        "to": "fc3b8efbdacb",
+        "text": "new(variedad, peso, grado)",
+        "style": "create"
+      },
+      {
+        "id": "8ae975bfac7a",
+        "t": "msg",
+        "from": "08be0f453b50",
+        "to": "fc3b8efbdacb",
+        "text": "evaluar()",
+        "style": "sync"
+      },
+      {
+        "id": "166a07a1dda5",
+        "t": "msg",
+        "from": "fc3b8efbdacb",
+        "to": "3ca6a8e19be8",
+        "text": "getGradoMinimo()",
+        "style": "sync"
+      },
+      {
+        "id": "75ec7905d9ff",
+        "t": "msg",
+        "from": "3ca6a8e19be8",
+        "to": "fc3b8efbdacb",
+        "text": "mínimo",
+        "style": "reply"
+      },
+      {
+        "id": "78bb4bcb2224",
+        "t": "note",
+        "over": [
+          "fc3b8efbdacb",
+          "3ca6a8e19be8"
+        ],
+        "text": "aceptada = grado ≥ mínimo\n(si no llega, esa uva va a abono)"
+      },
+      {
+        "id": "41ae78d6ca0f",
+        "t": "close"
+      },
+      {
+        "id": "48b57bd3d05a",
+        "t": "msg",
+        "from": "f9457452e3f7",
+        "to": "0c0d256ceff2",
+        "text": "guardar(entrada y detalle)",
+        "style": "sync"
+      },
+      {
+        "id": "d5e8e8898bfb",
+        "t": "msg",
+        "from": "f9457452e3f7",
+        "to": "35cb45bdcd4c",
+        "text": "new(empleado, ALTA, detalle)",
+        "style": "create"
+      },
+      {
+        "id": "5a7e9eb71442",
+        "t": "msg",
+        "from": "f9457452e3f7",
+        "to": "0c0d256ceff2",
+        "text": "guardar(registro)",
+        "style": "sync"
+      },
+      {
+        "id": "1f9d76edb6f5",
+        "t": "msg",
+        "from": "f9457452e3f7",
+        "to": "155183ff2800",
+        "text": "líneas aceptadas y rechazadas",
+        "style": "reply"
+      },
+      {
+        "id": "079172ed9f17",
+        "t": "msg",
+        "from": "155183ff2800",
+        "to": "f09ae9af026f",
+        "text": "mostrarResultado()",
+        "style": "reply"
+      }
+    ],
+    "activations": true,
+    "autonumber": true
+  }
+}

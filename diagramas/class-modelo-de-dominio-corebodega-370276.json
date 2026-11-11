@@ -1,0 +1,174 @@
+{
+  "format": "se-ramify/1",
+  "id": "370276b23727",
+  "kind": "class",
+  "title": "Modelo de dominio — CoreBodega",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. Modelo de dominio de CoreBodega.\n\nDecisiones:\n- MateriaPrima es una entrada de uva (un remolque). DetalleMateriaPrima son sus líneas: cada variedad con su peso y su grado de azúcar (supuesto S-05).\n- El grado mínimo depende de la variedad (reunión del 16/10), por eso Variedad es una clase. Si una línea no llega al mínimo, se marca como no aceptada y esa uva va a abono.\n- RegistroOperacion guarda quién hizo cada operación, cuándo y sobre qué (enunciado p. 5: «queda registrado qué usuario hizo cada gestión»).\n- Empleado es la opción «Personal» del menú. Administrador y Personal heredan de Empleado, igual que en los casos de uso. Los empleados son también los usuarios de los dos programas (supuesto S-01).",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "nodes": [
+      {
+        "id": "bc84431f8604",
+        "type": "package",
+        "x": -40,
+        "y": -60,
+        "label": "CoreBodega",
+        "w": 1080,
+        "h": 900
+      },
+      {
+        "id": "6c0aed580746",
+        "type": "class",
+        "x": 0,
+        "y": 0,
+        "label": "MateriaPrima",
+        "attrs": [
+          "numero",
+          "fecha",
+          "procedencia",
+          "matriculaRemolque",
+          "descripcion",
+          "/pesoTotal"
+        ],
+        "ops": []
+      },
+      {
+        "id": "0fefc54c9c13",
+        "type": "class",
+        "x": 340,
+        "y": 0,
+        "label": "DetalleMateriaPrima",
+        "attrs": [
+          "pesoKg",
+          "gradoAzucar",
+          "aceptada"
+        ],
+        "ops": []
+      },
+      {
+        "id": "abb2bc6ca25e",
+        "type": "class",
+        "x": 680,
+        "y": 0,
+        "label": "Variedad",
+        "attrs": [
+          "nombre",
+          "gradoMinimo"
+        ],
+        "ops": []
+      },
+      {
+        "id": "0d176a7f35ca",
+        "type": "class",
+        "x": 0,
+        "y": 330,
+        "label": "RegistroOperacion",
+        "attrs": [
+          "fechaHora",
+          "tipo: TipoOperacion",
+          "entidad",
+          "idEntidad",
+          "descripcion"
+        ],
+        "ops": []
+      },
+      {
+        "id": "0fe2ac17fb1e",
+        "type": "enum",
+        "x": 0,
+        "y": 620,
+        "label": "TipoOperacion",
+        "stereotype": "enumeration",
+        "attrs": [
+          "ALTA",
+          "MODIFICACION",
+          "BAJA"
+        ],
+        "ops": []
+      },
+      {
+        "id": "6088070ab810",
+        "type": "class",
+        "x": 420,
+        "y": 330,
+        "label": "Empleado",
+        "attrs": [
+          "codigoEmpresa",
+          "nombre",
+          "apellidos",
+          "dni",
+          "telefono",
+          "email",
+          "usuario",
+          "contrasena",
+          "activo"
+        ],
+        "ops": [],
+        "abstract": true
+      },
+      {
+        "id": "c52cc8ea310a",
+        "type": "class",
+        "x": 320,
+        "y": 700,
+        "label": "Administrador",
+        "attrs": [],
+        "ops": []
+      },
+      {
+        "id": "efa5babcce3e",
+        "type": "class",
+        "x": 580,
+        "y": 700,
+        "label": "Personal",
+        "attrs": [],
+        "ops": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "c67e61808b6a",
+        "type": "composition",
+        "from": "6c0aed580746",
+        "to": "0fefc54c9c13",
+        "fromLabel": "1",
+        "toLabel": "1..*"
+      },
+      {
+        "id": "16c403b77a2a",
+        "type": "association",
+        "from": "0fefc54c9c13",
+        "to": "abb2bc6ca25e",
+        "label": "es de",
+        "fromLabel": "0..*",
+        "toLabel": "1"
+      },
+      {
+        "id": "69ad0af1c17f",
+        "type": "association",
+        "from": "6088070ab810",
+        "to": "0d176a7f35ca",
+        "label": "realiza",
+        "fromLabel": "1",
+        "toLabel": "0..*"
+      },
+      {
+        "id": "20488109a41b",
+        "type": "generalization",
+        "from": "c52cc8ea310a",
+        "to": "6088070ab810"
+      },
+      {
+        "id": "ee614af16733",
+        "type": "generalization",
+        "from": "efa5babcce3e",
+        "to": "6088070ab810"
+      }
+    ],
+    "routing": "orthogonal"
+  }
+}

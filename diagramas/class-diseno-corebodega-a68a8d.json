@@ -1,0 +1,261 @@
+{
+  "format": "se-ramify/1",
+  "id": "a68a8d9d75eb",
+  "kind": "class",
+  "title": "Diagrama de clases de diseño — CoreBodega",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. Clases de diseño de CoreBodega: entidades con tipos, visibilidad y operaciones, y una clase de control por opción del menú.\n\n- Los tres controles crean un RegistroOperacion en cada alta, modificación o baja, con el empleado de la sesión.\n- La contraseña no se guarda tal cual: se guarda su hash.\n- DatosEntrada, LineaDetalle y DatosEmpleado son los datos que llegan del formulario.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "nodes": [
+      {
+        "id": "ea3d0b899bf4",
+        "type": "class",
+        "x": 0,
+        "y": 0,
+        "label": "ControlMateriaPrima",
+        "attrs": [],
+        "ops": [
+          "+ registrarEntrada(d: DatosEntrada): MateriaPrima",
+          "+ eliminarEntrada(numero: int): void",
+          "- validar(d: DatosEntrada): boolean"
+        ],
+        "stereotype": "control",
+        "color": "#2E8B7A"
+      },
+      {
+        "id": "e121688435f6",
+        "type": "class",
+        "x": 420,
+        "y": 0,
+        "label": "ControlDetalleMP",
+        "attrs": [],
+        "ops": [
+          "+ ingresarDetalle(numeroMP: int, l: List<LineaDetalle>): void"
+        ],
+        "stereotype": "control",
+        "color": "#2E8B7A"
+      },
+      {
+        "id": "719eb9c1fcc6",
+        "type": "class",
+        "x": 860,
+        "y": 0,
+        "label": "ControlEmpleado",
+        "attrs": [],
+        "ops": [
+          "+ altaEmpleado(d: DatosEmpleado, rol: String): Empleado",
+          "+ modificarEmpleado(id: int, d: DatosEmpleado): void",
+          "+ bajaEmpleado(id: int): void",
+          "- validarCodigoEmpresa(c: String): boolean"
+        ],
+        "stereotype": "control",
+        "color": "#2E8B7A"
+      },
+      {
+        "id": "d0d09e120324",
+        "type": "class",
+        "x": 0,
+        "y": 270,
+        "label": "MateriaPrima",
+        "attrs": [
+          "- numero: int",
+          "- fecha: Date",
+          "- procedencia: String",
+          "- matriculaRemolque: String",
+          "- descripcion: String"
+        ],
+        "ops": [
+          "+ anadirDetalle(v: Variedad, pesoKg: double, grado: double): DetalleMateriaPrima",
+          "+ pesoTotal(): double"
+        ]
+      },
+      {
+        "id": "caeeadf9b5d8",
+        "type": "class",
+        "x": 470,
+        "y": 270,
+        "label": "RegistroOperacion",
+        "attrs": [
+          "- fechaHora: DateTime",
+          "- tipo: TipoOperacion",
+          "- entidad: String",
+          "- idEntidad: int",
+          "- descripcion: String"
+        ],
+        "ops": []
+      },
+      {
+        "id": "3531e7aaaf41",
+        "type": "class",
+        "x": 860,
+        "y": 270,
+        "label": "Empleado",
+        "attrs": [
+          "- id: int",
+          "- codigoEmpresa: String",
+          "- nombre: String",
+          "- apellidos: String",
+          "- dni: String",
+          "- telefono: String",
+          "- email: String",
+          "- usuario: String",
+          "- hashContrasena: String",
+          "- activo: boolean"
+        ],
+        "ops": [
+          "+ comprobarContrasena(c: String): boolean",
+          "+ actualizar(d: DatosEmpleado): void",
+          "+ darDeBaja(): void"
+        ],
+        "abstract": true
+      },
+      {
+        "id": "27e78966eccd",
+        "type": "class",
+        "x": 0,
+        "y": 560,
+        "label": "DetalleMateriaPrima",
+        "attrs": [
+          "- pesoKg: double",
+          "- gradoAzucar: double",
+          "- aceptada: boolean"
+        ],
+        "ops": [
+          "+ evaluar(): void"
+        ]
+      },
+      {
+        "id": "8a54cd6c9601",
+        "type": "enum",
+        "x": 500,
+        "y": 560,
+        "label": "TipoOperacion",
+        "stereotype": "enumeration",
+        "attrs": [
+          "ALTA",
+          "MODIFICACION",
+          "BAJA"
+        ],
+        "ops": []
+      },
+      {
+        "id": "cf86fb773a50",
+        "type": "class",
+        "x": 790,
+        "y": 720,
+        "label": "Administrador",
+        "attrs": [],
+        "ops": []
+      },
+      {
+        "id": "db750b79d3f2",
+        "type": "class",
+        "x": 1010,
+        "y": 720,
+        "label": "Personal",
+        "attrs": [],
+        "ops": []
+      },
+      {
+        "id": "46d4e2313590",
+        "type": "class",
+        "x": 0,
+        "y": 790,
+        "label": "Variedad",
+        "attrs": [
+          "- nombre: String",
+          "- gradoMinimo: double"
+        ],
+        "ops": [
+          "+ getGradoMinimo(): double"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "51d1664ea0a5",
+        "type": "composition",
+        "from": "d0d09e120324",
+        "to": "27e78966eccd",
+        "fromLabel": "1",
+        "toLabel": "1..*"
+      },
+      {
+        "id": "0aa530adfc45",
+        "type": "directed",
+        "from": "27e78966eccd",
+        "to": "46d4e2313590",
+        "fromLabel": "0..*",
+        "toLabel": "1"
+      },
+      {
+        "id": "2b05dc1faa38",
+        "type": "association",
+        "from": "3531e7aaaf41",
+        "to": "caeeadf9b5d8",
+        "label": "realiza",
+        "fromLabel": "1",
+        "toLabel": "0..*"
+      },
+      {
+        "id": "b84ce5c9dec7",
+        "type": "dependency",
+        "from": "caeeadf9b5d8",
+        "to": "8a54cd6c9601"
+      },
+      {
+        "id": "83e46f6d31d3",
+        "type": "generalization",
+        "from": "cf86fb773a50",
+        "to": "3531e7aaaf41"
+      },
+      {
+        "id": "e2918d52a042",
+        "type": "generalization",
+        "from": "db750b79d3f2",
+        "to": "3531e7aaaf41"
+      },
+      {
+        "id": "8a987dba2c91",
+        "type": "dependency",
+        "from": "ea3d0b899bf4",
+        "to": "d0d09e120324"
+      },
+      {
+        "id": "f1b2d5b16480",
+        "type": "dependency",
+        "from": "e121688435f6",
+        "to": "d0d09e120324"
+      },
+      {
+        "id": "b8844b1824dd",
+        "type": "dependency",
+        "from": "719eb9c1fcc6",
+        "to": "3531e7aaaf41"
+      },
+      {
+        "id": "0140e744b0b8",
+        "type": "dependency",
+        "from": "ea3d0b899bf4",
+        "to": "caeeadf9b5d8"
+      },
+      {
+        "id": "89359c69f443",
+        "type": "dependency",
+        "from": "e121688435f6",
+        "to": "caeeadf9b5d8"
+      },
+      {
+        "id": "c4598809c22c",
+        "type": "dependency",
+        "from": "719eb9c1fcc6",
+        "to": "caeeadf9b5d8"
+      }
+    ],
+    "routing": "orthogonal"
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "format": "se-ramify/1",
+  "id": "b50d3fa1dc88",
+  "kind": "class",
+  "title": "Diagrama de clases de diseño — CoreReservas",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. Clases de diseño de CoreReservas: las entidades del modelo de dominio con tipos, visibilidad y operaciones, y una clase de control por opción del menú (las mismas que aparecen en los diagramas de secuencia).\n\n- Las pantallas (boundary) no se dibujan aquí para no cargar el diagrama: hay una por opción del menú y solo hablan con su control.\n- DatosProducto, DatosCliente, DatosPedido y CambioLinea son los datos que llegan del formulario.\n- La relación cliente-factura del dominio se obtiene a través de los pedidos.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "nodes": [
+      {
+        "id": "32456d61929e",
+        "type": "class",
+        "x": 0,
+        "y": 0,
+        "label": "ControlCliente",
+        "attrs": [],
+        "ops": [
+          "+ altaCliente(tipo: String, d: DatosCliente): Cliente",
+          "+ modificarCliente(codigo: int, d: DatosCliente): void",
+          "+ bajaCliente(codigo: int): void"
+        ],
+        "stereotype": "control",
+        "color": "#2E8B7A"
+      },
+      {
+        "id": "3998187cd0d0",
+        "type": "class",
+        "x": 360,
+        "y": 0,
+        "label": "ControlPedido",
+        "attrs": [],
+        "ops": [
+          "+ altaPedido(codCliente: int, d: DatosPedido): Pedido",
+          "+ confirmarPedido(numero: int): void",
+          "+ modificarPedido(numero: int, d: DatosPedido): void",
+          "+ cambiarEstado(numero: int, e: EstadoPedido): void",
+          "+ anularPedido(numero: int): void"
+        ],
+        "stereotype": "control",
+        "color": "#2E8B7A"
+      },
+      {
+        "id": "2d238ec9d24b",
+        "type": "class",
+        "x": 720,
+        "y": 0,
+        "label": "ControlDetallePedido",
+        "attrs": [],
+        "ops": [
+          "+ cargarPedido(numero: int): Pedido",
+          "+ aplicarCambios(numero: int, c: List<CambioLinea>): void",
+          "- validar(c: List<CambioLinea>): boolean"
+        ],
+        "stereotype": "control",
+        "color": "#2E8B7A"
+      },
+      {
+        "id": "9ff725ca614b",
+        "type": "class",
+        "x": 1080,
+        "y": 0,
+        "label": "ControlProducto",
+        "attrs": [],
+        "ops": [
+          "+ altaProducto(d: DatosProducto): Producto",
+          "+ modificarProducto(codigo: int, d: DatosProducto): void",
+          "- validar(d: DatosProducto): boolean"
+        ],
+        "stereotype": "control",
+        "color": "#2E8B7A"
+      },
+      {
+        "id": "c99aa08a07f8",
+        "type": "class",
+        "x": 0,
+        "y": 270,
+        "label": "Cliente",
+        "attrs": [
+          "- codigo: int",
+          "- nombre: String",
+          "- telefono: String",
+          "- email: String",
+          "- domicilio: String",
+          "- activo: boolean"
+        ],
+        "ops": [
+          "+ getDocumentoFiscal(): String {abstract}",
+          "+ actualizar(d: DatosCliente): void",
+          "+ tienePedidos(): boolean",
+          "+ darDeBaja(): void"
+        ],
+        "abstract": true
+      },
+      {
+        "id": "a06cc975ae74",
+        "type": "class",
+        "x": 360,
+        "y": 270,
+        "label": "Pedido",
+        "attrs": [
+          "- numero: int",
+          "- fechaAlta: Date",
+          "- estado: EstadoPedido",
+          "- observaciones: String"
+        ],
+        "ops": [
+          "+ confirmar(): void",
+          "+ esModificable(): boolean",
+          "+ actualizar(d: DatosPedido): void",
+          "+ actualizarLineas(c: List<CambioLinea>): void",
+          "+ marcarFacturado(f: Factura): void",
+          "+ marcarEnviado(): void",
+          "+ cerrar(): void",
+          "+ anular(): void",
+          "+ calcularTotal(): double"
+        ]
+      },
+      {
+        "id": "962ebff9c04e",
+        "type": "class",
+        "x": 760,
+        "y": 300,
+        "label": "LineaPedido",
+        "attrs": [
+          "- cantidad: int",
+          "- precioUnitario: double"
+        ],
+        "ops": [
+          "+ subtotal(): double"
+        ]
+      },
+      {
+        "id": "a5ab827c90c5",
+        "type": "class",
+        "x": 1080,
+        "y": 270,
+        "label": "Producto",
+        "attrs": [
+          "- codigo: int",
+          "- nombre: String",
+          "- variedad: String",
+          "- anada: int",
+          "- formatoMl: int",
+          "- precio: double",
+          "- activo: boolean"
+        ],
+        "ops": [
+          "+ actualizar(d: DatosProducto): void",
+          "+ desactivar(): void"
+        ]
+      },
+      {
+        "id": "652fd4b143b9",
+        "type": "class",
+        "x": -60,
+        "y": 690,
+        "label": "ClienteResidencial",
+        "attrs": [
+          "- nif: String",
+          "- apellidos: String"
+        ],
+        "ops": [
+          "+ getDocumentoFiscal(): String"
+        ]
+      },
+      {
+        "id": "d062756eacd6",
+        "type": "class",
+        "x": 180,
+        "y": 690,
+        "label": "ClienteIndustrial",
+        "attrs": [
+          "- cif: String",
+          "- razonSocial: String",
+          "- personaContacto: String"
+        ],
+        "ops": [
+          "+ getDocumentoFiscal(): String"
+        ]
+      },
+      {
+        "id": "df2a9adbf69e",
+        "type": "class",
+        "x": 430,
+        "y": 690,
+        "label": "Factura",
+        "attrs": [
+          "- numero: String",
+          "- fecha: Date",
+          "- baseImponible: double",
+          "- iva: double",
+          "- total: double"
+        ],
+        "ops": [
+          "+ calcularImportes(): void",
+          "+ imprimir(): void"
+        ]
+      },
+      {
+        "id": "10ec28bf4393",
+        "type": "class",
+        "x": 720,
+        "y": 690,
+        "label": "ControlFactura",
+        "attrs": [],
+        "ops": [
+          "+ pedidosPendientes(codCliente: int): List<Pedido>",
+          "+ generarFactura(p: List<Pedido>): Factura"
+        ],
+        "stereotype": "control",
+        "color": "#2E8B7A"
+      },
+      {
+        "id": "d7105ae2272c",
+        "type": "enum",
+        "x": 1100,
+        "y": 640,
+        "label": "EstadoPedido",
+        "stereotype": "enumeration",
+        "attrs": [
+          "RESERVADO",
+          "CONFIRMADO",
+          "FACTURADO",
+          "ENVIADO",
+          "CERRADO",
+          "ANULADO"
+        ],
+        "ops": []
+      }
+    ],
+    "edges": [
+      {
+        "id": "b663a0895668",
+        "type": "association",
+        "from": "c99aa08a07f8",
+        "to": "a06cc975ae74",
+        "fromLabel": "1",
+        "toLabel": "0..*"
+      },
+      {
+        "id": "7c8d50e62b07",
+        "type": "composition",
+        "from": "a06cc975ae74",
+        "to": "962ebff9c04e",
+        "fromLabel": "1",
+        "toLabel": "1..*"
+      },
+      {
+        "id": "1edfdf381290",
+        "type": "directed",
+        "from": "962ebff9c04e",
+        "to": "a5ab827c90c5",
+        "fromLabel": "0..*",
+        "toLabel": "1"
+      },
+      {
+        "id": "766bebb44b5f",
+        "type": "association",
+        "from": "df2a9adbf69e",
+        "to": "a06cc975ae74",
+        "fromLabel": "0..1",
+        "toLabel": "1..*"
+      },
+      {
+        "id": "13207d0d640a",
+        "type": "generalization",
+        "from": "652fd4b143b9",
+        "to": "c99aa08a07f8"
+      },
+      {
+        "id": "99d7723e8f74",
+        "type": "generalization",
+        "from": "d062756eacd6",
+        "to": "c99aa08a07f8"
+      },
+      {
+        "id": "93cdb26d4607",
+        "type": "dependency",
+        "from": "a06cc975ae74",
+        "to": "d7105ae2272c"
+      },
+      {
+        "id": "ab7b05b6042b",
+        "type": "dependency",
+        "from": "9ff725ca614b",
+        "to": "a5ab827c90c5"
+      },
+      {
+        "id": "e5f5c6e4d52c",
+        "type": "dependency",
+        "from": "32456d61929e",
+        "to": "c99aa08a07f8"
+      },
+      {
+        "id": "4b9ae30c33f0",
+        "type": "dependency",
+        "from": "3998187cd0d0",
+        "to": "a06cc975ae74"
+      },
+      {
+        "id": "60900c8c9307",
+        "type": "dependency",
+        "from": "2d238ec9d24b",
+        "to": "a06cc975ae74"
+      },
+      {
+        "id": "6a0b1ff86a26",
+        "type": "dependency",
+        "from": "10ec28bf4393",
+        "to": "df2a9adbf69e"
+      }
+    ],
+    "routing": "orthogonal"
+  }
+}

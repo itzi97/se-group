@@ -1,0 +1,291 @@
+{
+  "format": "se-ramify/1",
+  "id": "56c2829644f9",
+  "kind": "sequence",
+  "title": "Secuencia — Cliente (CU-03)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. CU-03 Gestionar cliente. Operaciones: alta, modificar y baja.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "participants": [
+      {
+        "id": "890129866a24",
+        "name": "Personal",
+        "kind": "actor"
+      },
+      {
+        "id": "e4d85b4e59b7",
+        "name": ":PantallaCliente",
+        "kind": "boundary"
+      },
+      {
+        "id": "5e349e061c49",
+        "name": ":ControlCliente",
+        "kind": "control"
+      },
+      {
+        "id": "055418701cb5",
+        "name": ":Cliente",
+        "kind": "entity"
+      },
+      {
+        "id": "4006beb1aab5",
+        "name": "BD",
+        "kind": "database"
+      }
+    ],
+    "items": [
+      {
+        "id": "add891e061bf",
+        "t": "open",
+        "op": "alt",
+        "guard": "Alta"
+      },
+      {
+        "id": "a628dbea9717",
+        "t": "msg",
+        "from": "890129866a24",
+        "to": "e4d85b4e59b7",
+        "text": "alta(tipo, datos, domicilio)",
+        "style": "sync"
+      },
+      {
+        "id": "e59f7089350f",
+        "t": "msg",
+        "from": "e4d85b4e59b7",
+        "to": "5e349e061c49",
+        "text": "altaCliente(tipo, datos)",
+        "style": "sync"
+      },
+      {
+        "id": "23325bc3f253",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "4006beb1aab5",
+        "text": "existeDocumento(nifCif)",
+        "style": "sync"
+      },
+      {
+        "id": "b917429090a3",
+        "t": "msg",
+        "from": "4006beb1aab5",
+        "to": "5e349e061c49",
+        "text": "existe",
+        "style": "reply"
+      },
+      {
+        "id": "695eddd254f6",
+        "t": "open",
+        "op": "alt",
+        "guard": "no existe"
+      },
+      {
+        "id": "811b5325fda9",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "055418701cb5",
+        "text": "new ClienteResidencial | ClienteIndustrial(datos)",
+        "style": "create"
+      },
+      {
+        "id": "1d414d5558f8",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "4006beb1aab5",
+        "text": "guardar(cliente)",
+        "style": "sync"
+      },
+      {
+        "id": "6f7f9f93fcec",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "e4d85b4e59b7",
+        "text": "cliente dado de alta",
+        "style": "reply"
+      },
+      {
+        "id": "9e5b8f28b733",
+        "t": "else",
+        "guard": "ya existe"
+      },
+      {
+        "id": "dd6f2037529c",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "e4d85b4e59b7",
+        "text": "aviso: NIF o CIF repetido",
+        "style": "reply"
+      },
+      {
+        "id": "eb1befca9a06",
+        "t": "close"
+      },
+      {
+        "id": "b1357c70aa47",
+        "t": "else",
+        "guard": "Modificar"
+      },
+      {
+        "id": "41995b927d77",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-07 Buscar cliente"
+      },
+      {
+        "id": "ca6c41d4a1b4",
+        "t": "close"
+      },
+      {
+        "id": "491e07525cd4",
+        "t": "msg",
+        "from": "890129866a24",
+        "to": "e4d85b4e59b7",
+        "text": "modificar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "384b91d3ad02",
+        "t": "msg",
+        "from": "e4d85b4e59b7",
+        "to": "5e349e061c49",
+        "text": "modificarCliente(codigo, datos)",
+        "style": "sync"
+      },
+      {
+        "id": "0c396530b528",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "055418701cb5",
+        "text": "actualizar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "aa0309f14daf",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "4006beb1aab5",
+        "text": "guardar(cliente)",
+        "style": "sync"
+      },
+      {
+        "id": "ebd8a4443026",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "e4d85b4e59b7",
+        "text": "cambios guardados",
+        "style": "reply"
+      },
+      {
+        "id": "4f788ba1d8c8",
+        "t": "else",
+        "guard": "Baja"
+      },
+      {
+        "id": "e38cdef5b652",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-07 Buscar cliente"
+      },
+      {
+        "id": "f0e6d71d0e0b",
+        "t": "close"
+      },
+      {
+        "id": "bc237eb610d6",
+        "t": "msg",
+        "from": "890129866a24",
+        "to": "e4d85b4e59b7",
+        "text": "baja()",
+        "style": "sync"
+      },
+      {
+        "id": "08b6dd824c95",
+        "t": "msg",
+        "from": "e4d85b4e59b7",
+        "to": "5e349e061c49",
+        "text": "bajaCliente(codigo)",
+        "style": "sync"
+      },
+      {
+        "id": "833eb12e609d",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "055418701cb5",
+        "text": "tienePedidos()",
+        "style": "sync"
+      },
+      {
+        "id": "d959db4a6445",
+        "t": "msg",
+        "from": "055418701cb5",
+        "to": "5e349e061c49",
+        "text": "sí / no",
+        "style": "reply"
+      },
+      {
+        "id": "80f5a9af6a80",
+        "t": "open",
+        "op": "alt",
+        "guard": "sin pedidos"
+      },
+      {
+        "id": "5b04e8b72ad8",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "4006beb1aab5",
+        "text": "eliminar(cliente)",
+        "style": "sync"
+      },
+      {
+        "id": "4fe904558685",
+        "t": "else",
+        "guard": "con pedidos (supuesto S-03)"
+      },
+      {
+        "id": "444d0acc14e4",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "055418701cb5",
+        "text": "darDeBaja()",
+        "style": "sync"
+      },
+      {
+        "id": "f358bb2aa258",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "4006beb1aab5",
+        "text": "guardar(cliente)",
+        "style": "sync"
+      },
+      {
+        "id": "d9df5dc51f81",
+        "t": "close"
+      },
+      {
+        "id": "177f4477cf60",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "e4d85b4e59b7",
+        "text": "cliente dado de baja",
+        "style": "reply"
+      },
+      {
+        "id": "c214b3a3c357",
+        "t": "close"
+      },
+      {
+        "id": "65a4b426aba3",
+        "t": "msg",
+        "from": "e4d85b4e59b7",
+        "to": "890129866a24",
+        "text": "mostrarResultado()",
+        "style": "reply"
+      }
+    ],
+    "activations": true,
+    "autonumber": true
+  }
+}

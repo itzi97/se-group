@@ -1,0 +1,197 @@
+{
+  "format": "se-ramify/1",
+  "id": "a8354b838a11",
+  "kind": "sequence",
+  "title": "Secuencia — Factura (CU-06)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. CU-06 Generar factura. Una factura agrupa uno o varios pedidos confirmados del mismo cliente; se guarda y se imprime.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "participants": [
+      {
+        "id": "2c44a0154b92",
+        "name": "Personal",
+        "kind": "actor"
+      },
+      {
+        "id": "b46fdadbb4b0",
+        "name": ":PantallaFactura",
+        "kind": "boundary"
+      },
+      {
+        "id": "d464d6bcca96",
+        "name": ":ControlFactura",
+        "kind": "control"
+      },
+      {
+        "id": "4d51433fa3c8",
+        "name": ":Pedido",
+        "kind": "entity"
+      },
+      {
+        "id": "06f18b488a76",
+        "name": ":Factura",
+        "kind": "entity"
+      },
+      {
+        "id": "1328e673df05",
+        "name": "BD",
+        "kind": "database"
+      }
+    ],
+    "items": [
+      {
+        "id": "4347aed6f5d2",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-07 Buscar cliente"
+      },
+      {
+        "id": "6c93dff3f408",
+        "t": "close"
+      },
+      {
+        "id": "07e331171fa9",
+        "t": "msg",
+        "from": "b46fdadbb4b0",
+        "to": "d464d6bcca96",
+        "text": "pedidosPendientes(codCliente)",
+        "style": "sync"
+      },
+      {
+        "id": "e686636840fd",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "1328e673df05",
+        "text": "buscarPedidos(cliente, CONFIRMADO)",
+        "style": "sync"
+      },
+      {
+        "id": "48e3e6a193f8",
+        "t": "msg",
+        "from": "1328e673df05",
+        "to": "d464d6bcca96",
+        "text": "pedidos",
+        "style": "reply"
+      },
+      {
+        "id": "23856d454139",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "b46fdadbb4b0",
+        "text": "pedidos confirmados con su detalle",
+        "style": "reply"
+      },
+      {
+        "id": "57490f058f29",
+        "t": "msg",
+        "from": "2c44a0154b92",
+        "to": "b46fdadbb4b0",
+        "text": "facturar(pedidos)",
+        "style": "sync"
+      },
+      {
+        "id": "fc9d462c37d2",
+        "t": "msg",
+        "from": "b46fdadbb4b0",
+        "to": "d464d6bcca96",
+        "text": "generarFactura(pedidos)",
+        "style": "sync"
+      },
+      {
+        "id": "c3c887d29120",
+        "t": "open",
+        "op": "alt",
+        "guard": "al menos un pedido confirmado con líneas"
+      },
+      {
+        "id": "487dcab8a9f9",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "06f18b488a76",
+        "text": "new(cliente, pedidos)",
+        "style": "create"
+      },
+      {
+        "id": "8d8bd16aeaaa",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "06f18b488a76",
+        "text": "calcularImportes()",
+        "style": "sync"
+      },
+      {
+        "id": "35e349f5e596",
+        "t": "open",
+        "op": "loop",
+        "guard": "para cada pedido"
+      },
+      {
+        "id": "37eeeb6ffe6f",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "4d51433fa3c8",
+        "text": "marcarFacturado(factura)",
+        "style": "sync"
+      },
+      {
+        "id": "128934e16587",
+        "t": "close"
+      },
+      {
+        "id": "f74b33e46161",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "1328e673df05",
+        "text": "guardar(factura, pedidos)",
+        "style": "sync"
+      },
+      {
+        "id": "e41bb0f1d8c2",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "06f18b488a76",
+        "text": "imprimir()",
+        "style": "sync"
+      },
+      {
+        "id": "1e3547eaf5c9",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "b46fdadbb4b0",
+        "text": "factura nº",
+        "style": "reply"
+      },
+      {
+        "id": "f6053999fe67",
+        "t": "else",
+        "guard": "ningún pedido se puede facturar"
+      },
+      {
+        "id": "cde63b928286",
+        "t": "msg",
+        "from": "d464d6bcca96",
+        "to": "b46fdadbb4b0",
+        "text": "aviso",
+        "style": "reply"
+      },
+      {
+        "id": "0b3a68926a49",
+        "t": "close"
+      },
+      {
+        "id": "3dfa22e4ac11",
+        "t": "msg",
+        "from": "b46fdadbb4b0",
+        "to": "2c44a0154b92",
+        "text": "mostrarResultado()",
+        "style": "reply"
+      }
+    ],
+    "activations": true,
+    "autonumber": true
+  }
+}

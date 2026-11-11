@@ -1,0 +1,21 @@
+{
+  "format": "se-ramify/1",
+  "id": "dbb3e0269d89",
+  "kind": "vision",
+  "title": "Visión — AñadaMaster (elevator pitch)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · Visión del producto con la plantilla del elevator pitch (Tema 5, Moore).",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "forWho": "Bodegas Viña Alcorza, una bodega familiar con cientos de clientes",
+    "who": "hoy gestiona sus pedidos y la entrada de uva con una aplicación en un solo ordenador que se cae a menudo, y no tiene facturación",
+    "product": "AñadaMaster",
+    "isA": "un sistema de gestión para bodegas, con dos programas: CoreReservas y CoreBodega",
+    "that": "reúne en un solo sitio los clientes, los pedidos de botellas, sus facturas y la uva que entra en vendimia, y deja constancia de quién hace cada cosa",
+    "unlike": "su aplicación actual, que para la empresa cuando falla, y que los programas de gestión genéricos o las hojas de cálculo, que no entienden de variedades, grados de azúcar ni del ciclo de un pedido de vino",
+    "ourProduct": "está hecho a la medida de su forma de trabajar, funciona aunque falle un equipo y es su primer sistema de facturación"
+  }
+}

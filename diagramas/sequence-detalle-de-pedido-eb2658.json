@@ -1,0 +1,233 @@
+{
+  "format": "se-ramify/1",
+  "id": "eb265843a2d3",
+  "kind": "sequence",
+  "title": "Secuencia — Pedido Detalle (CU-05)",
+  "project": "Entrega 2",
+  "notes": "Entrega 2 · UML. CU-05 Gestionar detalle de pedido. Operaciones: ingresar, modificar y eliminar líneas, que se aplican todas juntas con un botón.",
+  "created": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-11T18:00:00.000Z",
+  "createdBy": "Itziar",
+  "updatedBy": "Itziar",
+  "data": {
+    "participants": [
+      {
+        "id": "be36693afe92",
+        "name": "Personal",
+        "kind": "actor"
+      },
+      {
+        "id": "f602b3265d36",
+        "name": ":PantallaDetallePedido",
+        "kind": "boundary"
+      },
+      {
+        "id": "dbddd7eeba45",
+        "name": ":ControlDetallePedido",
+        "kind": "control"
+      },
+      {
+        "id": "3782375cdcac",
+        "name": ":Pedido",
+        "kind": "entity"
+      },
+      {
+        "id": "eddcce9eda5b",
+        "name": ":LineaPedido",
+        "kind": "entity"
+      },
+      {
+        "id": "b716fcb96de0",
+        "name": "BD",
+        "kind": "database"
+      }
+    ],
+    "items": [
+      {
+        "id": "356933d1998a",
+        "t": "open",
+        "op": "ref",
+        "guard": "CU-08 Buscar pedido"
+      },
+      {
+        "id": "aef8772b6afa",
+        "t": "close"
+      },
+      {
+        "id": "6bec7aa6772b",
+        "t": "msg",
+        "from": "f602b3265d36",
+        "to": "dbddd7eeba45",
+        "text": "cargarPedido(numero)",
+        "style": "sync"
+      },
+      {
+        "id": "9fce86076703",
+        "t": "msg",
+        "from": "dbddd7eeba45",
+        "to": "b716fcb96de0",
+        "text": "obtener(numero)",
+        "style": "sync"
+      },
+      {
+        "id": "fee66fd968e1",
+        "t": "msg",
+        "from": "b716fcb96de0",
+        "to": "dbddd7eeba45",
+        "text": "pedido y líneas",
+        "style": "reply"
+      },
+      {
+        "id": "eae507129d96",
+        "t": "msg",
+        "from": "dbddd7eeba45",
+        "to": "f602b3265d36",
+        "text": "líneas del pedido",
+        "style": "reply"
+      },
+      {
+        "id": "607c52c8aa9a",
+        "t": "open",
+        "op": "loop",
+        "guard": "hasta pulsar «Aplicar cambios»"
+      },
+      {
+        "id": "07cdd8bf08c0",
+        "t": "open",
+        "op": "alt",
+        "guard": "Ingresar"
+      },
+      {
+        "id": "6be3d5a4ef1d",
+        "t": "msg",
+        "from": "be36693afe92",
+        "to": "f602b3265d36",
+        "text": "anadirLinea(producto, cantidad)",
+        "style": "sync"
+      },
+      {
+        "id": "09ee566551f4",
+        "t": "else",
+        "guard": "Modificar"
+      },
+      {
+        "id": "7701dec2a6a8",
+        "t": "msg",
+        "from": "be36693afe92",
+        "to": "f602b3265d36",
+        "text": "cambiarLinea(linea, producto, cantidad)",
+        "style": "sync"
+      },
+      {
+        "id": "f0601a5b85c4",
+        "t": "else",
+        "guard": "Eliminar"
+      },
+      {
+        "id": "615ff683ed32",
+        "t": "msg",
+        "from": "be36693afe92",
+        "to": "f602b3265d36",
+        "text": "quitarLinea(linea)",
+        "style": "sync"
+      },
+      {
+        "id": "8d416be43f0e",
+        "t": "close"
+      },
+      {
+        "id": "25fd77144bf1",
+        "t": "close"
+      },
+      {
+        "id": "0e47ad05dddf",
+        "t": "msg",
+        "from": "be36693afe92",
+        "to": "f602b3265d36",
+        "text": "aplicarCambios()",
+        "style": "sync"
+      },
+      {
+        "id": "d8ce9da8bf84",
+        "t": "msg",
+        "from": "f602b3265d36",
+        "to": "dbddd7eeba45",
+        "text": "aplicarCambios(numero, cambios)",
+        "style": "sync"
+      },
+      {
+        "id": "a34dfc7506df",
+        "t": "msg",
+        "from": "dbddd7eeba45",
+        "to": "dbddd7eeba45",
+        "text": "validar(cambios)",
+        "style": "sync"
+      },
+      {
+        "id": "636f2b6062a3",
+        "t": "open",
+        "op": "alt",
+        "guard": "cantidades > 0 y productos activos"
+      },
+      {
+        "id": "b0f6b7883949",
+        "t": "msg",
+        "from": "dbddd7eeba45",
+        "to": "3782375cdcac",
+        "text": "actualizarLineas(cambios)",
+        "style": "sync"
+      },
+      {
+        "id": "d74072dad11d",
+        "t": "msg",
+        "from": "3782375cdcac",
+        "to": "eddcce9eda5b",
+        "text": "new(producto, cantidad, precio)",
+        "style": "create"
+      },
+      {
+        "id": "e3696e45f68d",
+        "t": "msg",
+        "from": "dbddd7eeba45",
+        "to": "b716fcb96de0",
+        "text": "guardar(pedido)",
+        "style": "sync"
+      },
+      {
+        "id": "bf42e3af4f70",
+        "t": "msg",
+        "from": "dbddd7eeba45",
+        "to": "f602b3265d36",
+        "text": "detalle actualizado",
+        "style": "reply"
+      },
+      {
+        "id": "6ceba5f3afe8",
+        "t": "else",
+        "guard": "datos no válidos"
+      },
+      {
+        "id": "5aff9b5cdd73",
+        "t": "msg",
+        "from": "dbddd7eeba45",
+        "to": "f602b3265d36",
+        "text": "errores",
+        "style": "reply"
+      },
+      {
+        "id": "29b094f3f0ae",
+        "t": "close"
+      },
+      {
+        "id": "261c67b40803",
+        "t": "msg",
+        "from": "f602b3265d36",
+        "to": "be36693afe92",
+        "text": "mostrarResultado()",
+        "style": "reply"
+      }
+    ],
+    "activations": true,
+    "autonumber": true
+  }
+}
