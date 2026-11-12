@@ -7,6 +7,19 @@ Fuentes: actividad de Blackboard (sync del 10 nov) · [`../Enunciado Caso Práct
 
 **Para revisar:** [`revision/COMO-REVISAR.md`](revision/COMO-REVISAR.md) (una hoja por persona).
 
+**Exposición y defensa:** en [`notas/`](notas/)
+* Guías para repasar en el ordenador, una por persona: `guia-diego.pdf`, `guia-javier.pdf`, `guia-samuel.pdf`, `guia-itziar.pdf` (qué decir en cada diapositiva, por qué está así y respuestas a posibles preguntas; fuente: `guia-exposicion.typ`)
+* Chuletas para el móvil, una por persona: `chuleta-diego.pdf`, `chuleta-javier.pdf`, `chuleta-samuel.pdf`, `chuleta-itziar.pdf`
+
+| | Exposición | Responde en la defensa |
+|---|---|---|
+| Diego | Diap. 1–9: visión, stakeholders, casos de uso, supuestos (≈ 5 min) | Visión; secuencias de Factura y CoreBodega |
+| Javier | Diap. 10–18: clases, estados, secuencias (≈ 5 min) | Clases (dominio y diseño), estados |
+| Samuel | Plan B: diap. 1–9 si no viene Diego | Casos de uso, fichas, supuestos, stakeholders |
+| Itziar | — | Secuencias de CoreReservas, decisiones generales, la E3 |
+
+**Plan B (no viene Diego):** Samuel presenta las diapositivas 1–9; las preguntas de Diego se reparten: la visión, Samuel; sus secuencias, Javier.
+
 ## Cómo se puntúa (rúbrica de Blackboard)
 
 | Parte | Peso | Dónde está |
