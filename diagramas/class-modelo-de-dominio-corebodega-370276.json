@@ -65,7 +65,7 @@
         "id": "0d176a7f35ca",
         "type": "class",
         "x": 0,
-        "y": 250,
+        "y": 200,
         "label": "RegistroOperacion",
         "attrs": [
           "fechaHora",
@@ -80,7 +80,7 @@
         "id": "0fe2ac17fb1e",
         "type": "enum",
         "x": 0,
-        "y": 470,
+        "y": 390,
         "label": "TipoOperacion",
         "stereotype": "enumeration",
         "attrs": [
@@ -94,7 +94,7 @@
         "id": "6088070ab810",
         "type": "class",
         "x": 300,
-        "y": 250,
+        "y": 200,
         "label": "Empleado",
         "attrs": [
           "codigoEmpresa",
@@ -114,7 +114,7 @@
         "id": "c52cc8ea310a",
         "type": "class",
         "x": 230,
-        "y": 560,
+        "y": 450,
         "label": "Administrador",
         "attrs": [],
         "ops": []
@@ -123,7 +123,7 @@
         "id": "efa5babcce3e",
         "type": "class",
         "x": 430,
-        "y": 560,
+        "y": 450,
         "label": "Personal",
         "attrs": [],
         "ops": []

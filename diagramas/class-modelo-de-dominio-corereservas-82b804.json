@@ -65,7 +65,7 @@
         "id": "ef1d4832d4f4",
         "type": "class",
         "x": 490,
-        "y": 215,
+        "y": 170,
         "label": "Producto",
         "attrs": [
           "codigo",
@@ -82,7 +82,7 @@
         "id": "7f5432407a9e",
         "type": "class",
         "x": 240,
-        "y": 250,
+        "y": 200,
         "label": "Cliente",
         "attrs": [
           "codigo",
@@ -99,7 +99,7 @@
         "id": "b4d1f77142ad",
         "type": "enum",
         "x": 0,
-        "y": 215,
+        "y": 180,
         "label": "EstadoPedido",
         "stereotype": "enumeration",
         "attrs": [
@@ -116,7 +116,7 @@
         "id": "e9ae12f4068f",
         "type": "class",
         "x": 110,
-        "y": 500,
+        "y": 420,
         "label": "ClienteResidencial",
         "attrs": [
           "nif",
@@ -128,7 +128,7 @@
         "id": "9bba41f9513f",
         "type": "class",
         "x": 350,
-        "y": 500,
+        "y": 420,
         "label": "ClienteIndustrial",
         "attrs": [
           "cif",

@@ -4,9 +4,9 @@
   "kind": "state",
   "title": "Diagrama de estados — Pedido",
   "project": "Entrega 2",
-  "notes": "Entrega 2 · UML (complemento). Ciclo de vida de un pedido, acordado con el cliente el 16/10: reservado › confirmado › facturado › enviado › cerrado. Solo se puede anular (y modificar) antes de facturar.",
+  "notes": "Entrega 2 · UML (complemento). Ciclo de vida de un pedido, acordado con el cliente el 16/10: reservado › confirmado › facturado › enviado › cerrado. Solo se puede anular (y modificar) antes de facturar. Dos estados finales: uno para los pedidos anulados y otro para los cerrados.",
   "created": "2026-11-11T18:00:00.000Z",
-  "updated": "2026-11-12T10:00:00.000Z",
+  "updated": "2026-11-12T12:00:00.000Z",
   "createdBy": "Itziar",
   "updatedBy": "Itziar",
   "data": {
@@ -14,15 +14,15 @@
       {
         "id": "b21357d07d0a",
         "type": "initial",
-        "x": 0,
-        "y": 130,
+        "x": -60,
+        "y": 108,
         "label": ""
       },
       {
         "id": "b62ef27ec4e1",
         "type": "state",
-        "x": 100,
-        "y": 100,
+        "x": 60,
+        "y": 80,
         "label": "Reservado",
         "attrs": [
           "entry / guardar con fecha de alta"
@@ -31,15 +31,15 @@
       {
         "id": "711c9a29f947",
         "type": "state",
-        "x": 390,
-        "y": 100,
+        "x": 330,
+        "y": 80,
         "label": "Confirmado"
       },
       {
         "id": "fd8b21bdabf9",
         "type": "state",
-        "x": 650,
-        "y": 100,
+        "x": 590,
+        "y": 80,
         "label": "Facturado",
         "attrs": [
           "entry / guardar e imprimir factura"
@@ -48,29 +48,36 @@
       {
         "id": "9a51c148b7cf",
         "type": "state",
-        "x": 690,
-        "y": 300,
+        "x": 610,
+        "y": 280,
         "label": "Enviado"
       },
       {
         "id": "e1fe3dfc1193",
         "type": "state",
-        "x": 420,
-        "y": 300,
+        "x": 610,
+        "y": 450,
         "label": "Cerrado"
       },
       {
         "id": "405fd80f972b",
         "type": "state",
-        "x": 150,
-        "y": 300,
+        "x": 200,
+        "y": 290,
         "label": "Anulado"
       },
       {
         "id": "f34c95b498cd",
         "type": "final",
-        "x": 300,
-        "y": 430,
+        "x": 240,
+        "y": 450,
+        "label": ""
+      },
+      {
+        "id": "f24c95b498cd",
+        "type": "final",
+        "x": 830,
+        "y": 458,
         "label": ""
       }
     ],
@@ -142,7 +149,7 @@
         "id": "51b17f86c4b2",
         "type": "transition",
         "from": "e1fe3dfc1193",
-        "to": "f34c95b498cd"
+        "to": "f24c95b498cd"
       },
       {
         "id": "aae27e8e49f1",
