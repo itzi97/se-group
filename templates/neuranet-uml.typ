@@ -96,7 +96,7 @@
   place(center + horizon, box(fill: bg, inset: (x: 1.5pt, y: 1pt), text(size: size, fill: fill, body))))
 
 // ============================================================ clases y estados
-#let _graph(d, size, unit, avail, max-scale, max-height) = {
+#let _graph(d, size, unit, avail, max-scale, max-height, compact: true) = {
   let nodes = d.data.nodes
   let edges = d.data.edges
   let S = size / 1pt
@@ -171,6 +171,62 @@
       let m = measure(c)
       contents.insert(n.id, c)
       boxes.insert(n.id, (x: n.x * unit, y: n.y * unit, w: m.width / 1pt, h: m.height / 1pt))
+    }
+  }
+  // ---- compactar: acercar las cajas todo lo posible (por separado en x y en y)
+  // dejando solo el hueco que necesitan las líneas y sus etiquetas ----
+  if compact {
+    let ids = boxes.keys()
+    let raw = (:)
+    for n in nodes { if n.id in boxes { raw.insert(n.id, (x: n.x, y: n.y)) } }
+    // hueco mínimo entre dos cajas unidas: lo que mida su etiqueta (o las multiplicidades)
+    let linked = (:)
+    for e in edges {
+      let lw = measure(text(size: size * 0.9, e.at("label", default: ""))).width / 1pt + S * 3
+      for k in (e.from + "|" + e.to, e.to + "|" + e.from) { linked.insert(k, calc.max(linked.at(k, default: 0), lw)) }
+    }
+    let selfloop = edges.filter(e => e.from == e.to).map(e => e.from)
+    let gx(a, b) = { let k = a + "|" + b; if k in linked { calc.max(S * 7, linked.at(k)) } else { S * 3.5 } }
+    let gy(a, b) = if (a + "|" + b) in linked { S * 7.5 } else { S * 2.6 }
+    // 1) vertical: cada caja sube hasta la de encima con la que coincide en horizontal
+    let fin = (:)
+    for id in ids.sorted(key: id => raw.at(id).y) {
+      let b = boxes.at(id)
+      let x0 = raw.at(id).x * unit; let x1 = x0 + b.w
+      let top = if id in selfloop { S * 3.2 } else { 0 }
+      for (m, f) in fin {
+        let mb = boxes.at(m); let mx0 = raw.at(m).x * unit
+        let below-linked = (m + "|" + id) in linked and raw.at(id).y > raw.at(m).y + 40
+        if below-linked or (mx0 < x1 + S * 2 and x0 < mx0 + mb.w + S * 2) {
+          top = calc.max(top, f.y + mb.h + gy(m, id) + (if id in selfloop { S * 3.2 } else { 0 }))
+        }
+      }
+      fin.insert(id, (x: 0, y: top))
+    }
+    // 2) horizontal: cada caja se arrima a la de su izquierda con la que coincide en vertical
+    let placed = (:)
+    let xkey(id) = {
+      let p = edges.find(e => e.type == "generalization" and e.from == id)
+      if p != none and p.to in raw and raw.at(id).x >= raw.at(p.to).x - 100 { calc.max(raw.at(id).x, raw.at(p.to).x + 1) } else { raw.at(id).x }
+    }
+    for id in ids.sorted(key: xkey) {
+      let b = boxes.at(id); let y0 = fin.at(id).y; let y1 = y0 + b.h
+      let left = 0
+      for (m, f) in placed {
+        let mb = boxes.at(m)
+        if fin.at(m).y < y1 + S * 1.5 and y0 < fin.at(m).y + mb.h + S * 1.5 {
+          left = calc.max(left, f + mb.w + gx(m, id))
+        }
+      }
+      // una subclase no se queda a la izquierda de su clase padre
+      for e in edges.filter(e => e.type == "generalization" and e.from == id and e.to in placed) {
+        if raw.at(id).x >= raw.at(e.to).x - 100 { left = calc.max(left, placed.at(e.to)) }
+      }
+      placed.insert(id, left)
+    }
+    for id in ids {
+      let b = boxes.at(id)
+      boxes.insert(id, (x: placed.at(id), y: fin.at(id).y, w: b.w, h: b.h))
     }
   }
   // paquetes y estados compuestos: rodean los nodos que tienen dentro
@@ -258,11 +314,11 @@
   _fit(W, H, avail, max-scale, max-height, drawing)
 }
 
-#let class-diagram(d, size: 7.6pt, unit: 0.72, max-scale: 1.6, max-height: none) = layout(avail => context
+#let class-diagram(d, size: 7.6pt, unit: 0.72, max-scale: 2.0, max-height: none) = layout(avail => context
   _graph(d, size, unit, avail, max-scale, max-height))
 
-#let state-diagram(d, size: 8.5pt, unit: 0.72, max-scale: 1.5, max-height: none) = layout(avail => context
-  _graph(d, size, unit, avail, max-scale, max-height))
+#let state-diagram(d, size: 8.5pt, unit: 0.72, max-scale: 2.2, max-height: none) = layout(avail => context
+  _graph(d, size, unit, avail, max-scale, max-height, compact: false))
 
 // Leyenda de la notación de clases (relaciones)
 #let class-legend(size: 7.5pt) = {
@@ -391,7 +447,7 @@
 
   // ---- recorrido: posiciones verticales ----
   let y = hh + S * 2.2
-  let row = S * 2.9
+  let row = S * 2.35
   let frames = ()     // (i, lo, hi, depth, y0, y1, op, guard, elses)
   let fstack = ()     // índices en frames
   let msgs = ()       // (i, y)
@@ -431,19 +487,19 @@
       if selfm { y += S * 1.6 }
     } else if it.t == "open" {
       if it.op == "ref" {
-        y += S * 1.6
-        frames.push((i: i, depth: fstack.len(), y0: y, y1: y + S * 3.2, op: "ref", guard: it.guard, elses: ()))
+        y += S * 1.1
+        frames.push((i: i, depth: fstack.len(), y0: y, y1: y + S * 2.6, op: "ref", guard: it.guard, elses: ()))
         fstack.push(frames.len() - 1)
-        y += S * 3.2
+        y += S * 2.6
       } else {
-        y += S * 1.6
+        y += S * 1.2
         frames.push((i: i, depth: fstack.len(), y0: y, y1: 0, op: it.op, guard: it.guard, elses: ()))
         fstack.push(frames.len() - 1)
         snaps.push(call)
-        y += S * 1.9
+        y += S * 1.6
       }
     } else if it.t == "else" {
-      y += S * 1.6
+      y += S * 1.2
       let f = fstack.last()
       let fr = frames.at(f)
       fr.elses.push((y: y, guard: it.guard))
@@ -452,12 +508,12 @@
       let snap = snaps.last()
       while call.len() > snap.len() { let c = call.pop()
         if parts.at(col.at(c.p)).kind != "actor" { acts.push((col.at(c.p), c.y, y - S * 0.4, c.d)) } }
-      y += S * 1.9
+      y += S * 1.6
     } else if it.t == "close" {
       let f = fstack.pop()
       let fr = frames.at(f)
       if fr.op != "ref" {
-        y += S * 1.2
+        y += S * 0.9
         fr.y1 = y
         frames.at(f) = fr
         let snap = snaps.pop()
@@ -710,4 +766,52 @@
   let n1 = a.filter(it => it.t == "msg").len()
   let with-items(its) = { let dd = d; let data = d.data; data.items = its; dd.data = data; dd }
   (with-items(a), with-items(b), n1)
+}
+
+// Parte una secuencia por la mitad (o por el mensaje `at`): la primera parte
+// cierra los fragmentos que quedan abiertos y la segunda los vuelve a abrir
+// con «(sigue)». Sirve para ponerla en dos columnas en una diapositiva.
+#let halve-sequence(d, at: auto) = {
+  let items = d.data.items
+  let msgs = items.enumerate().filter(((i, it)) => it.t == "msg").map(((i, it)) => i)
+  // punto de corte: el mensaje más cercano a la mitad con menos fragmentos abiertos
+  let depth-at = (:)
+  let stack = ()
+  for (i, it) in items.enumerate() {
+    depth-at.insert(str(i), stack.len())
+    if it.t == "open" { stack.push(it) } else if it.t == "close" and stack.len() > 0 { let _ = stack.pop() }
+  }
+  let mid = msgs.at(calc.quo(msgs.len(), 2))
+  let cut = if at != auto { at } else {
+    // alto aproximado de cada elemento (mensajes y fragmentos), para cortar por la mitad del alto
+    let h(it) = if it.t == "msg" { 3 } else if it.t == "note" { 4 } else if it.t == "open" and it.op == "ref" { 5 } else { 2 }
+    let total = items.map(h).sum()
+    let acc = 0
+    let before = (:)
+    for (i, it) in items.enumerate() { before.insert(str(i), acc); acc += h(it) }
+    let score(i) = calc.abs(before.at(str(i)) - total / 2) + depth-at.at(str(i)) * 2
+    let best = msgs.at(0)
+    for i in msgs { if score(i) < score(best) and items.at(i).style != "reply" { best = i } }
+    best
+  }
+  let open = ()
+  for it in items.slice(0, cut) {
+    if it.t == "open" { open.push(it) }
+    else if it.t == "close" and open.len() > 0 { let _ = open.pop() }
+    else if it.t == "else" and open.len() > 0 { let o = open.pop(); o.guard = it.guard; open.push(o) }
+  }
+  let a = items.slice(0, cut) + open.map(o => (id: "c", t: "close"))
+  let b = open.map(o => (id: "o", t: "open", op: o.op, guard: o.guard + " (sigue)")) + items.slice(cut)
+  let n1 = a.filter(it => it.t == "msg").len()
+  let with-items(its) = { let dd = d; let data = d.data; data.items = its; dd.data = data; dd }
+  (with-items(a), with-items(b), n1)
+}
+
+// Secuencia en dos columnas (para diapositivas): mismo tamaño en las dos
+#let sequence-two-columns(d, size: 8.5pt, gutter: 1.2cm) = {
+  let (a, b, n) = halve-sequence(d)
+  grid(columns: 2, column-gutter: gutter, align: top,
+    sequence-diagram(a, size: size, max-scale: none),
+    grid.vline(stroke: (paint: hairline, dash: "dashed")),
+    sequence-diagram(b, size: size, max-scale: none, number-from: n + 1))
 }

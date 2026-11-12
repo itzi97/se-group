@@ -135,21 +135,7 @@
   #text(size: 17pt)[Pantalla → control → entidades → base de datos. Todas las operaciones en fragmentos `alt`.]
 ]
 
-#slide(title: [Ejemplo: Factura (CU-06)])[
-  #diagrama-y-notas(ratio: (1.9fr, 1fr), sequence-diagram(secuencias.at(4).d, max-scale: none, size: 9pt), [
-    - Se buscan los pedidos *confirmados* del cliente
-    - La factura junta *uno o varios* y calcula importes
-    - Cada pedido pasa a *facturado*
-    - Se guarda e *imprime*
-  ])
-]
-#slide(title: [Ejemplo: Detalle Materia Prima (CU-22)])[
-  #diagrama-y-notas(ratio: (2.2fr, 1fr), sequence-diagram(secuencias.at(6).d, max-scale: none, size: 9pt), [
-    - Una línea por *variedad* del remolque
-    - Cada línea se compara con el *grado mínimo*
-    - Si no llega, la uva va a *abono*
-    - Queda *registrado* quién lo hizo
-  ])
-]
+#slide(title: [Ejemplo: Factura (CU-06)], fit: true)[#sequence-two-columns(secuencias.at(4).d)]
+#slide(title: [Ejemplo: Detalle Materia Prima (CU-22)], fit: true)[#sequence-diagram(secuencias.at(6).d, max-scale: none, size: 9pt)]
 
 #focus-slide[Gracias \ #text(size: 22pt, weight: 500, fill: chispa)[Soluciones de IA a tu medida]]

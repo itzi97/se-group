@@ -105,6 +105,7 @@ Estas son las dudas que quedaron abiertas en la reunión y lo que hemos supuesto
 
 #tabla-supuestos()
 
+#pagebreak()
 = Modelo de dominio
 
 El modelo de dominio recoge los conceptos de vuestro negocio y cómo se relacionan: qué datos tiene un pedido, a quién pertenece, qué lleva dentro… Todavía no habla de programación, por eso no lleva tipos de datos ni operaciones.
@@ -113,7 +114,7 @@ El modelo de dominio recoge los conceptos de vuestro negocio y cómo se relacion
 
 == CoreReservas
 
-#figure(class-diagram(dominio-reservas, max-height: 14cm), caption: [Modelo de dominio de CoreReservas.])
+#figure(class-diagram(dominio-reservas, max-height: 17cm), caption: [Modelo de dominio de CoreReservas.])
 
 - Un *cliente* es residencial (con NIF) o industrial (con CIF y razón social). Por eso hay una clase para cada tipo, y las dos comparten lo común.
 - Un *pedido* es de un cliente y tiene una o más *líneas*. Cada línea es un vino y una cantidad, y guarda el precio del momento, para que un cambio de precio no altere los pedidos antiguos. Si se borra el pedido, se borran sus líneas.
@@ -122,7 +123,7 @@ El modelo de dominio recoge los conceptos de vuestro negocio y cómo se relacion
 
 == CoreBodega
 
-#figure(class-diagram(dominio-bodega, max-height: 14cm), caption: [Modelo de dominio de CoreBodega.])
+#figure(class-diagram(dominio-bodega, max-height: 17cm), caption: [Modelo de dominio de CoreBodega.])
 
 - La *materia prima* es la entrada de un remolque. Su *detalle* son las líneas, una por variedad, con el peso y el grado de azúcar (S-05).
 - Cada *variedad* tiene su grado mínimo. Si una línea no llega, se marca como no aceptada y esa uva va a abono.
@@ -148,7 +149,7 @@ Las pantallas no aparecen en estos diagramas para no cargarlos: hay una por opci
 
 Un pedido pasa por varios estados desde que el cliente llama hasta que lo recibe. El diagrama recoge lo acordado en la reunión: se reserva, se confirma, se factura, se envía y se cierra. Solo se puede modificar o anular antes de facturarlo.
 
-#figure(state-diagram(estados, max-scale: 1.0), caption: [Ciclo de vida de un pedido.])
+#figure(state-diagram(estados), caption: [Ciclo de vida de un pedido.])
 
 = Diagramas de secuencia
 
@@ -163,10 +164,10 @@ En todos aparecen las mismas piezas: el usuario, la *pantalla* (_boundary_), el 
   if "partir" in s {
     let (a, b, n) = split-sequence(s.d, s.partir)
     [ Es la secuencia más larga, así que la mostramos en dos partes: la numeración sigue de una a otra.]
-    figure(sequence-diagram(a, max-height: 19.5cm), caption: [Secuencia de la opción #s.opcion (#s.cu), parte 1 de 2: alta y confirmación.])
+    figure(sequence-diagram(a, max-height: 20.5cm), caption: [Secuencia de la opción #s.opcion (#s.cu), parte 1 de 2: alta y confirmación.])
     pagebreak()
-    figure(sequence-diagram(b, max-height: 21.5cm, number-from: n + 1), caption: [Secuencia de la opción #s.opcion (#s.cu), parte 2 de 2: modificar, cambiar de estado y anular.])
+    figure(sequence-diagram(b, max-height: 22.5cm, number-from: n + 1), caption: [Secuencia de la opción #s.opcion (#s.cu), parte 2 de 2: modificar, cambiar de estado y anular.])
   } else {
-    figure(sequence-diagram(s.d, max-height: 19.5cm), caption: [Secuencia de la opción #s.opcion (#s.cu).])
+    figure(sequence-diagram(s.d, max-height: 21cm), caption: [Secuencia de la opción #s.opcion (#s.cu).])
   }
 }
