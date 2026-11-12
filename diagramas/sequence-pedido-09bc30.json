@@ -4,9 +4,9 @@
   "kind": "sequence",
   "title": "Secuencia — Pedido (CU-04)",
   "project": "Entrega 2",
-  "notes": "Entrega 2 · UML. CU-04 Gestionar pedido. Operaciones: alta, confirmar, modificar, marcar enviado o cerrado, y anular.",
+  "notes": "Entrega 2 · UML. CU-04 Gestionar pedido. Operaciones: alta, confirmar, modificar, marcar enviado o cerrado, y anular. Antes de enviar cada operación, la pantalla pide confirmación al usuario.",
   "created": "2026-11-11T18:00:00.000Z",
-  "updated": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-12T10:00:00.000Z",
   "createdBy": "Itziar",
   "updatedBy": "Itziar",
   "data": {
@@ -83,6 +83,22 @@
         "style": "sync"
       },
       {
+        "id": "ef56e64dc3cd",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "9d25bcc76c40",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "6089065c3146",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "confirmar()",
+        "style": "sync"
+      },
+      {
         "id": "4d290f269742",
         "t": "msg",
         "from": "0f0de3f74032",
@@ -146,7 +162,7 @@
         "style": "sync"
       },
       {
-        "id": "973d9c892baa",
+        "id": "783d50ead5d2",
         "t": "msg",
         "from": "46e3b54b00c9",
         "to": "6ac8a81c5b84",
@@ -154,7 +170,21 @@
         "style": "sync"
       },
       {
-        "id": "b1594372c0ce",
+        "id": "79dd919304ad",
+        "t": "msg",
+        "from": "6ac8a81c5b84",
+        "to": "46e3b54b00c9",
+        "text": "confirmado / no reservado",
+        "style": "reply"
+      },
+      {
+        "id": "752a37fe80ac",
+        "t": "open",
+        "op": "alt",
+        "guard": "estaba reservado"
+      },
+      {
+        "id": "04c605ed2d8f",
         "t": "msg",
         "from": "46e3b54b00c9",
         "to": "878260474bad",
@@ -162,12 +192,29 @@
         "style": "sync"
       },
       {
-        "id": "5da4217883e8",
+        "id": "598271fc0ed9",
         "t": "msg",
         "from": "46e3b54b00c9",
         "to": "0f0de3f74032",
         "text": "pedido confirmado",
         "style": "reply"
+      },
+      {
+        "id": "adb98a5c1df8",
+        "t": "else",
+        "guard": "no reservado"
+      },
+      {
+        "id": "82c684b3e38e",
+        "t": "msg",
+        "from": "46e3b54b00c9",
+        "to": "0f0de3f74032",
+        "text": "aviso: solo se confirman pedidos reservados",
+        "style": "reply"
+      },
+      {
+        "id": "01837f1d286b",
+        "t": "close"
       },
       {
         "id": "8719c5b05fab",
@@ -190,6 +237,22 @@
         "from": "9d25bcc76c40",
         "to": "0f0de3f74032",
         "text": "modificar(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "e80a9c222670",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "9d25bcc76c40",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "bbe4f4c54977",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "confirmar()",
         "style": "sync"
       },
       {
@@ -287,6 +350,22 @@
         "style": "sync"
       },
       {
+        "id": "656cf2d13318",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "9d25bcc76c40",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "7c8df95247f2",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "confirmar()",
+        "style": "sync"
+      },
+      {
         "id": "b8059da0c9fd",
         "t": "msg",
         "from": "0f0de3f74032",
@@ -339,6 +418,22 @@
         "from": "9d25bcc76c40",
         "to": "0f0de3f74032",
         "text": "anular()",
+        "style": "sync"
+      },
+      {
+        "id": "866028de7115",
+        "t": "msg",
+        "from": "0f0de3f74032",
+        "to": "9d25bcc76c40",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "9b42b4ea410f",
+        "t": "msg",
+        "from": "9d25bcc76c40",
+        "to": "0f0de3f74032",
+        "text": "confirmar()",
         "style": "sync"
       },
       {

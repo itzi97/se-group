@@ -9,6 +9,13 @@
 #import "/templates/lib.typ": *
 #import "/templates/neuranet-uml.typ": *
 #import "comun.typ": *
+#import "/templates/neuranet-slides.typ": fit-region
+
+// Diagrama a la izquierda (llena su hueco) y los puntos clave a la derecha
+#let diagrama-y-notas(diagrama, notas, ratio: (1.65fr, 1fr)) = grid(columns: ratio, column-gutter: 0.8cm, rows: (100%,),
+  block(height: 100%, width: 100%, fit-region(diagrama, top-pad: 6pt, height-ratio: 0.97)),
+  align(horizon, block(width: 100%, { set text(size: 16pt); set par(justify: false, leading: 0.55em); notas })))
+
 
 #let secciones = ("Visión", "Stakeholders", "Casos de uso", "Clases y estados", "Secuencias")
 
@@ -31,14 +38,14 @@
 #agenda-slide(secciones)
 
 // ---------------- 1 · Visión ----------------
-#section-tag[1 · Visión]
+#section-tag[1 · Visión · Diego]
 
 #slide(title: [AñadaMaster en un minuto], fit: true)[
   #box(width: 26cm, vision-pitch(vision, size: 15pt))
 ]
 
 // ---------------- 2 · Stakeholders ----------------
-#section-tag[2 · Stakeholders]
+#section-tag[2 · Stakeholders · Diego]
 
 #slide(title: [Quién está implicado], fit: true)[
   #grid(columns: 2, column-gutter: 1.2cm, align: horizon,
@@ -59,10 +66,10 @@
 ]
 
 // ---------------- 3 · Casos de uso ----------------
-#section-tag[3 · Casos de uso]
+#section-tag[3 · Casos de uso · Diego]
 
-#slide(title: [CoreReservas: 8 casos de uso], fit: true)[#usecase-diagram(reservas)]
-#slide(title: [CoreBodega: 7 casos de uso], fit: true)[#usecase-diagram(bodega)]
+#slide(title: [CoreReservas: 8 casos de uso], fit: true)[#usecase-diagram(reservas, max-scale: 3)]
+#slide(title: [CoreBodega: 7 casos de uso], fit: true)[#usecase-diagram(bodega, max-scale: 3)]
 
 #slide(title: [Cada caso de uso, especificado])[
   #slide-columns(ratio: (1fr, 1.25fr), gutter: 1cm,
@@ -87,16 +94,36 @@
 ]
 
 // ---------------- 4 · Clases y estados ----------------
-#section-tag[4 · Clases y estados]
+#section-tag[4 · Clases y estados · Javier]
 
-#slide(title: [Modelo de dominio · CoreReservas], fit: true)[#class-diagram(dominio-reservas)]
-#slide(title: [Modelo de dominio · CoreBodega], fit: true)[#class-diagram(dominio-bodega)]
-#slide(title: [Diseño · CoreReservas], fit: true)[#class-diagram(diseno-reservas)]
-#slide(title: [Diseño · CoreBodega], fit: true)[#class-diagram(diseno-bodega)]
-#slide(title: [Ciclo de vida de un pedido], fit: true)[#state-diagram(estados)]
+#slide(title: [Modelo de dominio · CoreReservas])[
+  #diagrama-y-notas(class-diagram(dominio-reservas, max-scale: none, size: 9pt), [
+    - Cliente *residencial* (NIF) o *industrial* (CIF): herencia
+    - Un *pedido* tiene 1..\* *líneas*: cada una, un vino y una cantidad
+    - Una *factura* junta 1..\* pedidos del mismo cliente
+    - El *estado* sigue el ciclo acordado con el cliente
+  ])
+]
+#slide(title: [Modelo de dominio · CoreBodega])[
+  #diagrama-y-notas(class-diagram(dominio-bodega, max-scale: none, size: 9pt), [
+    - *MateriaPrima*: la entrada de un remolque
+    - *Detalle*: una línea por variedad, con peso y grado
+    - Cada *variedad* tiene su grado mínimo: si no llega, a abono
+    - *RegistroOperacion*: quién hizo qué y cuándo
+  ])
+]
+#slide(title: [Diseño · CoreReservas], fit: true)[#class-diagram(diseno-reservas, max-scale: none, size: 8.5pt)]
+#slide(title: [Diseño · CoreBodega])[
+  #diagrama-y-notas(ratio: (2.1fr, 1fr), class-diagram(diseno-bodega, max-scale: none, size: 8.5pt), [
+    - Un *control* por opción del menú (en verde)
+    - Los tres crean un *RegistroOperacion* en cada alta, cambio o baja
+    - La contraseña se guarda como *hash*
+  ])
+]
+#slide(title: [Ciclo de vida de un pedido], fit: true)[#state-diagram(estados, max-scale: none, size: 9pt)]
 
 // ---------------- 5 · Secuencias ----------------
-#section-tag[5 · Secuencias]
+#section-tag[5 · Secuencias · Javier]
 
 #slide(title: [Una secuencia por opción del menú])[
   #grid(columns: (1fr,) * 4, column-gutter: 0.5cm, row-gutter: 0.5cm,
@@ -108,7 +135,21 @@
   #text(size: 17pt)[Pantalla → control → entidades → base de datos. Todas las operaciones en fragmentos `alt`.]
 ]
 
-#slide(title: [Ejemplo: Factura (CU-06)], fit: true)[#sequence-diagram(secuencias.at(4).d)]
-#slide(title: [Ejemplo: Detalle Materia Prima (CU-22)], fit: true)[#sequence-diagram(secuencias.at(6).d)]
+#slide(title: [Ejemplo: Factura (CU-06)])[
+  #diagrama-y-notas(ratio: (1.9fr, 1fr), sequence-diagram(secuencias.at(4).d, max-scale: none, size: 9pt), [
+    - Se buscan los pedidos *confirmados* del cliente
+    - La factura junta *uno o varios* y calcula importes
+    - Cada pedido pasa a *facturado*
+    - Se guarda e *imprime*
+  ])
+]
+#slide(title: [Ejemplo: Detalle Materia Prima (CU-22)])[
+  #diagrama-y-notas(ratio: (2.2fr, 1fr), sequence-diagram(secuencias.at(6).d, max-scale: none, size: 9pt), [
+    - Una línea por *variedad* del remolque
+    - Cada línea se compara con el *grado mínimo*
+    - Si no llega, la uva va a *abono*
+    - Queda *registrado* quién lo hizo
+  ])
+]
 
 #focus-slide[Gracias \ #text(size: 22pt, weight: 500, fill: chispa)[Soluciones de IA a tu medida]]

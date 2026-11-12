@@ -6,7 +6,7 @@
   "project": "Entrega 2",
   "notes": "Entrega 2 · UML (complemento). Ciclo de vida de un pedido, acordado con el cliente el 16/10: reservado › confirmado › facturado › enviado › cerrado. Solo se puede anular (y modificar) antes de facturar.",
   "created": "2026-11-11T18:00:00.000Z",
-  "updated": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-12T10:00:00.000Z",
   "createdBy": "Itziar",
   "updatedBy": "Itziar",
   "data": {
@@ -21,7 +21,7 @@
       {
         "id": "b62ef27ec4e1",
         "type": "state",
-        "x": 120,
+        "x": 100,
         "y": 100,
         "label": "Reservado",
         "attrs": [
@@ -31,14 +31,14 @@
       {
         "id": "711c9a29f947",
         "type": "state",
-        "x": 470,
+        "x": 390,
         "y": 100,
         "label": "Confirmado"
       },
       {
         "id": "fd8b21bdabf9",
         "type": "state",
-        "x": 820,
+        "x": 650,
         "y": 100,
         "label": "Facturado",
         "attrs": [
@@ -48,29 +48,29 @@
       {
         "id": "9a51c148b7cf",
         "type": "state",
-        "x": 820,
-        "y": 330,
+        "x": 690,
+        "y": 300,
         "label": "Enviado"
       },
       {
         "id": "e1fe3dfc1193",
         "type": "state",
-        "x": 470,
-        "y": 330,
+        "x": 420,
+        "y": 300,
         "label": "Cerrado"
       },
       {
         "id": "405fd80f972b",
         "type": "state",
-        "x": 120,
-        "y": 330,
+        "x": 150,
+        "y": 300,
         "label": "Anulado"
       },
       {
         "id": "f34c95b498cd",
         "type": "final",
-        "x": 330,
-        "y": 500,
+        "x": 300,
+        "y": 430,
         "label": ""
       }
     ],

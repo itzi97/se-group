@@ -6,7 +6,7 @@
   "project": "Entrega 2",
   "notes": "Entrega 2 · UML. CU-05 Gestionar detalle de pedido. Operaciones: ingresar, modificar y eliminar líneas, que se aplican todas juntas con un botón.",
   "created": "2026-11-11T18:00:00.000Z",
-  "updated": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-12T10:00:00.000Z",
   "createdBy": "Itziar",
   "updatedBy": "Itziar",
   "data": {
@@ -76,6 +76,12 @@
         "to": "dbddd7eeba45",
         "text": "pedido y líneas",
         "style": "reply"
+      },
+      {
+        "id": "425cb9251350",
+        "t": "open",
+        "op": "alt",
+        "guard": "no facturado"
       },
       {
         "id": "eae507129d96",
@@ -216,6 +222,23 @@
       },
       {
         "id": "29b094f3f0ae",
+        "t": "close"
+      },
+      {
+        "id": "449f9113a04b",
+        "t": "else",
+        "guard": "facturado"
+      },
+      {
+        "id": "2566da7db79e",
+        "t": "msg",
+        "from": "dbddd7eeba45",
+        "to": "f602b3265d36",
+        "text": "aviso: el pedido ya está facturado",
+        "style": "reply"
+      },
+      {
+        "id": "4bc91fcb656a",
         "t": "close"
       },
       {

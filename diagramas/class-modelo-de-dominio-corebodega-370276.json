@@ -6,7 +6,7 @@
   "project": "Entrega 2",
   "notes": "Entrega 2 · UML. Modelo de dominio de CoreBodega.\n\nDecisiones:\n- MateriaPrima es una entrada de uva (un remolque). DetalleMateriaPrima son sus líneas: cada variedad con su peso y su grado de azúcar (supuesto S-05).\n- El grado mínimo depende de la variedad (reunión del 16/10), por eso Variedad es una clase. Si una línea no llega al mínimo, se marca como no aceptada y esa uva va a abono.\n- RegistroOperacion guarda quién hizo cada operación, cuándo y sobre qué (enunciado p. 5: «queda registrado qué usuario hizo cada gestión»).\n- Empleado es la opción «Personal» del menú. Administrador y Personal heredan de Empleado, igual que en los casos de uso. Los empleados son también los usuarios de los dos programas (supuesto S-01).",
   "created": "2026-11-11T18:00:00.000Z",
-  "updated": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-12T10:00:00.000Z",
   "createdBy": "Itziar",
   "updatedBy": "Itziar",
   "data": {
@@ -17,8 +17,8 @@
         "x": -40,
         "y": -60,
         "label": "CoreBodega",
-        "w": 1080,
-        "h": 900
+        "w": 800,
+        "h": 760
       },
       {
         "id": "6c0aed580746",
@@ -39,7 +39,7 @@
       {
         "id": "0fefc54c9c13",
         "type": "class",
-        "x": 340,
+        "x": 260,
         "y": 0,
         "label": "DetalleMateriaPrima",
         "attrs": [
@@ -52,7 +52,7 @@
       {
         "id": "abb2bc6ca25e",
         "type": "class",
-        "x": 680,
+        "x": 520,
         "y": 0,
         "label": "Variedad",
         "attrs": [
@@ -65,7 +65,7 @@
         "id": "0d176a7f35ca",
         "type": "class",
         "x": 0,
-        "y": 330,
+        "y": 250,
         "label": "RegistroOperacion",
         "attrs": [
           "fechaHora",
@@ -80,7 +80,7 @@
         "id": "0fe2ac17fb1e",
         "type": "enum",
         "x": 0,
-        "y": 620,
+        "y": 470,
         "label": "TipoOperacion",
         "stereotype": "enumeration",
         "attrs": [
@@ -93,8 +93,8 @@
       {
         "id": "6088070ab810",
         "type": "class",
-        "x": 420,
-        "y": 330,
+        "x": 300,
+        "y": 250,
         "label": "Empleado",
         "attrs": [
           "codigoEmpresa",
@@ -113,8 +113,8 @@
       {
         "id": "c52cc8ea310a",
         "type": "class",
-        "x": 320,
-        "y": 700,
+        "x": 230,
+        "y": 560,
         "label": "Administrador",
         "attrs": [],
         "ops": []
@@ -122,8 +122,8 @@
       {
         "id": "efa5babcce3e",
         "type": "class",
-        "x": 580,
-        "y": 700,
+        "x": 430,
+        "y": 560,
         "label": "Personal",
         "attrs": [],
         "ops": []

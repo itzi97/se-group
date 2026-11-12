@@ -37,9 +37,9 @@
 En la propuesta inicial (NN-AM-001) os presentamos Neuranet y los casos de uso de AñadaMaster. Aquí damos el siguiente paso: explicamos qué queremos conseguir con el sistema, quién está implicado y cómo va a funcionar por dentro.
 
 #cards(
-  (title: [Visión], accent: chispa, body: [Qué es AñadaMaster y por qué os va a ayudar, en un párrafo.]),
-  (title: [Stakeholders], accent: brasa, body: [Todas las personas y organizaciones a las que afecta el proyecto, y cómo vamos a tratar con cada una.]),
-  (title: [Modelos UML], accent: sinapsis, body: [Casos de uso con su especificación, clases, estados del pedido y una secuencia por cada opción del menú.]),
+  (title: [Visión], accent: chispa, body: [Qué es AñadaMaster, en un párrafo.]),
+  (title: [Stakeholders], accent: brasa, body: [Quién está implicado y cómo tratamos con cada uno.]),
+  (title: [Modelos UML], accent: sinapsis, body: [Casos de uso, clases, estados y secuencias.]),
 )
 
 Todo parte de lo que hablamos en la reunión del 16 de octubre (acta NN-AM-ACT-01). Algunas dudas quedaron abiertas. Para poder avanzar hemos supuesto la respuesta más razonable y la hemos marcado con un código (S-01, S-02…). Están todas juntas en el @supuestos, para que nos digáis si estáis de acuerdo.
@@ -78,9 +78,14 @@ Lo que sacamos de este mapa:
 
 = Casos de uso
 
-AñadaMaster son dos programas: *CoreReservas*, para los clientes, los pedidos y las facturas, y *CoreBodega*, para la entrada de uva y los empleados. Cada opción del menú es un caso de uso. Lo que se puede hacer dentro de cada opción (dar de alta, modificar, dar de baja…) está en su especificación.
+AñadaMaster son dos programas: *CoreReservas*, para los clientes, los pedidos y las facturas, y *CoreBodega*, para la entrada de uva y los empleados. Cada opción del menú es un caso de uso. Para cada programa mostramos primero el diagrama y después la ficha de cada caso de uso: quién lo usa, qué tiene que pasar antes, los pasos, qué puede salir distinto y cómo queda todo al terminar.
 
-Desde la propuesta inicial hemos cambiado algunas cosas: las facturas pueden juntar varios pedidos, la entrada de uva se registra por líneas (una por variedad) y nada que tenga historial se borra del todo.
+#callout(title: [Qué ha cambiado desde la propuesta inicial], accent: brasa)[
+  - Una factura puede juntar varios pedidos del mismo cliente. Por eso Generar factura empieza buscando el cliente.
+  - Un pedido se puede confirmar, marcar como enviado o cerrado, y anular solo antes de facturarlo.
+  - La entrada de uva se registra por líneas: una por variedad, con su peso y su grado.
+  - Nada que tenga historial se borra del todo: productos, clientes con pedidos y empleados se marcan como inactivos o dados de baja.
+]
 
 == CoreReservas
 
@@ -155,5 +160,13 @@ En todos aparecen las mismas piezas: el usuario, la *pantalla* (_boundary_), el 
   pagebreak(weak: true)
   [== #s.opcion (#s.cu)]
   s.texto
-  figure(sequence-diagram(s.d, max-height: 19.5cm), caption: [Secuencia de la opción #s.opcion (#s.cu).])
+  if "partir" in s {
+    let (a, b, n) = split-sequence(s.d, s.partir)
+    [ Es la secuencia más larga, así que la mostramos en dos partes: la numeración sigue de una a otra.]
+    figure(sequence-diagram(a, max-height: 19.5cm), caption: [Secuencia de la opción #s.opcion (#s.cu), parte 1 de 2: alta y confirmación.])
+    pagebreak()
+    figure(sequence-diagram(b, max-height: 21.5cm, number-from: n + 1), caption: [Secuencia de la opción #s.opcion (#s.cu), parte 2 de 2: modificar, cambiar de estado y anular.])
+  } else {
+    figure(sequence-diagram(s.d, max-height: 19.5cm), caption: [Secuencia de la opción #s.opcion (#s.cu).])
+  }
 }

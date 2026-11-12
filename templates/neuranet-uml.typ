@@ -85,6 +85,9 @@
   }
 }
 #let _fit(W, H, avail, max-scale, max-height, body) = {
+  // max-scale: none = tamaño natural, para que quien lo use lo escale
+  // (las diapositivas lo amplían hasta llenar el hueco que tienen)
+  if max-scale == none { return body }
   let f = calc.min(max-scale, avail.width / 1pt / W)
   if max-height != none { f = calc.min(f, max-height / 1pt / H) }
   align(center, scale(x: f * 100%, y: f * 100%, reflow: true, body))
@@ -255,10 +258,10 @@
   _fit(W, H, avail, max-scale, max-height, drawing)
 }
 
-#let class-diagram(d, size: 7.6pt, unit: 0.72, max-scale: 1.3, max-height: none) = layout(avail => context
+#let class-diagram(d, size: 7.6pt, unit: 0.72, max-scale: 1.6, max-height: none) = layout(avail => context
   _graph(d, size, unit, avail, max-scale, max-height))
 
-#let state-diagram(d, size: 8.5pt, unit: 0.72, max-scale: 1.3, max-height: none) = layout(avail => context
+#let state-diagram(d, size: 8.5pt, unit: 0.72, max-scale: 1.5, max-height: none) = layout(avail => context
   _graph(d, size, unit, avail, max-scale, max-height))
 
 // Leyenda de la notación de clases (relaciones)
@@ -319,7 +322,7 @@
   }
 }
 
-#let sequence-diagram(d, size: 7.8pt, max-scale: 1.25, max-height: none, numbered: auto) = layout(avail => context {
+#let sequence-diagram(d, size: 7.8pt, max-scale: 1.4, max-height: none, numbered: auto, number-from: 1) = layout(avail => context {
   let S = size / 1pt
   let parts = d.data.participants
   let items = d.data.items
@@ -331,7 +334,7 @@
   let th(s) = measure(text(size: size, s)).height / 1pt
 
   // ---- textos de los mensajes, con número ----
-  let k = 0
+  let k = number-from - 1
   let labels = ()
   for it in items {
     if it.t == "msg" {
@@ -437,7 +440,7 @@
         frames.push((i: i, depth: fstack.len(), y0: y, y1: 0, op: it.op, guard: it.guard, elses: ()))
         fstack.push(frames.len() - 1)
         snaps.push(call)
-        y += S * 1.2
+        y += S * 1.9
       }
     } else if it.t == "else" {
       y += S * 1.6
@@ -449,7 +452,7 @@
       let snap = snaps.last()
       while call.len() > snap.len() { let c = call.pop()
         if parts.at(col.at(c.p)).kind != "actor" { acts.push((col.at(c.p), c.y, y - S * 0.4, c.d)) } }
-      y += S * 1.2
+      y += S * 1.9
     } else if it.t == "close" {
       let f = fstack.pop()
       let fr = frames.at(f)
@@ -481,8 +484,7 @@
       place(top + left, dx: (xs.at(j) - hw.at(j) / 2) * 1pt, dy: (hh - measure(heads.at(j)).height / 1pt) * 1pt, heads.at(j))
       _ln((xs.at(j), hh + S * 0.5), (xs.at(j), H - S * 0.5), paint: hairline.darken(25%), th: 0.7pt, dash: "dashed")
     }
-    // fragmentos
-    for f in frames {
+    let draw-frame(f, pass) = {
       let s = span.at(str(f.i))
       let inset = S * 1.6 + (2 - calc.min(f.depth, 2)) * S * 0.9
       let x0 = xs.at(s.lo) - S * 2.6 - (if f.op == "ref" { 0 } else { (3 - calc.min(f.depth, 3)) * S * 0.7 })
@@ -493,24 +495,29 @@
       if f.op == "ref" {
         let lab = text(size: size, fill: petroleo, weight: 600, f.guard)
         x1 = calc.max(x1, x0 + tgw + measure(lab).width / 1pt + S * 4)
+        if pass == 1 {
         place(top + left, dx: x0 * 1pt, dy: f.y0 * 1pt, rect(width: (x1 - x0) * 1pt, height: (f.y1 - f.y0) * 1pt, fill: white, stroke: 0.8pt + petroleo))
         place(top + left, dx: x0 * 1pt, dy: f.y0 * 1pt, box(fill: petroleo, inset: (x: S * 0.7 * 1pt, y: S * 0.3 * 1pt), tag))
         place(top + left, dx: (x0 + tgw) * 1pt, dy: f.y0 * 1pt, box(width: (x1 - x0 - tgw) * 1pt, height: (f.y1 - f.y0) * 1pt, align(center + horizon, lab)))
+        }
       } else {
         let paint = if f.op == "alt" { brasa } else if f.op == "loop" { sinapsis } else { petroleo }
         let gw = calc.max(measure(text(size: size * 0.92, weight: 600)[\[#f.guard\]]).width / 1pt,
           ..f.elses.map(e => measure(text(size: size * 0.92, weight: 600)[\[#e.guard\]]).width / 1pt - tgw))
         x1 = calc.max(x1, x0 + tgw + gw + S * 2)
-        place(top + left, dx: x0 * 1pt, dy: f.y0 * 1pt, rect(width: (x1 - x0) * 1pt, height: (f.y1 - f.y0) * 1pt, stroke: 0.8pt + paint))
+        if pass == 0 { place(top + left, dx: x0 * 1pt, dy: f.y0 * 1pt, rect(width: (x1 - x0) * 1pt, height: (f.y1 - f.y0) * 1pt, stroke: 0.8pt + paint)) }
+        if pass == 1 {
         place(top + left, dx: x0 * 1pt, dy: f.y0 * 1pt, box(fill: paint, inset: (x: S * 0.7 * 1pt, y: S * 0.3 * 1pt),
           text(size: size * 0.9, weight: 700, fill: white, f.op)))
-        place(top + left, dx: (x0 + tgw + S * 0.6) * 1pt, dy: (f.y0 + S * 0.25) * 1pt, text(size: size * 0.92, weight: 600, fill: paint)[\[#f.guard\]])
+        place(top + left, dx: (x0 + tgw + S * 0.4) * 1pt, dy: (f.y0 + S * 0.15) * 1pt, box(fill: white, inset: (x: S * 0.25 * 1pt, y: S * 0.12 * 1pt), text(size: size * 0.92, weight: 600, fill: paint)[\[#f.guard\]]))
         for e in f.elses {
           _ln((x0, e.y), (x1, e.y), paint: paint, th: 0.7pt, dash: "dashed")
-          place(top + left, dx: (x0 + S * 0.8) * 1pt, dy: (e.y + S * 0.25) * 1pt, text(size: size * 0.92, weight: 600, fill: paint)[\[#e.guard\]])
+          place(top + left, dx: (x0 + S * 0.5) * 1pt, dy: (e.y + S * 0.2) * 1pt, box(fill: white, inset: (x: S * 0.25 * 1pt, y: S * 0.12 * 1pt), text(size: size * 0.92, weight: 600, fill: paint)[\[#e.guard\]]))
+        }
         }
       }
     }
+    for f in frames { draw-frame(f, 0) }
     // activaciones
     for a in acts {
       let x = xs.at(a.at(0)) - 3.5 + a.at(3) * 3.5
@@ -518,6 +525,7 @@
         place(top + left, dx: x * 1pt, dy: a.at(1) * 1pt, rect(width: 7pt, height: (a.at(2) - a.at(1)) * 1pt, fill: white, stroke: 0.7pt + petroleo))
       }
     }
+    for f in frames { draw-frame(f, 1) }
     // mensajes
     for m in msgs {
       let it = items.at(m.i)
@@ -682,4 +690,24 @@
       ..row([A diferencia de], v.unlike),
       ..row([nuestro producto], v.ourProduct),
     )))
+}
+
+// Parte una secuencia larga en dos, por una rama («else») del fragmento
+// principal. Devuelve (parte1, parte2, mensajes de la parte 1): el mismo
+// diagrama en dos trozos; la segunda parte vuelve a abrir el fragmento.
+#let split-sequence(d, guard) = {
+  let items = d.data.items
+  let depth = 0
+  let cut = none
+  let op = none
+  for (i, it) in items.enumerate() {
+    if it.t == "open" and it.op != "ref" { if depth == 0 { op = it.op }; depth += 1 }
+    else if it.t == "close" and depth > 0 and not (i > 0 and items.at(i - 1).t == "open" and items.at(i - 1).op == "ref") { depth -= 1 }
+    else if it.t == "else" and depth == 1 and it.guard == guard { cut = i }
+  }
+  let a = items.slice(0, cut) + ((id: "cut-close", t: "close"),)
+  let b = ((id: "cut-open", t: "open", op: op, guard: guard),) + items.slice(cut + 1)
+  let n1 = a.filter(it => it.t == "msg").len()
+  let with-items(its) = { let dd = d; let data = d.data; data.items = its; dd.data = data; dd }
+  (with-items(a), with-items(b), n1)
 }

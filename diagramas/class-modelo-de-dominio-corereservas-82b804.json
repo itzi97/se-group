@@ -6,7 +6,7 @@
   "project": "Entrega 2",
   "notes": "Entrega 2 · UML. Modelo de dominio de CoreReservas: los conceptos del negocio, sus datos y cómo se relacionan. Sin tipos ni operaciones (eso va en el diagrama de diseño).\n\nDecisiones:\n- LineaPedido es la opción «Pedido Detalle» del menú: cada línea es un vino y una cantidad. Composición: si se borra el pedido, se borran sus líneas.\n- Cliente residencial o industrial con herencia: cada tipo tiene su documento (NIF o CIF) y sus datos propios (reunión del 16/10).\n- Una factura agrupa uno o varios pedidos del mismo cliente; un pedido se factura una sola vez.\n- Los estados del pedido son un enumerado (reunión del 16/10). El ciclo completo está en el diagrama de estados.\n- Producto.activo y Cliente.activo: supuestos S-02 y S-03 (no se borra lo que tiene historial).",
   "created": "2026-11-11T18:00:00.000Z",
-  "updated": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-12T10:00:00.000Z",
   "createdBy": "Itziar",
   "updatedBy": "Itziar",
   "data": {
@@ -17,8 +17,8 @@
         "x": -40,
         "y": -60,
         "label": "CoreReservas",
-        "w": 1080,
-        "h": 900
+        "w": 800,
+        "h": 760
       },
       {
         "id": "fdd09273a03a",
@@ -38,7 +38,7 @@
       {
         "id": "6dc911d85d26",
         "type": "class",
-        "x": 340,
+        "x": 240,
         "y": 0,
         "label": "Pedido",
         "attrs": [
@@ -52,7 +52,7 @@
       {
         "id": "2ad87974037f",
         "type": "class",
-        "x": 680,
+        "x": 490,
         "y": 0,
         "label": "LineaPedido",
         "attrs": [
@@ -64,8 +64,8 @@
       {
         "id": "ef1d4832d4f4",
         "type": "class",
-        "x": 680,
-        "y": 260,
+        "x": 490,
+        "y": 215,
         "label": "Producto",
         "attrs": [
           "codigo",
@@ -81,8 +81,8 @@
       {
         "id": "7f5432407a9e",
         "type": "class",
-        "x": 340,
-        "y": 300,
+        "x": 240,
+        "y": 250,
         "label": "Cliente",
         "attrs": [
           "codigo",
@@ -99,7 +99,7 @@
         "id": "b4d1f77142ad",
         "type": "enum",
         "x": 0,
-        "y": 300,
+        "y": 215,
         "label": "EstadoPedido",
         "stereotype": "enumeration",
         "attrs": [
@@ -115,8 +115,8 @@
       {
         "id": "e9ae12f4068f",
         "type": "class",
-        "x": 180,
-        "y": 620,
+        "x": 110,
+        "y": 500,
         "label": "ClienteResidencial",
         "attrs": [
           "nif",
@@ -127,8 +127,8 @@
       {
         "id": "9bba41f9513f",
         "type": "class",
-        "x": 500,
-        "y": 620,
+        "x": 350,
+        "y": 500,
         "label": "ClienteIndustrial",
         "attrs": [
           "cif",

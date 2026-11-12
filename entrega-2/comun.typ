@@ -19,7 +19,7 @@
    texto: [Alta y modificación. El control valida los datos antes de crear o guardar el producto.]),
   (cu: "CU-03", opcion: [Cliente], d: json("/diagramas/sequence-cliente-56c282.json"),
    texto: [Alta, modificación y baja. En el alta se comprueba que el NIF o CIF no esté repetido; en la baja, si el cliente tiene pedidos, se marca como dado de baja en lugar de borrarlo (S-03).]),
-  (cu: "CU-04", opcion: [Pedido], d: json("/diagramas/sequence-pedido-09bc30.json"),
+  (cu: "CU-04", opcion: [Pedido], d: json("/diagramas/sequence-pedido-09bc30.json"), partir: "Modificar",
    texto: [Alta, confirmación, modificación, cambio a enviado o cerrado y anulación. Antes de modificar o anular, el pedido comprueba que todavía no está facturado.]),
   (cu: "CU-05", opcion: [Pedido Detalle], d: json("/diagramas/sequence-detalle-de-pedido-eb2658.json"),
    texto: [El usuario añade, cambia o quita líneas en pantalla, y todo se aplica a la vez con el botón «Aplicar cambios».]),

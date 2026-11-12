@@ -4,9 +4,9 @@
   "kind": "sequence",
   "title": "Secuencia — Producto (CU-02)",
   "project": "Entrega 2",
-  "notes": "Entrega 2 · UML. CU-02 Gestionar producto. Operaciones: alta y modificar. Los productos no se borran (supuesto S-02).",
+  "notes": "Entrega 2 · UML. CU-02 Gestionar producto. Operaciones: alta y modificar. Los productos no se borran (supuesto S-02). Antes de enviar cada operación, la pantalla pide confirmación al usuario (enunciado: «hay que confirmar los cambios»).",
   "created": "2026-11-11T18:00:00.000Z",
-  "updated": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-12T10:00:00.000Z",
   "createdBy": "Itziar",
   "updatedBy": "Itziar",
   "data": {
@@ -39,15 +39,6 @@
     ],
     "items": [
       {
-        "id": "b9de0615d359",
-        "t": "note",
-        "over": [
-          "4d9aee03fb67",
-          "fd5121aee3f3"
-        ],
-        "text": "La pantalla pide confirmación\nantes de enviar cada operación"
-      },
-      {
         "id": "d8807932f7c4",
         "t": "open",
         "op": "alt",
@@ -59,6 +50,22 @@
         "from": "4d9aee03fb67",
         "to": "fd5121aee3f3",
         "text": "alta(datos)",
+        "style": "sync"
+      },
+      {
+        "id": "a4c123b1612d",
+        "t": "msg",
+        "from": "fd5121aee3f3",
+        "to": "4d9aee03fb67",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "d272d1371c17",
+        "t": "msg",
+        "from": "4d9aee03fb67",
+        "to": "fd5121aee3f3",
+        "text": "confirmar()",
         "style": "sync"
       },
       {
@@ -138,6 +145,22 @@
         "style": "sync"
       },
       {
+        "id": "149d439536b3",
+        "t": "msg",
+        "from": "fd5121aee3f3",
+        "to": "4d9aee03fb67",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "216fdaeeb975",
+        "t": "msg",
+        "from": "4d9aee03fb67",
+        "to": "fd5121aee3f3",
+        "text": "confirmar()",
+        "style": "sync"
+      },
+      {
         "id": "48bd2661fa25",
         "t": "msg",
         "from": "fd5121aee3f3",
@@ -176,6 +199,24 @@
         "to": "6bb5a3c6cc66",
         "text": "actualizar(datos)",
         "style": "sync"
+      },
+      {
+        "id": "9209dcb468e0",
+        "t": "open",
+        "op": "opt",
+        "guard": "marcar como inactivo (S-02)"
+      },
+      {
+        "id": "7e032fd0db16",
+        "t": "msg",
+        "from": "081e0072fdf7",
+        "to": "6bb5a3c6cc66",
+        "text": "desactivar()",
+        "style": "sync"
+      },
+      {
+        "id": "1b56bb9a2f5f",
+        "t": "close"
       },
       {
         "id": "30b6628e94cb",

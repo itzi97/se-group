@@ -4,9 +4,9 @@
   "kind": "sequence",
   "title": "Secuencia — Cliente (CU-03)",
   "project": "Entrega 2",
-  "notes": "Entrega 2 · UML. CU-03 Gestionar cliente. Operaciones: alta, modificar y baja.",
+  "notes": "Entrega 2 · UML. CU-03 Gestionar cliente. Operaciones: alta, modificar y baja. Antes de enviar cada operación, la pantalla pide confirmación al usuario.",
   "created": "2026-11-11T18:00:00.000Z",
-  "updated": "2026-11-11T18:00:00.000Z",
+  "updated": "2026-11-12T10:00:00.000Z",
   "createdBy": "Itziar",
   "updatedBy": "Itziar",
   "data": {
@@ -53,6 +53,22 @@
         "style": "sync"
       },
       {
+        "id": "eee65f53e942",
+        "t": "msg",
+        "from": "e4d85b4e59b7",
+        "to": "890129866a24",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "1ce50211670e",
+        "t": "msg",
+        "from": "890129866a24",
+        "to": "e4d85b4e59b7",
+        "text": "confirmar()",
+        "style": "sync"
+      },
+      {
         "id": "e59f7089350f",
         "t": "msg",
         "from": "e4d85b4e59b7",
@@ -83,12 +99,35 @@
         "guard": "no existe"
       },
       {
-        "id": "811b5325fda9",
+        "id": "e555a6323d18",
+        "t": "open",
+        "op": "alt",
+        "guard": "residencial"
+      },
+      {
+        "id": "8a3b99e68433",
         "t": "msg",
         "from": "5e349e061c49",
         "to": "055418701cb5",
-        "text": "new ClienteResidencial | ClienteIndustrial(datos)",
+        "text": "new ClienteResidencial(datos)",
         "style": "create"
+      },
+      {
+        "id": "f7a43c5e11dc",
+        "t": "else",
+        "guard": "industrial"
+      },
+      {
+        "id": "057071e2b0cf",
+        "t": "msg",
+        "from": "5e349e061c49",
+        "to": "055418701cb5",
+        "text": "new ClienteIndustrial(datos)",
+        "style": "create"
+      },
+      {
+        "id": "6128e6e96235",
+        "t": "close"
       },
       {
         "id": "1d414d5558f8",
@@ -147,6 +186,22 @@
         "style": "sync"
       },
       {
+        "id": "ae679f02e8d2",
+        "t": "msg",
+        "from": "e4d85b4e59b7",
+        "to": "890129866a24",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "8a79023c39c2",
+        "t": "msg",
+        "from": "890129866a24",
+        "to": "e4d85b4e59b7",
+        "text": "confirmar()",
+        "style": "sync"
+      },
+      {
         "id": "384b91d3ad02",
         "t": "msg",
         "from": "e4d85b4e59b7",
@@ -199,6 +254,22 @@
         "from": "890129866a24",
         "to": "e4d85b4e59b7",
         "text": "baja()",
+        "style": "sync"
+      },
+      {
+        "id": "00661fccd268",
+        "t": "msg",
+        "from": "e4d85b4e59b7",
+        "to": "890129866a24",
+        "text": "pedirConfirmacion()",
+        "style": "async"
+      },
+      {
+        "id": "a29a0d347301",
+        "t": "msg",
+        "from": "890129866a24",
+        "to": "e4d85b4e59b7",
+        "text": "confirmar()",
         "style": "sync"
       },
       {

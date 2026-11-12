@@ -6,7 +6,7 @@
   "project": "Entrega 1",
   "notes": "Entrega 1 · Parte 2. Diagrama de casos de uso del programa CoreReservas de AñadaMaster (enunciado, p. 4).\n\nDecisiones de modelado:\n- Un diagrama por Core: son dos programas distintos, con usuarios distintos.\n- Un caso de uso por opción del menú (Producto, Cliente, Pedido, Pedido Detalle, Factura). Las operaciones de cada opción (alta, modificar, baja o anular) están en su especificación.\n- Personal es el actor principal (es quien más usa CoreReservas) y Administrador hereda de Personal: el enunciado les da los mismos privilegios.\n- Confirmar o aplicar los cambios es un paso del flujo, no un caso de uso.\n- «include»: Buscar cliente (CU-03, CU-04) y Buscar pedido (CU-04 a CU-06). «extend»: Gestionar cliente extiende Gestionar pedido cuando el cliente aún no existe.\n- El cliente de la bodega no es actor: no usa el sistema; llama por teléfono y el personal registra sus pedidos.\n- Reunión con el cliente (16/10/2026): Generar factura (primer sistema de facturación), estados del pedido y anulación solo antes de facturar, ficha de cliente residencial o industrial con NIF o CIF.",
   "created": "2026-10-22T16:58:32.165Z",
-  "updated": "2026-10-22T17:42:57.000Z",
+  "updated": "2026-11-12T10:00:00.000Z",
   "data": {
     "routing": "straight",
     "nodes": [
@@ -107,7 +107,7 @@
           "preconditions": "El usuario ha iniciado sesión en el programa (CU-01).",
           "trigger": "Un cliente llama para hacer, cambiar o anular un pedido.",
           "mainFlow": "Alta: el usuario elige Pedido › Alta, busca el cliente (incluye CU-07) e introduce los datos del pedido; el sistema lo guarda como «reservado».\nConfirmar: cuando el cliente confirma, el usuario busca el pedido (incluye CU-08) y lo confirma; pasa a «confirmado».\nModificar: el usuario elige Pedido › Modificar, busca el pedido (incluye CU-08), introduce los cambios que pide el cliente y confirma; el sistema guarda el pedido.\nCambiar estado: cuando el pedido sale de la bodega el usuario lo marca como «enviado», y cuando el cliente lo recibe, como «cerrado» (supuesto S-07).\nAnular: el usuario elige Pedido › Baja, busca el pedido (incluye CU-08) y confirma la anulación; el pedido pasa a «anulado».",
-          "alternativeFlows": "En el alta, el cliente no existe: se da de alta en ese momento (CU-03 «extend» CU-04, condición «el cliente no existe») y se continúa.\nEl pedido ya está facturado: el sistema no permite modificarlo ni anularlo.\nEl usuario no confirma: no se aplica ningún cambio.",
+          "alternativeFlows": "En el alta, el cliente no existe: se da de alta en ese momento (CU-03 «extend» CU-04, condición «el cliente no existe») y se continúa.\nEl pedido ya está facturado: el sistema no permite modificarlo ni anularlo.\nAl confirmar, el pedido no está reservado (por ejemplo, ya está anulado o facturado): el sistema avisa y no lo confirma.\nEl usuario no confirma: no se aplica ningún cambio.",
           "postconditions": "El pedido queda registrado, confirmado, modificado, enviado, cerrado o anulado. Sus líneas se gestionan con CU-05 y su ciclo completo está en el diagrama de estados.",
           "priority": "",
           "frequency": ""

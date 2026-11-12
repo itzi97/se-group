@@ -27,7 +27,7 @@ Fuentes: actividad de Blackboard (sync del 10 nov) · [`../Enunciado Caso Práct
 - [x] Visión con la plantilla del elevator pitch
 - [x] Supuestos documentados (S-01 a S-13) para las dudas abiertas de la reunión
 - [ ] Revisión de los cuatro → correcciones aplicadas
-- [ ] Repartir quién presenta qué
+- [x] Quién presenta: Diego la visión · Samuel stakeholders y casos de uso · Javier clases y estados · Itziar secuencias y cierre (va en la etiqueta de cada diapositiva)
 - [ ] Subir los PDF y **enviar** en Blackboard
 
 ## Decisiones tomadas (11 nov)
